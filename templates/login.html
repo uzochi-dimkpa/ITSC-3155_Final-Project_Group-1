@@ -1,0 +1,42 @@
+{% extends '_layout.html' %}
+
+{% block title %} Login Page {% endblock %}
+
+{% block body %}
+
+<style>
+    
+    .login-content {
+        margin-left: 96px;
+    }
+    #loginbutton {
+        background-color: #7749F8;
+    }
+    
+
+</style>
+
+<div class="login-content">
+    <h1>Login</h1>
+    <hr>
+    <br>
+    <br>
+
+    <form>
+        <label for="username"><h4>Username</h4></label><br>
+        <input type="text" id="username" name="username"><br>
+        <br>
+        <label for="password"><h4>Password</h4></label><br>
+        <input type="text" id="password" name="password">
+    </form>
+
+    <br>
+    <button type="button" id="loginbutton" class="btn btn-primary">Login</button>
+    <br>
+    <br>
+
+    <h2>New User?</h2>
+    <br>
+    <button type="button" class="btn btn-primary">SignUp</button>
+</div>
+{% endblock %}
