@@ -21,7 +21,7 @@ def signup():
 def create_question():
     return render_template('create-question.html')
 
-@app.route('/create-question', methods=['POST'])
+@app.post('/create-question')
 def create_question_form():
     
     redirect('/create-question')
