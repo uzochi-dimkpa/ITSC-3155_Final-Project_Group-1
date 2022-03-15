@@ -16,6 +16,15 @@ def login():
 def signup():
     return render_template('signup.html')
 
+#app get for /create-question
+@app.get('/create-question')
+def create_question():
+    return render_template('create-question.html')
+
+@app.route('/create-question', methods=['POST'])
+def create_question_form():
+    
+    redirect('/create-question')
 
 if __name__ == '__main__':
     app.run(debug=True)
