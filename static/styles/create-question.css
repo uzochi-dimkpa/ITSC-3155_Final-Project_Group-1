@@ -1,0 +1,36 @@
+#ask-question {
+  padding-left: 96px;
+}
+.form {
+  /*on the left, add 192x192 padding*/
+  padding-left: 192px;
+  
+}
+.form textarea {
+  /*make text input box bigger vertically*/
+  padding: 40px;
+  width: 50%;
+
+}
+#tags {
+  /*make tags input box bigger vertically*/
+  padding: 10px;
+  width: 50%;
+  border-radius: 5px;
+}
+
+.button-post {
+  padding: 10px;
+  border-radius: 10px;
+  border: 2px solid rgb(255, 244, 244);
+
+  background: linear-gradient(to right, rgb(192, 123, 231) 50%, white 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  transition: all .5s ease-out;
+}
+.button-post:hover {
+  /*make dropdown menu appear on hover*/
+  background-position: left bottom;
+  color: white;
+}
