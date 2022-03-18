@@ -3,8 +3,274 @@
 {% block title %} Homepage {% endblock %}
 
 {% block body %}
-    <h1>Hello! This is a test</h1>
+    <style>
+        /* Adds whitespace in the upward and leftward directions */
+        .pagewide_whitespace_top_left {
+            margin-top: 104px;
+            margin-left:96px;
+        }
+
+        /* General properties of the page title */
+        #DuoLing_header {
+            font-family: 'Inter';
+            font-style: italic;
+            font-weight: 500;
+            font-size: 64px;
+            line-height: 77px;
+
+            /* Whitespace; DEPRECATED */
+            /* border-bottom: 75px solid rgba(255, 255, 255, 1); */
+        }
+
+        /* General properties of the question display text */
+        #Question_display_text {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 24px;
+            line-height: 30px;
+        }
+
+        /* Change the text color to purple; DEPRECATED */
+        /*
+        .Question_display_text {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 24px;
+            line-height: 30px;
+        }
+        /**/
+
+        /* General propreties of the main table */
+        .main_table {
+            border-collapse: collapse;
+            min-width: 824px; min-height: 578px;
+            margin-right: 25px; margin-bottom: 25px;
+        }
+
+        /* Adding an udnerline to all rows */
+        .main_table thead tr,
+        .main_table tbody tr {
+            border-bottom: thin solid rgba(0, 0, 0, 1);
+            margin-bottom: 25px;
+        }
+
+        /* Setting text properties for the first column of the table head */
+        .main_table thead td:nth-of-type(1) {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 32px;
+            line-height: 39px;
+        }
+
+        /* Setting general properties for the seocnd column of the table head */
+        .main_table thead td:nth-of-type(2) {
+            text-align: right;
+            vertical-align: bottom;
+            padding-right: 40px;
+        }
+
+        /* Setting a permanent width for the first column of the table body */
+        .main_table tbody td:nth-of-type(1) {
+            width: 230px;
+        }
+
+        /*
+        Setting text properties for the second column of the table body,
+        This is the exact same styling at the above 'Question_display_text' id
+        */
+        .main_table tbody tr td:nth-of-type(2) {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 24px;
+            line-height: 30px;
+            padding-left: 15px;
+        }
+
+        /* ... */
+        /*
+        ...
+        /**/
+
+        .nested_table {
+            border-collapse: collapse;
+            min-width: 190px; min-height: 94px;
+            text-align: center;
+            vertical-align: middle;
+            /* ... */ margin-right: 25px; margin-bottom: 25px; /* ... */
+        }
+
+        .nested_table thead tr {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 48px;
+            line-height: 60px;
+        }
+
+        .nested_table tbody tr {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 18px;
+            line-height: 23px;
+        }
+    </style>
+
+    <!-- Temporary; Will remove later -->
+    <!---->
     <a href="/login">Login</a>
     <br>
     <a href="/signup">SignUp</a>
+    <!---->
+
+    <div class="pagewide_whitespace_top_left">
+        <h1 id="DuoLing_header">DuoLing</h1>
+
+        <!--
+            For some reason, adding whitespace between the
+            above h1 tag and the table below changes the
+            width of every other line in the table.
+            I am unsure of how to fix this, but I am going to
+            add it into the page anyway because that is the
+            way the Figma UI Mockup is styled.
+        -->
+
+        <? Whitespace >
+        <div style="margin-bottom: 75px"></div>
+
+        <table class="nested_table">
+            <thead>
+                <tr>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>Votes</td>
+                    <td>Answers</td>
+                    <td>Views</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="main_table">
+            <thead>
+                <tr>
+                    <td>
+                        Top Questions
+                    </td>
+                    <td>
+                        <div>
+                            <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
+                                <button type="button" class="btn btn-dark">Hot</button>
+                                <button type="button" class="btn btn-dark">New</button>
+                                <button type="button" class="btn btn-dark">Best</button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>
+                        <table class="nested_table">
+                            <thead>
+                                <tr>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                </tr>
+                            </thead>
+                
+                            <tbody>
+                                <tr>
+                                    <td>Votes</td>
+                                    <td>Answers</td>
+                                    <td>Views</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                    <td><span style="color: rgba(119, 73, 248, 1)">[Display question here]</span></td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <table class="nested_table">
+                            <thead>
+                                <tr>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                </tr>
+                            </thead>
+                
+                            <tbody>
+                                <tr>
+                                    <td>Votes</td>
+                                    <td>Answers</td>
+                                    <td>Views</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                    <td><span style="color: rgba(119, 73, 248, 1)">[Display question here]</span></td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <table class="nested_table">
+                            <thead>
+                                <tr>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                </tr>
+                            </thead>
+                
+                            <tbody>
+                                <tr>
+                                    <td>Votes</td>
+                                    <td>Answers</td>
+                                    <td>Views</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                    <td><span style="color: rgba(119, 73, 248, 1)">[Display question here]</span></td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <table class="nested_table">
+                            <thead>
+                                <tr>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                </tr>
+                            </thead>
+                
+                            <tbody>
+                                <tr>
+                                    <td>Votes</td>
+                                    <td>Answers</td>
+                                    <td>Views</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                    <td><span style="color: rgba(119, 73, 248, 1)">[Display question here]</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
