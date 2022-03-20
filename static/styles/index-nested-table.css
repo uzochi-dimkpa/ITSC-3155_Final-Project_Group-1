@@ -1,0 +1,23 @@
+#nested_table {
+    border-collapse: collapse;
+    min-width: 190px; min-height: 94px;
+    text-align: center;
+    vertical-align: middle;
+    margin-right: 25px;
+}
+
+#nested_table > thead > tr {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 48px;
+    line-height: 60px;
+}
+
+#nested_table > tbody > tr {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 23px;
+}
