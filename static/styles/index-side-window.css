@@ -1,0 +1,32 @@
+/* All properties of FAQ/Tips/Tricks display window */
+        /* General properties */
+        .Side_window {
+            min-width: 404px; min-height: 270px;
+            float: right;
+            margin-right: 58px;
+
+            /* Border for visualization/debugging purposes */
+            /* border: 1px rgba(0, 0, 0, 1) solid; /**/
+        }
+
+        /* h4 tag properties */
+        .Side_window > h4 {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 32px;
+            line-height: 39px;
+            text-align: center;
+            padding-bottom: 35px;
+        }
+
+        /* h5 tag properties */
+        .Side_window > h5 {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 200;
+            font-size: 24px;
+            line-height: 30px;
+            text-align: center;
+            padding-bottom: 20px;
+        }
