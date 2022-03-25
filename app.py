@@ -28,3 +28,7 @@ def create_question_form():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+@app.get('/profile')
+def profile():
+    return render_template('profile.html')
