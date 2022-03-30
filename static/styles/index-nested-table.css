@@ -7,7 +7,7 @@
 }
 
 #nested_table > thead > tr {
-    font-family: 'Inter';
+    font: 'Inter';
     font-style: normal;
     font-weight: 600;
     font-size: 48px;
@@ -15,7 +15,7 @@
 }
 
 #nested_table > tbody > tr {
-    font-family: 'Inter';
+    font: 'Inter';
     font-style: normal;
     font-weight: 600;
     font-size: 18px;
