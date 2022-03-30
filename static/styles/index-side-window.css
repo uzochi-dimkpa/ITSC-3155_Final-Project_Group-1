@@ -11,7 +11,7 @@
 
         /* h4 tag properties */
         .Side_window > h4 {
-            font-family: 'Inter';
+            font: 'Inter';
             font-style: normal;
             font-weight: 400;
             font-size: 32px;
@@ -22,7 +22,7 @@
 
         /* h5 tag properties */
         .Side_window > h5 {
-            font-family: 'Inter';
+            font: 'Inter';
             font-style: normal;
             font-weight: 200;
             font-size: 24px;
