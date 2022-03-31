@@ -58,3 +58,7 @@ if __name__ == '__main__':
 @app.get('/profile')
 def profile():
     return render_template('profile.html')
+
+@app.get('/faq')
+def faq():
+    return render_template('faq.html')
