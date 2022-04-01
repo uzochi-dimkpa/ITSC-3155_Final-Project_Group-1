@@ -1,4 +1,5 @@
 import os
+import re
 from flask import Flask, abort, redirect, render_template, request
 from dotenv import load_dotenv
 from src.models import db
@@ -58,6 +59,10 @@ if __name__ == '__main__':
 @app.get('/profile')
 def profile():
     return render_template('profile.html')
+
+@app.get('/about')
+def about():
+    return render_template('about.html')
 
 @app.get('/faq')
 def faq():
