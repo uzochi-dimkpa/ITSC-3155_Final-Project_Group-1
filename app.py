@@ -63,3 +63,7 @@ def profile():
 @app.get('/about')
 def about():
     return render_template('about.html')
+
+@app.get('/faq')
+def faq():
+    return render_template('faq.html')
