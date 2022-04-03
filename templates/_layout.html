@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- FontAwesome is a great choice, we use it on my team -->
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     <title>{% block title %}{% endblock %}</title>
     {% block stylesheets %}{% endblock %}
@@ -60,7 +61,7 @@
             </div>
         </div>
     </nav>
-
+    <!-- This JS bundle link should either be in the head with a defer attribute or after the body so it doesn't start up until after the body is parsed -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     {% block body %}{% endblock %}
 </body>

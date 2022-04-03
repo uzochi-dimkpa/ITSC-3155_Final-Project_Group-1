@@ -11,7 +11,8 @@ app = Flask(__name__)
 
 load_dotenv()
 
-
+# It might be useful to provide a .env.sample file that just contains all the env vars someone would need when cloning the project
+# This file could then be committed and pushed to GitHub because it would have blank values, just the keys
 db_host = os.getenv('DB_HOST')
 db_port = os.getenv('DB_PORT')
 db_user = os.getenv('DB_USER', 'root')
@@ -20,7 +21,7 @@ db_name = os.getenv('DB_NAME')
 
 app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql://{db_user}:{db_pass}@{db_host}:{db_port}/{db_name}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_ECHO'] = True
+app.config['SQLALCHEMY_ECHO'] = True # Might be good as an env var so you're not logging this in production and only locally
 
 db.init_app(app)
 
@@ -48,11 +49,13 @@ def signup():
 def create_question():
     return render_template('create-question.html')
 
+# This routes may look better / more uniform with the route format in the PPTs
 @app.post('/create-question')
 def create_question_form():
     
     redirect('/create-question')
 
+# This should be at the very end of the file, not here (maybe a merge issue)
 if __name__ == '__main__':
     app.run(debug=True)
 

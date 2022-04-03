@@ -13,6 +13,7 @@ class Profile(db.Model):
     def __repr__(self):
         return f'Profile class'
 
+# Not really sure why there are singletons in this module, you would want to create multiple instances of these models
 profile_singleton = Profile()
 
 
