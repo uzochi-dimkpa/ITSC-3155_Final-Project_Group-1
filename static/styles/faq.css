@@ -1,0 +1,23 @@
+main
+{
+    margin: 64px;
+}
+h1
+{
+    margin-bottom: 82px;
+    font-size: 65px;
+}
+table
+{
+    line-height: 85px;
+    min-height: 25px;
+}
+th
+{
+    font-size: 50px;
+}
+td
+{
+    font-size: 25px;
+}
+
