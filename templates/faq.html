@@ -1,32 +1,10 @@
 {% extends '_layout.html' %}
 
 {% block title %}FAQ Page{% endblock %}
-
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/faq.css') }}"> {% endblock
+%}
 {% block body %}
-<style>
-    main
-    {
-        margin: 64px;
-    }
-    h1
-    {
-        margin-bottom: 82px;
-        font-size: 65px;
-    }
-    table
-    {
-        line-height: 85px;
-        min-height: 25px;
-    }
-    th
-    {
-        font-size: 50px;
-    }
-    td
-    {
-        font-size: 25px;
-    }
-</style>
 <main>
     <h1>Frequently Asked Questions (FAQ)</h1>
 

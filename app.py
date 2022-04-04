@@ -53,8 +53,7 @@ def create_question_form():
     
     redirect('/create-question')
 
-if __name__ == '__main__':
-    app.run(debug=True)
+
 
 @app.get('/profile')
 def profile():
@@ -67,3 +66,5 @@ def about():
 @app.get('/faq')
 def faq():
     return render_template('faq.html')
+if __name__ == '__main__':
+    app.run(debug=True)
