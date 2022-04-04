@@ -47,17 +47,17 @@ CREATE TABLE IF NOT EXISTS t_comment (
 
 -- Server-sider tables:
 CREATE TABLE IF NOT EXISTS t_language (
-	language_name VARCHAR(255) NOT NULL,
+	language_name VARCHAR(255) NOT NULL UNIQUE,
     PRIMARY KEY (language_name)
 );
 
 CREATE TABLE IF NOT EXISTS t_tag (
-    tag_name VARCHAR(255) NOT NULL,
+    tag_name VARCHAR(255) NOT NULL UNIQUE,
     PRIMARY KEY (tag_name)
 );
 
 CREATE TABLE IF NOT EXISTS t_relate (
-    relate_type VARCHAR(255) NOT NULL,
+    relate_type VARCHAR(255) NOT NULL UNIQUE,
     PRIMARY KEY (relate_type)
 );
 
