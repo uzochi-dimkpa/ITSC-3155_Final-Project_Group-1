@@ -13,7 +13,7 @@ USE DuoLing;
 -- CRUD tables:
 CREATE TABLE IF NOT EXISTS t_user  (
 	user_id INT AUTO_INCREMENT NOT NULL,
-	username VARCHAR(255) NOT NULL,
+	username VARCHAR(255) NOT NULL UNIQUE,
     user_password VARCHAR(255) NOT NULL,
     first_name VARCHAR(255) NOT NULL,
     last_name VARCHAR(255) NOT NULL,
