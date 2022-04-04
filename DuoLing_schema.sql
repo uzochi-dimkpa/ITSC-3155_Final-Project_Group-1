@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS t_post (
     title TEXT NOT NULL,
     post_text TEXT NOT NULL,
     created_at DATETIME NOT NULL,
-    updated_at DATETIME NOT NULL,
+    updated_at DATETIME NULL,
     PRIMARY KEY (post_id),
     FOREIGN KEY (user_id) REFERENCES t_user(user_id) -- ON UPDATE CASCADE ON DELETE SET NULL
 );
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS t_comment (
     title TEXT NOT NULL,
     comment_text TEXT NOT NULL,
     created_at DATETIME NOT NULL,
-    updated_at DATETIME NOT NULL,
+    updated_at DATETIME NULL,
     PRIMARY KEY (comment_id),
     FOREIGN KEY (post_id) REFERENCES t_post(post_id), -- ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES t_user(user_id) -- ON UPDATE CASCADE ON DELETE CASCADE
