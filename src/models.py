@@ -2,37 +2,64 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
+
+
 #: TEMPORARY; WILL EDIT/UPDATE LATER
 
-class Profile(db.Model):
-    profile_id = db.Column(db.Integer, primary_key=True)
-    first_name = db.Column(db.String, nullable=False)
-    last_name = db.Column(db.String, nullable=False)
-    profile_role = db.Column(db.String, nullable=False)
+# CRUD Resource #1
+class User(db.Model):
+    # TODO: Update SQLAlchemy Table here
 
     def __repr__(self):
-        return f'Profile class'
-
-profile_singleton = Profile()
+        return f'User class'
 
 
 
-class Question(db.Model):
-    question_id = db.Column(db.Integer, primary_key=True)
-    question_text = db.Column(db.Text, nullable=False)
+# CRUD Resource #2
+class Post(db.Model):
+    # TODO: Update SQLAlchemy Table here
 
     def __repr__(self):
-        return f'Question class'
-
-question_singleton = Question()
+        return f'Post class'
 
 
 
+# CRUD Resource #3
 class Comment(db.Model):
-    comment_id = db.Column(db.Integer, primary_key=True)
-    comment_text = db.Column(db.Text, nullable=False)
+    # TODO: Update SQLAlchemy Table here
 
     def __repr__(self):
         return f'Question class'
 
-comment_singleton = Comment()
+
+
+# Server-side resource #1
+class Language(db.Model):
+    # TODO: Update SQLAlchemy Table here
+
+    def __repr__(self):
+        return f'Language class'
+
+language_singleton = Language()
+
+
+
+# Server-side resource #2
+class Tag(db.Model):
+    # TODO: Update SQLAlchemy Table here
+
+    def __repr__(self):
+        return f'Tag class'
+
+tag_singleton = Tag()
+
+
+
+# Server-side resource #3
+class Relationship(db.Model):
+    # TODO: Update SQLAlchemy Table here
+
+    def __repr__(self):
+        return f'Relationship class'
+
+relationship_singleton = Relationship()
