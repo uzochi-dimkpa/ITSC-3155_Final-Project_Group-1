@@ -46,18 +46,16 @@ def signup():
     return render_template('signup.html')
 
 #app get for /create-question
-@app.get('/create-question')
+@app.get('/create-post')
 def create_question():
-    return render_template('create-question.html')
+    return render_template('create-post.html')
 
-@app.post('/create-question')
+@app.post('/create-post')
 def create_question_form():
     
-    redirect('/create-question')
+    redirect('/create-post')
 
-@app.get('/profile')
-def profile():
-    return render_template('profile.html')
+
 
 @app.get('/about')
 def about():
