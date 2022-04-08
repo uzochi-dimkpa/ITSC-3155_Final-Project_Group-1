@@ -44,13 +44,13 @@ class Post(db.Model):
 # CRUD Resource #3
 class Comment(db.Model):
     # TODO: Update SQLAlchemy Table here
-    comment_id = db.Column(db.Integer, primary_key=true)
-    post_id = db.Column(db.Integer, nullable=false)
-    user_id = db.Column(db.Integer, nullable=false)
-    title = db.Colum(db.Text, nullable=false)
-    comment_text = db.Column(db.Text, nullable=false)
-    created_at = db.Column(db.DateTime, nullable=false)
-    updated_at = db.Column(db.DateTime, nullable=true)
+    comment_id = db.Column(db.Integer, primary_key=True)
+    post_id = db.Column(db.Integer, nullable=False)
+    user_id = db.Column(db.Integer, nullable=False)
+    title = db.Colum(db.Text, nullable=False)
+    comment_text = db.Column(db.Text, nullable=False)
+    created_at = db.Column(db.DateTime, nullable=False)
+    updated_at = db.Column(db.DateTime, nullable=True)
 
 
 
