@@ -44,15 +44,25 @@ class Post(db.Model):
 # CRUD Resource #3
 class Comment(db.Model):
     # TODO: Update SQLAlchemy Table here
+    comment_id = db.Column(db.Integer, primary_key=true)
+    post_id = db.Column(db.Integer, nullable=false)
+    user_id = db.Column(db.Integer, nullable=false)
+    title = db.Colum(db.Text, nullable=false)
+    comment_text = db.Column(db.Text, nullable=false)
+    created_at = db.Column(db.DateTime, nullable=false)
+    updated_at = db.Column(db.DateTime, nullable=true)
+
+
 
     def __repr__(self):
-        return f'Question class'
+        return f'Comment class'
 
 
 
 # Server-side resource #1
 class Language(db.Model):
     # TODO: Update SQLAlchemy Table here
+    language_name = db.Column(db.String, nullable=false,unique=true,primary_key=true)
 
     def __repr__(self):
         return f'Language class'
@@ -64,6 +74,7 @@ language_singleton = Language()
 # Server-side resource #2
 class Tag(db.Model):
     # TODO: Update SQLAlchemy Table here
+    tag_name = db.Column(db.String, nullable=false,unique=true,primary_key=true)
 
     def __repr__(self):
         return f'Tag class'
