@@ -1,20 +1,10 @@
 {% extends '_layout.html' %}
 
 {% block title %} Login Page {% endblock %}
-
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/signup.css') }}"> {% endblock
+%}
 {% block body %}
-
-<style>
-    
-    .signin-content {
-        margin-left: 96px;
-    }
-    #signupbutton {
-        background-color: #7749F8;
-    }
-    
-
-</style>
 
 <div class="signin-content">
     <h1>SignUp</h1>
