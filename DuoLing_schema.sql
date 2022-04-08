@@ -34,8 +34,8 @@ CREATE TABLE IF NOT EXISTS t_post (
 
 CREATE TABLE IF NOT EXISTS t_comment (
 	comment_id INT AUTO_INCREMENT NOT NULL,
-    post_id INT NULL,
-    user_id INT NULL,
+    post_id INT NOT NULL,
+    user_id INT NOT NULL,
     title TEXT NOT NULL,
     comment_text TEXT NOT NULL,
     created_at DATETIME NOT NULL,
