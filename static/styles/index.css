@@ -1,5 +1,5 @@
  /* Adds whitespace in the upward and leftward directions */
- .pagewide_whitespace_top_left {
+.pagewide_whitespace_top_left {
   margin-top: 104px;
   margin-left:96px;
 }
