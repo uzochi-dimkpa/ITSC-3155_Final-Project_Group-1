@@ -62,7 +62,7 @@ class Comment(db.Model):
 # Server-side resource #1
 class Language(db.Model):
     # TODO: Update SQLAlchemy Table here
-    language_name = db.Column(db.String, nullable=false,unique=true,primary_key=true)
+    language_name = db.Column(db.String, nullable=False,unique=True,primary_key=True)
 
     def __repr__(self):
         return f'Language class'
@@ -74,7 +74,7 @@ language_singleton = Language()
 # Server-side resource #2
 class Tag(db.Model):
     # TODO: Update SQLAlchemy Table here
-    tag_name = db.Column(db.String, nullable=false,unique=true,primary_key=true)
+    tag_name = db.Column(db.String, nullable=False,unique=True,primary_key=True)
 
     def __repr__(self):
         return f'Tag class'
