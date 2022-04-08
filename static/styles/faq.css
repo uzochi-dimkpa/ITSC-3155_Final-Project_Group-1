@@ -5,7 +5,7 @@ main
 h1
 {
     margin-bottom: 82px;
-    font-size: 65px;
+    font-size: 55px;
 }
 table
 {
@@ -14,10 +14,10 @@ table
 }
 th
 {
-    font-size: 50px;
+    font-size: 40px;
 }
 td
 {
-    font-size: 25px;
+    font-size: 15px;
 }
 

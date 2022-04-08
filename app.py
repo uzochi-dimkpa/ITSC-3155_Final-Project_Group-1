@@ -41,11 +41,11 @@ app.register_blueprint(comment_router)
 def login():
     return render_template('login.html')
 
+
 @app.get('/signup')
 def signup():
     return render_template('signup.html')
 
-#app get for /create-question
 @app.get('/create-post')
 def create_question():
     return render_template('create-post.html')
@@ -55,8 +55,6 @@ def create_question_form():
     
     redirect('/create-post')
 
-
-
 @app.get('/about')
 def about():
     return render_template('about.html')
@@ -64,7 +62,6 @@ def about():
 @app.get('/faq')
 def faq():
     return render_template('faq.html')
-
 
 
 if __name__ == '__main__':
