@@ -1,4 +1,3 @@
-from enum import unique
 from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
@@ -44,6 +43,8 @@ class Post(db.Model):
 # CRUD Resource #3
 class Comment(db.Model):
     # TODO: Update SQLAlchemy Table here
+    __tablename__ = 't_comment'
+
     comment_id = db.Column(db.Integer, primary_key=True)
     post_id = db.Column(db.Integer, nullable=False)
     user_id = db.Column(db.Integer, nullable=False)
@@ -51,8 +52,6 @@ class Comment(db.Model):
     comment_text = db.Column(db.Text, nullable=False)
     created_at = db.Column(db.DateTime, nullable=False)
     updated_at = db.Column(db.DateTime, nullable=True)
-
-
 
     def __repr__(self):
         return f'Comment class'
@@ -62,6 +61,8 @@ class Comment(db.Model):
 # Server-side resource #1
 class Language(db.Model):
     # TODO: Update SQLAlchemy Table here
+    __tablename__ = 't_language'
+
     language_name = db.Column(db.String, nullable=False,unique=True,primary_key=True)
 
     def __repr__(self):
@@ -74,6 +75,8 @@ language_singleton = Language()
 # Server-side resource #2
 class Tag(db.Model):
     # TODO: Update SQLAlchemy Table here
+    __tablename__ = 't_tag'
+
     tag_name = db.Column(db.String, nullable=False,unique=True,primary_key=True)
 
     def __repr__(self):
