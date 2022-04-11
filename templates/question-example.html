@@ -1,9 +1,17 @@
 {% extends '_layout.html' %}
 
 {% block title %} Question Example {% endblock %}
-{% block stylesheets %}{% endblock %}
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/question-example.css') }}">
+{% endblock %}
 
 {% block body %}
+<main>
+    <h1>(Question Text)</h1>
 
-
+    <h2>(Question)</h2>
+    <div class="container">
+        In ultricies fermentum aliquet. Pellentesque dui magna, condimentum non ullamcorper at, cursus in sem. Nunc condimentum, purus ac enenatis commodo libero, am auctor porta tortor, nec consequat nibh finibus a. Sed ultrices risus eget iaculis luctus. Mauris vel gravida magna.
+    </div>
+</main>
 {% endblock %}

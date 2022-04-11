@@ -67,3 +67,7 @@ def about():
 @app.get('/faq')
 def faq():
     return render_template('faq.html')
+
+@app.get('/example')
+def example():
+    return render_template('question-example.html')
