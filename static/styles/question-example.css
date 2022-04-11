@@ -1,9 +1,19 @@
-body
+main
 {
     margin: 10px;
 }
 .container
 {
     width: 747px;
-    margin: 0;
+    position: relative;
+    float: left;
+    background-color: #F8F9FA;
+    border: 2px solid #7749F8;
+}
+
+.reply
+{
+    width: 420px;
+    min-height: 120px;
+    border: 2px solid #adb5bd;
 }
