@@ -46,12 +46,19 @@ class Comment(db.Model):
     __tablename__ = 't_comment'
 
     comment_id = db.Column(db.Integer, primary_key=True)
-    post_id = db.Column(db.Integer, nullable=False)
-    user_id = db.Column(db.Integer, nullable=False)
-    title = db.Colum(db.Text, nullable=False)
+    post_id = db.Column(db.Integer, db.ForeignKey('t_post.post_id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('t_user.user_id'), nullable=False)
     comment_text = db.Column(db.Text, nullable=False)
     created_at = db.Column(db.DateTime, nullable=False)
     updated_at = db.Column(db.DateTime, nullable=True)
+
+    user = db.Relationship('User', backref='comments', lazy=True)
+    post = db.Relationship('Post', backref='comments', lazy=True)
+
+    def __init__(self, comment_id, post_id, user_id, comment_text, created_at, updated_at):
+        self.comment_id = comment_id; self.post_id = post_id; self.user_id = user_id
+        self.comment_text = comment_text
+        self.created_at = created_at; self.updated_at = updated_at
 
     def __repr__(self):
         return f'Comment class'
@@ -93,10 +100,20 @@ class Relationship(db.Model):
 
     relate_type = db.Column(db.String, nullable = False, unique = True, primary_key = True)
 
-    def __init__(self, relate_type):
-        self.relate_type = relate_type
+    #: Not necessary to have an __init__ method for this class,
+    #: as this table will only be updated server-side:
+    # def __init__(self, relate_type):
+    #     self.relate_type = relate_type
 
     def __repr__(self):
         return f'Relationship type: {self.relate_type}\n'
 
 relationship_singleton = Relationship()
+
+
+
+# Junction table #1
+
+# Junction table #2
+
+# Junction table #3

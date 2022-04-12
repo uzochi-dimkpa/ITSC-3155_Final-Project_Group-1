@@ -23,9 +23,9 @@ CREATE TABLE IF NOT EXISTS t_user  (
 
 CREATE TABLE IF NOT EXISTS t_post (
 	post_id INT AUTO_INCREMENT NOT NULL,
-    user_id INT NULL,
+    user_id INT NOT NULL,
     title TEXT NOT NULL,
-    post_text TEXT NOT NULL,
+    body TEXT NOT NULL,
     created_at DATETIME NOT NULL,
     updated_at DATETIME NULL,
     PRIMARY KEY (post_id),
@@ -36,7 +36,6 @@ CREATE TABLE IF NOT EXISTS t_comment (
 	comment_id INT AUTO_INCREMENT NOT NULL,
     post_id INT NOT NULL,
     user_id INT NOT NULL,
-    title TEXT NOT NULL,
     comment_text TEXT NOT NULL,
     created_at DATETIME NOT NULL,
     updated_at DATETIME NULL,
@@ -74,7 +73,7 @@ CREATE TABLE IF NOT EXISTS user__user (
 	user_id_one INT NOT NULL,
     user_id_two INT NOT NULL,
     relate_type VARCHAR(255) NOT NULL,
-    PRIMARY KEY (user_id_one, user_id_two, relate_type),
+    PRIMARY KEY (user_id_one, user_id_two),
     FOREIGN KEY (user_id_one) REFERENCES t_user(user_id), -- ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY (user_id_two) REFERENCES t_user(user_id), -- ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY (relate_type) REFERENCES t_relate(relate_type) -- ON UPDATE CASCADE ON DELETE CASCADE
