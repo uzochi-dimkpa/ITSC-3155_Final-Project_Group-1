@@ -1,0 +1,24 @@
+.login-content {
+  margin-left: 96px;
+}
+#loginbutton {
+  background: linear-gradient(to right, #4c33db  50%, #7749F8 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  transition: all .3s ease-out;
+}
+#loginbutton:hover {
+  background-position: left bottom;
+  color: aliceblue;
+}
+
+.btn-primary {
+  background: linear-gradient(to right, #3357db  50%, #5571fd 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  transition: all .3s ease-out;
+}
+.btn-primary:hover {
+  background-position: left bottom;
+  color: aliceblue;
+}

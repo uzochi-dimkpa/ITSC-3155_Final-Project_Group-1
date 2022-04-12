@@ -3,8 +3,8 @@ import re
 from flask import Flask, abort, redirect, render_template, request
 from dotenv import load_dotenv
 from src.models import db
-from src.blueprints.profile_blueprint import router as profile_router
-from src.blueprints.question_blueprint import router as question_router
+from src.blueprints.user_blueprint import router as user_router
+from src.blueprints.post_blueprint import router as post_router
 from src.blueprints.comment_blueprint import router as comment_router
 
 app = Flask(__name__)
@@ -12,15 +12,17 @@ app = Flask(__name__)
 load_dotenv()
 
 
-db_host = os.getenv('DB_HOST')
-db_port = os.getenv('DB_PORT')
-db_user = os.getenv('DB_USER', 'root')
+# RENAME '.env_' FILE TO '.env' AND MAKE CHANGES TO FIELDS AS NECESSARY
+db_host = os.getenv('DB_HOST') # Default: localhost
+db_port = os.getenv('DB_PORT') # Default: 3306
+db_user = os.getenv('DB_USER', 'root') # Default: root
 db_pass = os.getenv('DB_PASSWORD')
-db_name = os.getenv('DB_NAME')
+db_name = os.getenv('DB_NAME') # Server default: DuoLing
+sql_echo = os.getenv('SQL_ECHO') # Default: False
 
 app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql://{db_user}:{db_pass}@{db_host}:{db_port}/{db_name}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_ECHO'] = True
+app.config['SQLALCHEMY_ECHO'] = sql_echo
 
 db.init_app(app)
 
@@ -30,8 +32,8 @@ def index():
     return render_template('index.html')
 
 
-app.register_blueprint(profile_router)
-app.register_blueprint(question_router)
+app.register_blueprint(user_router)
+app.register_blueprint(post_router)
 app.register_blueprint(comment_router)
 
 
@@ -43,22 +45,14 @@ def login():
 def signup():
     return render_template('signup.html')
 
-#app get for /create-question
-@app.get('/create-question')
+@app.get('/create-post')
 def create_question():
-    return render_template('create-question.html')
+    return render_template('create-post.html')
 
-@app.post('/create-question')
+@app.post('/create-post')
 def create_question_form():
     
-    redirect('/create-question')
-
-if __name__ == '__main__':
-    app.run(debug=True)
-
-@app.get('/profile')
-def profile():
-    return render_template('profile.html')
+    redirect('/create-post')
 
 @app.get('/about')
 def about():
@@ -71,3 +65,8 @@ def faq():
 @app.get('/example')
 def example():
     return render_template('question-example.html')
+
+
+
+if __name__ == '__main__':
+    app.run(debug=True)

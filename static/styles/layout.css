@@ -1,0 +1,23 @@
+#DuoLing_navbar_item {
+  font: 'Inter';
+  font-style: normal;
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 24px;
+}
+i {
+  font-size:40px;
+   color:white; 
+  margin-bottom: 10px;
+}
+#search-btn {
+  border: 1px solid white;
+  background: linear-gradient(to right, black 50%, white 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  transition: all .3s ease-out;
+}
+#search-btn:hover {
+  background-position: left bottom;
+  color: black;
+}

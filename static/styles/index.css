@@ -1,0 +1,26 @@
+ /* Adds whitespace in the upward and leftward directions */
+.pagewide_whitespace_top_left {
+  margin-top: 104px;
+  margin-left:96px;
+}
+
+/* General properties of the page title */
+#DuoLing_header {
+  font: 'Inter';
+  font-style: italic;
+  font-weight: 500;
+  font-size: 64px;
+  line-height: 77px;
+
+  /* Whitespace; DEPRECATED */
+  /* border-bottom: 75px solid rgba(255, 255, 255, 1); */
+}
+
+/* General properties of the question display text */
+#Question_display_text {
+  font: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 30px;
+}
