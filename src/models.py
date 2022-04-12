@@ -34,6 +34,21 @@ class User(db.Model):
 # CRUD Resource #2
 class Post(db.Model):
     # TODO: Update SQLAlchemy Table here
+    __tablename__ = 't_post'
+
+    post_id = db.Column(db.Integer, nullable = False, primary_key = True)
+    title = db.Column(db.String, nullable = False)
+    body = db.Column(db.String, nullable = False)
+    created_at = db.Column(db.DateTime, server_default=db.func.now())
+    updated_at = db.Column(db.DateTime, server_default=db.func.now(), server_onupdate=db.func.now())
+
+    user_id = db.Column(db.String, db.ForeignKey('user.user_id'), nullable = False)
+    user = db.relationship('User', backref='posts', lazy=True)
+
+    def __init__(self, title, body, user_id, created_at, updated_at):
+        self.title = title; self.body = body
+        self.created_at = created_at; self.updated_at = updated_at
+        self.user_id = user_id
 
     def __repr__(self):
         return f'Post class'
