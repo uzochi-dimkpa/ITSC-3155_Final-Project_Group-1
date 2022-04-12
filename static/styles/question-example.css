@@ -1,0 +1,24 @@
+main
+{
+    margin: 10px;
+    float: left;
+}
+.container
+{
+    width: 747px;
+    background-color: #F8F9FA;
+    border: 2px solid #7749F8;
+    position: relative;
+}
+
+.reply
+{
+    width: 420px;
+    border: 2px solid #adb5bd;
+    margin-left: 0px;
+}
+
+.main-reply
+{
+    min-height: 120px;
+}

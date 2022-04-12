@@ -62,6 +62,11 @@ def about():
 def faq():
     return render_template('faq.html')
 
+@app.get('/example')
+def example():
+    return render_template('question-example.html')
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
