@@ -42,7 +42,7 @@ class Post(db.Model):
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, server_default=db.func.now(), server_onupdate=db.func.now())
 
-    user_id = db.Column(db.String, db.ForeignKey('user.user_id'), nullable = False)
+    user_id = db.Column(db.String, db.ForeignKey('t_user.user_id'), nullable = False)
     user = db.relationship('User', backref='posts', lazy=True)
 
     def __init__(self, title, body, user_id, created_at, updated_at):
@@ -67,8 +67,8 @@ class Comment(db.Model):
     created_at = db.Column(db.DateTime, nullable=False)
     updated_at = db.Column(db.DateTime, nullable=True)
 
-    user = db.Relationship('User', backref='comments', lazy=True)
-    post = db.Relationship('Post', backref='comments', lazy=True)
+    # user = db.relationship('User', backref='comments', lazy=True)
+    # post = db.relationship('Post', backref='comments', lazy=True)
 
     def __init__(self, comment_id, post_id, user_id, comment_text, created_at, updated_at):
         self.comment_id = comment_id; self.post_id = post_id; self.user_id = user_id
