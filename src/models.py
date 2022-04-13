@@ -67,8 +67,8 @@ class Comment(db.Model):
     created_at = db.Column(db.DateTime, nullable=False)
     updated_at = db.Column(db.DateTime, nullable=True)
 
-    # user = db.relationship('User', backref='comments', lazy=True)
-    # post = db.relationship('Post', backref='comments', lazy=True)
+    user = db.relationship('User', backref='comments', lazy=True)
+    post = db.relationship('Post', backref='comments', lazy=True)
 
     def __init__(self, comment_id, post_id, user_id, comment_text, created_at, updated_at):
         self.comment_id = comment_id; self.post_id = post_id; self.user_id = user_id
