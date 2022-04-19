@@ -15,9 +15,13 @@
     </div>
     <!--Main reply and other replies-->
     <h3>Reply</h3>
-    <div class="container reply main-reply">
-        Write your message here.
-    </div>
+    <form id="main-reply">
+        <div class="container reply main-reply">
+            <label for="reply" class="visually-hidden">Reply</label>
+            <textarea class="form-control" id="reply" name="reply" rows="3" placeholder="Type your reply here."></textarea>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
     <h3>Other Replies:</h3>
     <div class="container reply">Lorem ipsum</div>
     <div class="container reply">Lorem ipsum</div>
