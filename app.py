@@ -31,12 +31,6 @@ db.init_app(app)
 def index():
     return render_template('index.html')
 
-
-app.register_blueprint(user_router)
-app.register_blueprint(post_router)
-app.register_blueprint(comment_router)
-
-
 @app.get('/login')
 def login():
     return render_template('login.html')
@@ -63,8 +57,17 @@ def faq():
     return render_template('faq.html')
 
 @app.get('/example')
-def example():
-    return render_template('question-example.html')
+def post_example():
+    return render_template('post-example.html')
+
+# @app.get('/profile')
+# def user_profile():
+#     return render_template('profile.html')
+
+
+app.register_blueprint(user_router)
+app.register_blueprint(post_router)
+app.register_blueprint(comment_router)
 
 
 
