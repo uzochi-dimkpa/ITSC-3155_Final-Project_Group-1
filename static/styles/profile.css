@@ -1,44 +1,37 @@
+
 .btn-primary {
     background: linear-gradient(to right, #3357db  50%, #5571fd 50%);
     background-size: 200% 100%;
     background-position: right bottom;
     transition: all .3s ease-out;
-}
-
-.btn-primary:hover {
+  }
+  .btn-primary:hover {
     background-position: left bottom;
     color: aliceblue;
-}
-
-.card {
-    /* acts as a profile card */
-    border-radius: 5px;
-    padding: 50px;
-    text-align: center;
-    width: 100%;
-}
-
-.title {
-    margin-left: 96px;
-}
-
-/*card will be on left while language-question is displayed on right on same line*/
-.profile {
-    padding: 20px;
-    margin-left: 50px;
-    display: flex;
+  }
+  .card {
+      /* acts as a profile card */
+        border-radius: 5px;
+        padding: 50px;
+        text-align: center;
+        width: 100%;
+        
+  }
+  .title {
+      margin-left: 96px;
+  }
+  /*card will be on left while language-question is displayed on right on same line*/
+  .profile {
+     padding: 20px;
+     margin-left: 50px;
+     display: flex;
     flex-direction: row;
     justify-content: space-between;
-}
 
-.container {
-    padding-left: 90px;
-}
-
-.btn-primary {
-    margin-top: 50px;
-}
-.fa-user-circle {
-    font-size: 100px;
-    margin-bottom: 10px;
-}
+  }
+  .container {
+      padding-left: 90px;
+  }
+  .btn-primary {
+      margin-top: 50px;
+  }
