@@ -12,7 +12,7 @@
     <br>
     <br>
 
-    <form>
+    <form action="#" method="POST">
         <label for="username"><h4>Username</h4></label><br>
         <input type="text" id="username" name="username"><br>
         <br>
@@ -22,17 +22,20 @@
         <br>
         <label for="password"><h4>Password</h4></label><br>
         <input type="text" id="password" name="password">
-        
+        <br>
+        <br>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="formCheckDefault">
+            <label class="form-check-label" for="formCheckDefault"><h5>Opt-in to recieve email notifications of new DuoLing posts for your languages</h5></label>
+        </div>   
+        <br>
+        <br>
+    
+        <button type="button" id="signupbutton" class="btn btn-primary">SignUp</button>
     </form>
     <br>
     <br>
-    <div class="form-check">
-        <input style="width: 26px; height: 23px;" class="form-check-input" type="checkbox" value="" id="formCheckDefault">
-        <label style="margin-left: 30px;" class="form-check-label" for="formCheckDefault"><h5>Opt-in to recieve email notifications of new DuoLing posts for your languages</h5></label>
-    </div>    <br>
-    <br>
-
-    <button type="button" id="signupbutton" class="btn btn-primary">SignUp</button>
+    
 
 
 {% endblock %}
