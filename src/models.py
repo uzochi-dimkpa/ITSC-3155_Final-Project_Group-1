@@ -24,8 +24,8 @@ class User(db.Model):
         self.num_friends = num_friends
 
     def __repr__(self):
-        return f'User #{self.user_id}:\
-                \nUsername: {self.username}, Password: {self.user_password}\n\
+        return f'User #{self.user_id}:\n\
+                Username: {self.username}, Password: {self.user_password}\n\
                 First Name: {self.first_name}, Last Name: {self.last_name}\n\
                 # of Friends: {self.num_friends}\n\n\n'
 
@@ -34,9 +34,31 @@ class User(db.Model):
 # CRUD Resource #2
 class Post(db.Model):
     # TODO: Update SQLAlchemy Table here
+    __tablename__ = 't_post'
+
+    post_id = db.Column(db.Integer, nullable = False, primary_key = True)
+    title = db.Column(db.String, nullable = False)
+    body = db.Column(db.String, nullable = False)
+    created_at = db.Column(db.DateTime, nullable = False, server_default=db.func.now()) #- server_default=db.func.now()
+    updated_at = db.Column(db.DateTime, nullable = True, server_default=None, server_onupdate=db.func.now()) #- server_default=db.func.now(),
+
+    user_id = db.Column(db.Integer, db.ForeignKey('t_user.user_id'), nullable = False)
+    user = db.relationship('User', backref='posts', lazy=True)
+
+    def __init__(self, title, body, user_id, created_at, updated_at):
+        self.title = title; self.body = body
+        self.created_at = created_at; self.updated_at = updated_at
+        self.user_id = user_id
+
+    def get_top_four_posts():
+        return Post.query.filter_by(Post.post_id < 5)
 
     def __repr__(self):
-        return f'Post class'
+        return f'Post #{self.post_id}:\n\
+                User #{self.user_id}\n\
+                Title: {self.title}\n\
+                Body: {self.body}\n\
+                Created At: {self.created_at}, Updated At: {self.updated_at}\n\n\n'
 
 
 
@@ -50,11 +72,14 @@ class Comment(db.Model):
     user_id = db.Column(db.Integer, nullable=False)
     title = db.Colum(db.Text, nullable=False)
     comment_text = db.Column(db.Text, nullable=False)
-    created_at = db.Column(db.DateTime, nullable=False)
-    updated_at = db.Column(db.DateTime, nullable=True)
+    created_at = db.Column(db.DateTime, nullable=False, server_default=db.func.now())
+    updated_at = db.Column(db.DateTime, nullable=True, server_default=None, server_onupdate=db.func.now())
 
     def __repr__(self):
-        return f'Comment class'
+        return f'Comment #{self.comment_id}:\n\
+                Post #{self.post_id}, User #{self.user_id}\n\
+                Text: {self.comment_text}\n\
+                Created At: {self.created_at}, Updated At: {self.updated_at}\n\n\n'
 
 
 

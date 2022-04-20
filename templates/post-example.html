@@ -7,25 +7,21 @@
 
 {% block body %}
 <main>
-    <h1>(Question Text)</h1>
-    <!--Question-->
-    <h2>(Question)</h2>
+    <h1>{{ post.title }}</h1>
+    <!-- Question -->
+    <!-- <h2>(Question)</h2> -->
     <div class="container">
-        In ultricies fermentum aliquet. Pellentesque dui magna, condimentum non ullamcorper at, cursus in sem. Nunc condimentum, purus ac enenatis commodo libero, am auctor porta tortor, nec consequat nibh finibus a. Sed ultrices risus eget iaculis luctus. Mauris vel gravida magna.
+        {{ post.body }}
     </div>
     <!--Main reply and other replies-->
     <h3>Reply</h3>
-    <form id="main-reply">
-        <div class="container reply main-reply">
-            <label for="reply" class="visually-hidden">Reply</label>
-            <textarea class="form-control" id="reply" name="reply" rows="3" placeholder="Type your reply here."></textarea>
-        </div>
-        <button type="submit">Submit</button>
-    </form>
-    <h3>Other Replies:</h3>
-    <div class="container reply">Lorem ipsum</div>
-    <div class="container reply">Lorem ipsum</div>
-    <div class="container reply">Lorem ipsum</div>
+    <div class="container reply main-reply">
+        Write your message here.
+    </div>
+    <h3>Other People's Replies:</h3>
+    {% for comment in comments %}
+    <div class="container reply">{{ comment.comment_text }}</div>
+    {% endfor %}
 </main>
 <!--nav buttons-->
 <footer style="text-align: center; padding-top: 82px; padding-bottom: 25px;">
