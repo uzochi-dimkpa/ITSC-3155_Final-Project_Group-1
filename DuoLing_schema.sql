@@ -92,9 +92,6 @@ CREATE TABLE IF NOT EXISTS post__tag (
 
 -- ---------------------------------------------------- Entries
 
--- Client-side database entries
--- ...
-
 -- Server-side database entries:
 INSERT INTO t_language (language_name)
 VALUES
