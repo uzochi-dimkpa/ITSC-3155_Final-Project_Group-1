@@ -84,7 +84,8 @@
 
             <!-- Table body -->
             <tbody>
-                <!-- First row -->
+                <!-- All rows -->
+                {% for post in top_four_posts %}
                 <tr>
                     <!-- First column -->
                     <td>
@@ -92,7 +93,11 @@
                             <thead>
                                 <tr>
                                     <td>0</td>
-                                    <td>0</td>
+
+                                    {% if post.user_id in num_comments.keys() %}
+                                    <td>{{ num_comments.get(post.post_id) }}</td>
+                                    {% endif %}
+
                                     <td>0</td>
                                 </tr>
                             </thead>
@@ -100,7 +105,13 @@
                             <tbody>
                                 <tr>
                                     <td>Votes</td>
-                                    <td>Answers</td>
+
+                                    {% if num_comments.get(post.post_id) > 1 %}
+                                    <td>Comments</td>
+                                    {% else %}
+                                    <td>Comment</td>
+                                    {% endif %}
+
                                     <td>Views</td>
                                 </tr>
                             </tbody>
@@ -109,96 +120,21 @@
 
                     <!-- Second column -->
                     <td>
-                        <span style="color: rgba(119, 73, 248, 1)">[Display question here]</span>
+                        <a href="/post/{{ post.post_id }}" > <!-- style="text-decoration: none; color: rgba(119, 73, 248, 1);" -->
+                            {{ post.title }}
+                        </a>
                     </td>
+
+                    <!-- Third column -->
+                    {% if post.user_id in post_users.keys() %}
+                    <td>
+                        <a href="/user/{{ post.user_id }}"> <!-- style="text-decoration: none;" -->
+                            {{ post_users.get(post.user_id) }}
+                        </a>
+                    </td>
+                    {% endif %}
                 </tr>
-
-                <!-- Second row -->
-                <tr>
-                    <!-- First column -->
-                    <td>
-                        <table id="nested_table">
-                            <thead>
-                                <tr>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                            </thead>
-                
-                            <tbody>
-                                <tr>
-                                    <td>Votes</td>
-                                    <td>Answers</td>
-                                    <td>Views</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </td>
-
-                    <!-- Second column -->
-                    <td>
-                        <span style="color: rgba(119, 73, 248, 1)">[Display question here]</span>
-                    </td>
-                </tr>
-
-                <!-- Third row -->
-                <tr>
-                    <!-- First column -->
-                    <td>
-                        <table id="nested_table">
-                            <thead>
-                                <tr>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                            </thead>
-                
-                            <tbody>
-                                <tr>
-                                    <td>Votes</td>
-                                    <td>Answers</td>
-                                    <td>Views</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </td>
-
-                    <!-- Second column -->
-                    <td>
-                        <span style="color: rgba(119, 73, 248, 1)">[Display question here]</span>
-                    </td>
-                </tr>
-
-                <!-- Fourth row -->
-                <tr>
-                    <!-- First column -->
-                    <td>
-                        <table id="nested_table">
-                            <thead>
-                                <tr>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                            </thead>
-                
-                            <tbody>
-                                <tr>
-                                    <td>Votes</td>
-                                    <td>Answers</td>
-                                    <td>Views</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </td>
-
-                    <!-- Second column -->
-                    <td>
-                        <span style="color: rgba(119, 73, 248, 1)">[Display question here]</span>
-                    </td>
-                </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>
