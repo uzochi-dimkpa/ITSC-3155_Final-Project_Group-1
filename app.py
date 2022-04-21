@@ -38,14 +38,11 @@ def index():
     for post in top_four_posts:
         post_users.update({post.user_id: User.query.filter(post.user_id == User.user_id).first().username})
         num_comments.update({post.post_id: Comment.query.filter(post.post_id == Comment.post_id).count()})
-    
+
+    # Debug
+    print(f'\n\nCurrent DATETIME: {db.func.now()}\n\n')
+
     return render_template('index.html', top_four_posts = top_four_posts, post_users = post_users, num_comments = num_comments)
-
-
-app.register_blueprint(user_router)
-app.register_blueprint(post_router)
-app.register_blueprint(comment_router)
-
 
 @app.get('/login')
 def login():

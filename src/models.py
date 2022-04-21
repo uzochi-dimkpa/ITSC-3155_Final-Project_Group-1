@@ -70,7 +70,6 @@ class Comment(db.Model):
     comment_id = db.Column(db.Integer, primary_key=True)
     post_id = db.Column(db.Integer, nullable=False)
     user_id = db.Column(db.Integer, nullable=False)
-    title = db.Colum(db.Text, nullable=False)
     comment_text = db.Column(db.Text, nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, nullable=True, server_default=None, server_onupdate=db.func.now())
@@ -118,8 +117,8 @@ class Relationship(db.Model):
 
     relate_type = db.Column(db.String, nullable = False, unique = True, primary_key = True)
 
-    def __init__(self, relate_type):
-        self.relate_type = relate_type
+    # def __init__(self, relate_type):
+    #     self.relate_type = relate_type
 
     def __repr__(self):
         return f'Relationship type: {self.relate_type}\n'
