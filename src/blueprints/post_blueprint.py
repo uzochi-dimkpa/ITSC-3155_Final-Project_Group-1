@@ -12,8 +12,8 @@ def create_post():
     title = request.form.get('title', '')
     body = request.form.get('body', '')
     user_id = request.form.get('user_id', '')
-    created_at = request.form.get('created_at', '')
-    updated_at = request.form.get('updated_at', '')
+    created_at = db.func.now() #- request.form.get('created_at', '')
+    updated_at = None #- request.form.get('updated_at', '')
 
     if title == '' or body == '' or user_id == '':
         abort(400)
