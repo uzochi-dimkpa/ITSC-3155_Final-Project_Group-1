@@ -15,9 +15,12 @@
     </div>
     <!--Main reply and other replies-->
     <h3>Reply</h3>
-    <div class="container reply main-reply">
-        Write your message here.
-    </div>
+    <form>
+        <textarea class="container reply main-reply">
+            Write your message here.
+        </textarea>
+        <button type="submit">Submit</button>
+    </form>
     <h3>Other People's Replies:</h3>
     {% for comment in comments %}
     <div class="container reply">{{ comment.comment_text }}</div>
