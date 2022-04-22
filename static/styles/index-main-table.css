@@ -12,6 +12,8 @@
     margin-bottom: 25px;
 }
 
+
+
 /* Setting text properties for the first column of the table head */
 #main_table > thead > tr > td:nth-of-type(1) {
     font: 'Inter';
@@ -35,6 +37,8 @@
 }
 /**/
 
+
+
 /*
 #main_table tbody td:nth-of-type(1),
 #main_table tbody td:nth-of-type(2),
@@ -51,15 +55,71 @@
 }
 /**/
 
+
+
 /*
-Setting text properties for the second column of the table body,
+Setting text properties for the second column of the table body;
 This is the exact same styling at the above 'Question_display_text' id
 */
-#main_table > tbody > tr > td:nth-last-of-type(1) {
+#main_table > tbody > tr > td:nth-of-type(2) > a {
     font: 'Inter';
     font-style: normal;
     font-weight: 600;
     font-size: 24px;
     line-height: 30px;
     padding-left: 15px;
+    text-decoration: none;
+    color: rgba(119, 73, 248, 1)
 }
+
+/*
+Setting text properties for the second column fo the table body;
+This will display an underline (of a different color) when the cursor
+is hovering over the text that this id applies to
+*/
+#main_table > tbody > tr > td:nth-of-type(2) > a:hover {
+    text-decoration: underline;
+    text-decoration-color: rgba(0, 0, 0, 1);
+}
+
+
+
+/* Setting text properties for the third column of the table body */
+#main_table > tbody > tr > td:nth-of-type(3) > a {
+    font: 'Inter';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 30px;
+    text-align: left;
+    text-decoration: none;
+    color: rgba(0, 0, 0, 1);
+}
+
+/*
+Setting text properties for the third column fo the table body;
+This will display an underline (of the same color) when the cursor
+is hovering over the text that this id applies to
+*/
+#main_table > tbody > tr > td:nth-of-type(3) > a:hover {
+    text-decoration: underline;
+    text-decoration-color: rgba(0, 0, 0, 1);
+}
+
+
+
+/* ... */
+/*
+.clickable {
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    position: absolute;     
+    z-index: 1;
+}
+
+.link-hover:hover {
+    text-decoration: underline rgba(0, 0, 0, 1);
+}
+/**/

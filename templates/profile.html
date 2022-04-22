@@ -9,12 +9,12 @@
 
 <div>
 
-    <h1 class="title">User Name</h1>
+    <h1 class="title">{{ user.first_name }} {{ user.last_name }}</h1>
 
     <div class="profile">
         <div class="card">
             <div class="profile-img">
-                <i class="fas fa-user-circle"></i>
+                <img src="..." alt="profile">
             </div>
             <div class="profile-bio">
                 <p>
@@ -39,16 +39,20 @@
                 </ul>
             </div>
             <div class="profile-questions">
-                <h3>Questions Asked</h3>
+                <h3>Recent Posts</h3>
                 <ul>
+                    {% for post in posts %}
                     <li>
-                        <a href="#">
-                            <h4>What is the best way to learn a new language?</h4>
+                        <a href="/post/{{ post.post_id }}">
+                            <h4>{{ post.title }}</h4> <!-- What is the best way to learn a new language? -->
                         </a>
                     </li>
+                    {% endfor %}
                 </ul>
             </div>
         </div>
+
+
     </div>
 </div>
 {% endblock %}

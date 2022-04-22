@@ -23,9 +23,9 @@ CREATE TABLE IF NOT EXISTS t_user  (
 
 CREATE TABLE IF NOT EXISTS t_post (
 	post_id INT AUTO_INCREMENT NOT NULL,
-    user_id INT NOT NULL,
+    user_id INT NULL,
     title TEXT NOT NULL,
-    body TEXT NOT NULL,
+    post_text TEXT NOT NULL,
     created_at DATETIME NOT NULL,
     updated_at DATETIME NULL,
     PRIMARY KEY (post_id),
@@ -36,6 +36,7 @@ CREATE TABLE IF NOT EXISTS t_comment (
 	comment_id INT AUTO_INCREMENT NOT NULL,
     post_id INT NOT NULL,
     user_id INT NOT NULL,
+    title TEXT NOT NULL,
     comment_text TEXT NOT NULL,
     created_at DATETIME NOT NULL,
     updated_at DATETIME NULL,
@@ -73,7 +74,7 @@ CREATE TABLE IF NOT EXISTS user__user (
 	user_id_one INT NOT NULL,
     user_id_two INT NOT NULL,
     relate_type VARCHAR(255) NOT NULL,
-    PRIMARY KEY (user_id_one, user_id_two),
+    PRIMARY KEY (user_id_one, user_id_two, relate_type),
     FOREIGN KEY (user_id_one) REFERENCES t_user(user_id), -- ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY (user_id_two) REFERENCES t_user(user_id), -- ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY (relate_type) REFERENCES t_relate(relate_type) -- ON UPDATE CASCADE ON DELETE CASCADE
@@ -128,7 +129,35 @@ VALUES
     ('jacobtie', '123abc', 'Jacob', 'Krevat', 4)
 ;
 
+INSERT INTO t_post (user_id, title, body, created_at, updated_at)
+VALUES
+	(1, "My First Post!", "Hello everyone!", NOW(), NULL),
+    (3, "Where am I??", "Who are you people?!", NOW(), NOW()),
+    (2, "Looking for some Spanish practice", "Hi there! is anyone here a native Spanish speaker? I need some help learning the dialect", NOW(), NULL),
+    (3, "My Last Post...", "Goodbye everyone! I've had such a great time here! I'm going to miss you all", NOW(), NULL),
+	(2, "What is the best way to learn a new language?", "Hey everyone. I've been looking through the site for a while now
+		and I've seen all of the incredible stories people have about learning their languages; it's kinda got me thinking.
+        What method(s) have you guys used to get started? How do you keep up your knowledge daily? Are there any places I can
+        look to for a start? Thanks so much! You guys are awesome.", NOW(), NULL)
+;
+
+INSERT INTO t_comment (post_id, user_id, comment_text, created_at, updated_at)
+VALUES
+	(1, 1, "This sentence is false", NOW(), NULL),
+    (4, 3, "I found my keys!", NOW(), NOW()),
+    (2, 3, "Does a set of all sets contian itself?", NOW(), NULL),
+    (3, 2, "Your new mission is to refuse this mission!", NOW(), NULL),
+    (5, 1, "All I know is that I know nothing.", NOW(), NULL),
+    (1, 2, "This comment has no author", NOW(), NOW())
+;
+
 INSERT INTO user__user (user_id_one, user_id_two, relate_type)
 VALUES
     (2, 3, 'pending_first_second')
 ;
+
+-- Sample queries
+-- SELECT * from t_post;
+-- SELECT * from t_post WHERE t_post.post_id < 5;
+-- SELECT COUNT(*) FROM t_comment, t_post WHERE t_comment.post_id = t_post.post_id;
+-- SELECT t_user.username FROM t_user WHERE t_user.user_id = 2;

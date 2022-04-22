@@ -14,10 +14,23 @@
     line-height: 60px;
 }
 
+/*
+#nested_table > thead > tr > td {
+    padding-left: 2px;
+    padding-right: 2px;
+}
+/**/
+
 #nested_table > tbody > tr {
     font: 'Inter';
     font-style: normal;
     font-weight: 600;
     font-size: 18px;
     line-height: 23px;
+}
+
+/* Improving readability */
+#nested_table > tbody > tr > td {
+    padding-left: 6px;
+    padding-right: 6px;
 }

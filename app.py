@@ -2,7 +2,8 @@ import os
 import re
 from flask import Flask, abort, redirect, render_template, request
 from dotenv import load_dotenv
-from src.models import db
+from sqlalchemy import func, select
+from src.models import User, Post, Comment, db
 from src.blueprints.user_blueprint import router as user_router
 from src.blueprints.post_blueprint import router as post_router
 from src.blueprints.comment_blueprint import router as comment_router
@@ -22,14 +23,26 @@ sql_echo = os.getenv('SQL_ECHO') # Default: False
 
 app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql://{db_user}:{db_pass}@{db_host}:{db_port}/{db_name}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_ECHO'] = sql_echo
+app.config['SQLALCHEMY_ECHO'] = eval(sql_echo)
 
 db.init_app(app)
 
 
+
 @app.get('/')
+# Index page should display 4 user-created posts
 def index():
-    return render_template('index.html')
+    top_four_posts = Post.query.filter(Post.post_id < 5).all()
+    post_users = {}; num_comments = {}
+
+    for post in top_four_posts:
+        post_users.update({post.user_id: User.query.filter(post.user_id == User.user_id).first().username})
+        num_comments.update({post.post_id: Comment.query.filter(post.post_id == Comment.post_id).count()})
+
+    # Debug
+    print(f'\n\nCurrent DATETIME: {db.func.now()}\n\n')
+
+    return render_template('index.html', top_four_posts = top_four_posts, post_users = post_users, num_comments = num_comments)
 
 @app.get('/login')
 def login():
@@ -39,14 +52,13 @@ def login():
 def signup():
     return render_template('signup.html')
 
-@app.get('/create-post')
-def create_question():
-    return render_template('create-post.html')
+# @app.get('/create-post')
+# def create_post():
+#     return render_template('create-post.html')
 
-@app.post('/create-post')
-def create_question_form():
-    
-    redirect('/create-post')
+# @app.post('/create-post')
+# def create_post_form():
+#     redirect('/create-post')
 
 @app.get('/about')
 def about():
@@ -56,13 +68,14 @@ def about():
 def faq():
     return render_template('faq.html')
 
-@app.get('/example')
-def post_example():
-    return render_template('post-example.html')
+# @app.get('/example')
+# def post_example():
+#     return render_template('post-example.html')
 
 # @app.get('/profile')
 # def user_profile():
 #     return render_template('profile.html')
+
 
 
 app.register_blueprint(user_router)
