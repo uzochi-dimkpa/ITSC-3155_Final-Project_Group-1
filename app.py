@@ -35,7 +35,7 @@ def inject_user_session_profile():
     # session querying and for returning the user object to the '_layout.html' page
     user_id = 1
     logged_in_user = User.query.get(user_id)
-    return dict(user = logged_in_user) #- key = "value",
+    return dict(logged_in_user = logged_in_user) #- key = "value",
 
 @app.get('/')
 # Index page should display 4 user-created posts
