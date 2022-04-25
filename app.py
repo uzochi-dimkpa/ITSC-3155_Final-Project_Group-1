@@ -13,7 +13,7 @@ app = Flask(__name__)
 load_dotenv()
 
 
-# RENAME '.env_' FILE TO '.env' AND MAKE CHANGES TO FIELDS AS NECESSARY
+# TODO: RENAME '.env_' FILE TO '.env' AND MAKE CHANGES TO FIELDS AS NECESSARY
 db_host = os.getenv('DB_HOST') # Default: localhost
 db_port = os.getenv('DB_PORT') # Default: 3306
 db_user = os.getenv('DB_USER', 'root') # Default: root
@@ -29,6 +29,14 @@ db.init_app(app)
 
 
 
+@app.context_processor
+def inject_user_session_profile():
+    # PLACEHODER; the following code will be replaced with code for user login
+    # session querying and for returning the user object to the '_layout.html' page
+    user_id = 1
+    logged_in_user = User.query.get(user_id)
+    return dict(logged_in_user = logged_in_user) #- key = "value",
+
 @app.get('/')
 # Index page should display 4 user-created posts
 def index():
@@ -40,7 +48,7 @@ def index():
         num_comments.update({post.post_id: Comment.query.filter(post.post_id == Comment.post_id).count()})
 
     # Debug
-    print(f'\n\nCurrent DATETIME: {db.func.now()}\n\n')
+    # print(f'\n\nCurrent DATETIME: {db.func.now()}\n\n')
 
     return render_template('index.html', top_four_posts = top_four_posts, post_users = post_users, num_comments = num_comments)
 
@@ -51,14 +59,6 @@ def login():
 @app.get('/signup')
 def signup():
     return render_template('signup.html')
-
-# @app.get('/create-post')
-# def create_post():
-#     return render_template('create-post.html')
-
-# @app.post('/create-post')
-# def create_post_form():
-#     redirect('/create-post')
 
 @app.get('/about')
 def about():
@@ -75,6 +75,14 @@ def faq():
 # @app.get('/profile')
 # def user_profile():
 #     return render_template('profile.html')
+
+# @app.get('/create-post')
+# def create_post():
+#     return render_template('create-post.html')
+
+# @app.post('/create-post')
+# def create_post_form():
+#     redirect('/create-post')
 
 
 

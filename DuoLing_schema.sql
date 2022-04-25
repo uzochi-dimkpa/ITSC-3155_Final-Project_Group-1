@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS t_post (
 	post_id INT AUTO_INCREMENT NOT NULL,
     user_id INT NULL,
     title TEXT NOT NULL,
-    post_text TEXT NOT NULL,
+    body TEXT NOT NULL,
     created_at DATETIME NOT NULL,
     updated_at DATETIME NULL,
     PRIMARY KEY (post_id),
@@ -36,7 +36,6 @@ CREATE TABLE IF NOT EXISTS t_comment (
 	comment_id INT AUTO_INCREMENT NOT NULL,
     post_id INT NOT NULL,
     user_id INT NOT NULL,
-    title TEXT NOT NULL,
     comment_text TEXT NOT NULL,
     created_at DATETIME NOT NULL,
     updated_at DATETIME NULL,
@@ -153,7 +152,8 @@ VALUES
 
 INSERT INTO user__user (user_id_one, user_id_two, relate_type)
 VALUES
-    (2, 3, 'pending_first_second')
+    (2, 3, 'pending_first_second'),
+    (3, 1, 'friends')
 ;
 
 -- Sample queries
