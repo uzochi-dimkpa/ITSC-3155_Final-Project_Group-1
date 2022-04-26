@@ -131,6 +131,8 @@ VALUES
 INSERT INTO t_post (user_id, title, body, created_at, updated_at)
 VALUES
 	(1, "My First Post!", "Hello everyone!", NOW(), NULL),
+    (1, "What's for dinner?", "I'm hungry", NOW(), NULL),
+    (3, "I feel like a genius!", "I greeted my mom in French today. She still has no idea what I'm saying.", NOW(), NOW()),
     (3, "Where am I??", "Who are you people?!", NOW(), NOW()),
     (2, "Looking for some Spanish practice", "Hi there! is anyone here a native Spanish speaker? I need some help learning the dialect", NOW(), NULL),
     (3, "My Last Post...", "Goodbye everyone! I've had such a great time here! I'm going to miss you all", NOW(), NULL),
@@ -143,6 +145,7 @@ VALUES
 INSERT INTO t_comment (post_id, user_id, comment_text, created_at, updated_at)
 VALUES
 	(1, 1, "This sentence is false", NOW(), NULL),
+    (2, 1, "Hi hungry! I'm dad", NOW(), NULL),
     (4, 3, "I found my keys!", NOW(), NOW()),
     (2, 3, "Does a set of all sets contian itself?", NOW(), NULL),
     (3, 2, "Your new mission is to refuse this mission!", NOW(), NULL),

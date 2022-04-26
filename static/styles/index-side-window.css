@@ -1,7 +1,7 @@
 /* All properties of FAQ/Tips/Tricks display window */
         /* General properties */
         .Side_window {
-            min-width: 404px; min-height: 270px;
+            width: 404px; min-height: 270px;
             float: right;
             margin-right: 58px;
 
@@ -29,4 +29,15 @@
             line-height: 30px;
             text-align: center;
             padding-bottom: 20px;
+        }
+
+        .Side_window > h5 > a {
+            color: rgba(119, 73, 248, 1);
+            text-decoration: none;
+        }
+
+        .Side_window > h5 > a:hover {
+            /* color: rgba(119, 73, 248, 1); */
+            text-decoration: underline;
+            text-decoration-color: rgba(0, 0, 0, 1);
         }

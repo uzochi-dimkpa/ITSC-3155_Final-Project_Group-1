@@ -41,16 +41,20 @@ def inject_user_session_profile():
 # Index page should display 4 user-created posts
 def index():
     top_four_posts = Post.query.filter(Post.post_id < 5).all()
+    all_posts = Post.query.all()
     post_users = {}; num_comments = {}
 
-    for post in top_four_posts:
+    for post in all_posts:
         post_users.update({post.user_id: User.query.filter(post.user_id == User.user_id).first().username})
         num_comments.update({post.post_id: Comment.query.filter(post.post_id == Comment.post_id).count()})
+
+    # Async Javascript work
+    # num_posts = Post.query.count()
 
     # Debug
     # print(f'\n\nCurrent DATETIME: {db.func.now()}\n\n')
 
-    return render_template('index.html', top_four_posts = top_four_posts, post_users = post_users, num_comments = num_comments)
+    return render_template('index.html', all_posts = all_posts, post_users = post_users, num_comments = num_comments) #- , num_posts=num_posts
 
 @app.get('/login')
 def login():
