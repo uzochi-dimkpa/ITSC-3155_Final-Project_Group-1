@@ -78,7 +78,7 @@ def faq():
     return render_template('faq.html')
 
 
-# BROKEN
+# CURRENTLY BROKEN
 # @app.post('/register')
 # def register():
 #     username = request.form.get('username', '')
