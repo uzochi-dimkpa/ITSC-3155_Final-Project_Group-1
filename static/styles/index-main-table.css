@@ -93,6 +93,7 @@ is hovering over the text that this id applies to
     line-height: 30px;
     text-align: left;
     text-decoration: none;
+    padding-left: 10px;
     color: rgba(0, 0, 0, 1);
 }
 

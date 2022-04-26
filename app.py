@@ -1,6 +1,6 @@
 import os
 import re
-from flask import Flask, abort, redirect, render_template, request
+from flask import Flask, abort, redirect, render_template, request, session
 from dotenv import load_dotenv
 from sqlalchemy import func, select
 from flask_bcrypt import Bcrypt
@@ -46,16 +46,20 @@ def inject_user_session_profile():
 # Index page should display 4 user-created posts
 def index():
     top_four_posts = Post.query.filter(Post.post_id < 5).all()
+    all_posts = Post.query.all()
     post_users = {}; num_comments = {}
 
-    for post in top_four_posts:
+    for post in all_posts:
         post_users.update({post.user_id: User.query.filter(post.user_id == User.user_id).first().username})
         num_comments.update({post.post_id: Comment.query.filter(post.post_id == Comment.post_id).count()})
+
+    # Async Javascript work
+    # num_posts = Post.query.count()
 
     # Debug
     # print(f'\n\nCurrent DATETIME: {db.func.now()}\n\n')
 
-    return render_template('index.html', top_four_posts = top_four_posts, post_users = post_users, num_comments = num_comments)
+    return render_template('index.html', all_posts = all_posts, post_users = post_users, num_comments = num_comments) #- , num_posts=num_posts
 
 @app.get('/login')
 def login():
@@ -73,44 +77,44 @@ def about():
 def faq():
     return render_template('faq.html')
 
-@app.post('/register')
-def register():
-    username = request.form.get('username', '')
-    password = request.form.get('password', '')
+# @app.post('/register')
+# def register():
+#     username = request.form.get('username', '')
+#     password = request.form.get('password', '')
 
-    if username == '' or password == '':
-        abort(400)
+#     if username == '' or password == '':
+#         abort(400)
 
-    hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
+#     hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
 
-    new_user = User(username, hashed_password)
-    db.session.add(new_user)
-    db.session.commit()
+#     new_user = User(username, hashed_password)
+#     db.session.add(new_user)
+#     db.session.commit()
 
-    return redirect('/')
+#     return redirect('/')
 
-@app.post('/login')
-def login():
-    username = request.form.get('username', '')
-    password = request.form.get('password', '')
+# @app.post('/login')
+# def login():
+#     username = request.form.get('username', '')
+#     password = request.form.get('password', '')
 
-    if username == '' or password == '':
-        abort(400)
+#     if username == '' or password == '':
+#         abort(400)
 
-    existing_user = User.query.filter_by(username=username).first()
+#     existing_user = User.query.filter_by(username=username).first()
 
-    if not existing_user or existing_user.user_id == 0:
-        return redirect('/fail')
+#     if not existing_user or existing_user.user_id == 0:
+#         return redirect('/fail')
 
-    if not bcrypt.check_password_hash(existing_user.password, password):
-        return redirect('/fail')
+#     if not bcrypt.check_password_hash(existing_user.password, password):
+#         return redirect('/fail')
 
-    session['user'] = {
-        'username': username,
-        'user_id': existing_user.user_id,
-    }
+#     session['user'] = {
+#         'username': username,
+#         'user_id': existing_user.user_id,
+#     }
 
-    return redirect('/success')
+#     return redirect('/') #- '/success'
 
 # @app.get('/example')
 # def post_example():

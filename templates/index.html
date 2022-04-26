@@ -7,11 +7,9 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/index-nested-table.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/index-side-window.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/index.css') }}">
-
 {% endblock %}
- 
+
 {% block body %}
-  
     <div class="pagewide_whitespace_top_left">
         <h1 id="DuoLing_header">DuoLing</h1>
 
@@ -52,13 +50,13 @@
             <h4>Frequent Questions</h4>
 
             <h5>
-                <span style="color: rgba(119, 73, 248, 1)">[Display question here]</span>
+                <a href="/faq">What is DuoLing?</a>
             </h5>
             <h5>
-                <span style="color: rgba(119, 73, 248, 1)">[Display question here]</span>
+                <a href="/faq">How does one become fluent in another language?</a>
             </h5>
             <h5>
-                <span style="color: rgba(119, 73, 248, 1)">[Display question here]</span>
+                <a href="/faq">Do I have to pay to use DuoLing?</a>
             </h5>
         </article>
 
@@ -71,7 +69,9 @@
                         Top Questions
                     </td>
 
+                    <!-- For when we add views & likes attributes to post table entries -->
                     <!-- Second column -->
+                    <!--
                     <td>
                         <div>
                             <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
@@ -81,13 +81,14 @@
                             </div>
                         </div>
                     </td>
+                    -->
                 </tr>
             </thead>
 
             <!-- Table body -->
             <tbody>
                 <!-- All rows -->
-                {% for post in top_four_posts %}
+                {% for post in all_posts %}
                 <tr>
                     <!-- First column -->
                     <td>
@@ -141,7 +142,8 @@
         </table>
     </div>
 
-    <footer style="text-align: center; padding-top: 82px; padding-bottom: 25px;">
+    <!-- For when we add pagination and asynchronous scripts -->
+    <!-- <footer style="text-align: center; padding-top: 82px; padding-bottom: 25px;">
         <div class="btn-group" role="group" aria-label="Basic outlined button group">
             <button type="button" class="btn btn-outline-secondary" style="color: rgba(171, 181, 190, 1); border-color: rgba(171, 181, 190, 1)">Prev</button>
             <button type="button" class="btn btn-outline-light" style="color: rgba(119, 73, 248, 1); border-color: rgba(171, 181, 190, 1)">1</button>
@@ -149,5 +151,10 @@
             <button type="button" class="btn btn-outline-light" style="color: rgba(119, 73, 248, 1); border-color: rgba(171, 181, 190, 1)">3</button>
             <button type="button" class="btn btn-outline-light" style="color: rgba(119, 73, 248, 1); border-color: rgba(171, 181, 190, 1)">Next</button>
         </div>
-    </footer>
+    </footer> -->
+
+    <!-- <script>
+        var total_num_posts = { num_posts };
+        console.log("total_num_posts")
+    </script> -->
 {% endblock %}
