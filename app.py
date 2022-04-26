@@ -1,6 +1,6 @@
 import os
 import re
-from flask import Flask, abort, redirect, render_template, request
+from flask import Flask, abort, redirect, render_template, request, session
 from dotenv import load_dotenv
 from sqlalchemy import func, select
 from flask_bcrypt import Bcrypt
