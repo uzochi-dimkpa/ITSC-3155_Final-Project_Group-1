@@ -77,6 +77,8 @@ def about():
 def faq():
     return render_template('faq.html')
 
+
+# BROKEN
 # @app.post('/register')
 # def register():
 #     username = request.form.get('username', '')
@@ -115,6 +117,8 @@ def faq():
 #     }
 
 #     return redirect('/') #- '/success'
+
+
 
 # @app.get('/example')
 # def post_example():
