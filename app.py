@@ -3,14 +3,19 @@ import re
 from flask import Flask, abort, redirect, render_template, request
 from dotenv import load_dotenv
 from sqlalchemy import func, select
+from flask_bcrypt import Bcrypt
 from src.models import User, Post, Comment, db
 from src.blueprints.user_blueprint import router as user_router
 from src.blueprints.post_blueprint import router as post_router
 from src.blueprints.comment_blueprint import router as comment_router
 
 app = Flask(__name__)
+bcrypt = Bcrypt(app)
 
 load_dotenv()
+
+#This will need to be correctly adjusted:
+users = {}
 
 
 # TODO: RENAME '.env_' FILE TO '.env' AND MAKE CHANGES TO FIELDS AS NECESSARY
@@ -71,6 +76,45 @@ def about():
 @app.get('/faq')
 def faq():
     return render_template('faq.html')
+
+@app.post('/register')
+def register():
+    username = request.form.get('username', '')
+    password = request.form.get('password', '')
+
+    if username == '' or password == '':
+        abort(400)
+
+    hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
+
+    new_user = User(username, hashed_password)
+    db.session.add(new_user)
+    db.session.commit()
+
+    return redirect('/')
+
+@app.post('/login')
+def login():
+    username = request.form.get('username', '')
+    password = request.form.get('password', '')
+
+    if username == '' or password == '':
+        abort(400)
+
+    existing_user = User.query.filter_by(username=username).first()
+
+    if not existing_user or existing_user.user_id == 0:
+        return redirect('/fail')
+
+    if not bcrypt.check_password_hash(existing_user.password, password):
+        return redirect('/fail')
+
+    session['user'] = {
+        'username': username,
+        'user_id': existing_user.user_id,
+    }
+
+    return redirect('/success')
 
 # @app.get('/example')
 # def post_example():
