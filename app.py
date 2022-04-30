@@ -7,7 +7,7 @@ from flask_bcrypt import Bcrypt
 from src.models import User, Post, Comment, db
 from src.blueprints.user_blueprint import router as user_router
 from src.blueprints.post_blueprint import router as post_router
-from src.blueprints.comment_blueprint import router as comment_router
+# from src.blueprints.comment_blueprint import router as comment_router
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
@@ -36,7 +36,7 @@ db.init_app(app)
 
 @app.context_processor
 def inject_user_session_profile():
-    # PLACEHODER; the following code will be replaced with code for user login
+    # TODO: PLACEHODER; the following code will be replaced with code for user login
     # session querying and for returning the user object to the '_layout.html' page
     user_id = 1
     logged_in_user = User.query.get(user_id)
@@ -140,7 +140,7 @@ def faq():
 
 app.register_blueprint(user_router)
 app.register_blueprint(post_router)
-app.register_blueprint(comment_router)
+# app.register_blueprint(comment_router)
 
 
 

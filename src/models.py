@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.sql import func
 
 db = SQLAlchemy()
 
@@ -39,8 +40,8 @@ class Post(db.Model):
     post_id = db.Column(db.Integer, nullable = False, primary_key = True)
     title = db.Column(db.String, nullable = False)
     body = db.Column(db.String, nullable = False)
-    created_at = db.Column(db.DateTime, nullable = False, server_default=db.func.now()) #- server_default=db.func.now()
-    updated_at = db.Column(db.DateTime, nullable = True, server_default=None, server_onupdate=db.func.now()) #- server_default=db.func.now(),
+    created_at = db.Column(db.DateTime, nullable = False, server_default=func.now()) #- server_default=db.func.now()
+    updated_at = db.Column(db.DateTime, nullable = True, server_default=None, onupdate=func.now()) #- server_default=db.func.now(),
 
     user_id = db.Column(db.Integer, db.ForeignKey('t_user.user_id'), nullable = False)
     user = db.relationship('User', backref='posts', lazy=True)
@@ -68,11 +69,16 @@ class Comment(db.Model):
     __tablename__ = 't_comment'
 
     comment_id = db.Column(db.Integer, primary_key=True)
-    post_id = db.Column(db.Integer, nullable=False)
-    user_id = db.Column(db.Integer, nullable=False)
+    post_id = db.Column(db.Integer, db.ForeignKey('t_post.post_id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('t_user.user_id'), nullable=False)
     comment_text = db.Column(db.Text, nullable=False)
-    created_at = db.Column(db.DateTime, nullable=False, server_default=db.func.now())
-    updated_at = db.Column(db.DateTime, nullable=True, server_default=None, server_onupdate=db.func.now())
+    created_at = db.Column(db.DateTime, nullable=False, server_default=func.now())
+    updated_at = db.Column(db.DateTime, nullable=True, server_default=None, onupdate=func.now())
+
+    def __init__(self, comment_text, user_id, post_id, created_at, updated_at):
+        self.comment_text = comment_text
+        self.user_id = user_id; self.post_id = post_id
+        self.created_at = created_at; self.updated_at = updated_at
 
     def __repr__(self):
         return f'Comment #{self.comment_id}:\n\

@@ -13,30 +13,53 @@
     <div class="container">
         {{ post.body }}
     </div>
+    {% if post.updated_at is defined and post.updated_at is not none %}
+    <h6>Edited {{ post.updated_at }}</h6>
+    {% endif %}
+    {% if post.user_id == logged_in_user.user_id %}
+        <a href="/post/{{ post.post_id }}/update">Edit</a>
+        <form id="user_post" action="/post/{{ post.post_id }}/delete" method="POST">
+            <button form="user_post" type="submit" class="btn btn-danger">Delete</button>
+        </form>
+    {% endif %} <!-- type="submit" class="main-reply" -->
     <!--Main reply and other replies-->
     <h3>Reply</h3>
-    <form id="main-reply">
-        <textarea class="container reply main-reply" form="main-reply">
-            Write your message here.
-        </textarea>
-        <button type="submit" form="main-reply">Submit</button>
+    <form id ="comment_text" class="main-reply" action = "/post/{{ post.post_id }}/comment" method = "POST">
+        <textarea class="container reply main-reply" name="comment_text" id = "comment_text" placeholder = "Write your message here"></textarea> <!-- class="main-reply" -->
+        <button form="comment_text" type="submit" class="main-reply">Submit</button>
     </form>
     <h3>Other People's Replies:</h3>
     {% for comment in comments %}
-    <div class="container reply">{{ comment.comment_text }}</div>
+    <div class="container reply">{{ comment.comment_text }}
+        {% if comment.user_id == logged_in_user.user_id %}<a href="/post/{{ post.post_id }}/{{ comment.comment_id }}/edit">Edit</a>
+        <a href="/post/{{ post.post_id }}/{{ comment.comment_id }}/delete">Delete</a>
+        {% endif %}
+        {% if comment.updated_at is defined and comment.updated_at is not none %} <h6>Edited {{ comment.updated_at }}</h6>{% endif %}
+    </div> <!-- <button type="submit" class="main-reply" action="#"></button> -->
     {% endfor %}
+    {% if new_comment is defined and new_comment is not none %}
+    <div class="container reply">{{ new_comment.comment_text }}
+    <a href="/post/{{ post.post_id }}/{{ new_comment.comment_id }}/edit">Edit</a>
+    <a href="/post/{{ post.post_id }}/{{ new_comment.comment_id }}/delete">Delete</a>
+    </div> <!-- <button type="submit" class="main-reply" action="#"></button> -->
+    {% endif %}
 </main>
 
 
 <!-- For when we add pagination and asynchronous scripts -->
 <!--nav buttons-->
-<!-- <footer style="text-align: center; padding-top: 82px; padding-bottom: 25px;">
-    <div class="btn-group" role="group" aria-label="Basic outlined button group">
+<footer style="text-align: center; padding-top: 82px; padding-bottom: 25px;">
+    <!-- <div class="btn-group" role="group" aria-label="Basic outlined button group">
         <button type="button" class="btn btn-outline-secondary" style="color: rgba(171, 181, 190, 1); border-color: rgba(171, 181, 190, 1)">Prev</button>
         <button type="button" class="btn btn-outline-light" style="color: rgba(119, 73, 248, 1); border-color: rgba(171, 181, 190, 1)">1</button>
         <button type="button" class="btn btn-outline-light" style="color: rgba(119, 73, 248, 1); border-color: rgba(171, 181, 190, 1)">2</button>
         <button type="button" class="btn btn-outline-light" style="color: rgba(119, 73, 248, 1); border-color: rgba(171, 181, 190, 1)">3</button>
         <button type="button" class="btn btn-outline-light" style="color: rgba(119, 73, 248, 1); border-color: rgba(171, 181, 190, 1)">Next</button>
-    </div>
-</footer> -->
+    </div> -->
+    <script>
+        if ( window.history.replaceState ) {
+            window.history.replaceState( null, null, window.location.href );
+        }
+    </script>
+</footer>
 {% endblock %}

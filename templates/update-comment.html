@@ -6,7 +6,6 @@
 %}
 
 {% block body %}
-<h1 id="ask-question">Ask a Question!</h1>
 <!--Page will include a block to fill out a question, a dropdown to add tags, then a purple post button-->
 <!-- this is a language learning site -->
 <!-- <form class="container=fluid form" action="#" method="POST" id="question">
@@ -27,18 +26,12 @@
   <button type="submit" class="btn button-post" form="question">Post</button>
 </form> -->
 
-<form class="container=fluid form" action="/post/create" method="POST"> <!-- for="Post" id="question"--> 
-  <h2>Enter your Question here</h2>
+<form class="container=fluid form" action="/post/{{ post_id }}/{{ comment_id }}/update" method="POST"> <!-- for="Post" id="question"--> 
+  <h2>Change your comment here!</h2>
   <div class="form-group">
-    <label for="title">Question</label>
-    <textarea class="form-control" id="title"name='title' rows="1" wrap="soft" required></textarea> <!-- form="question" -->
-    
+    <label for="comment_text">Comment</label> 
+    <textarea class="form-control" id="comment_text"name="comment_text" rows="3" wrap="soft" required>{% if comment_text is defined and comment_text is not none %}{{ comment_text }}{% endif %}</textarea> <!-- form="question" -->
   </div>
-  <h2>Enter details about your question!</h2>
-  <div class="form-group">
-    <label for="body">details</label> 
-    <textarea class="form-control" id="body"name='body' rows="3" wrap="soft" required></textarea> <!-- form="question" -->
-  </div>
-  <button type="submit" class="btn button-post">Post</button> <!-- form="question" -->
+  <button type="submit" class="btn button-post">Update</button> <!-- form="question" -->
 </form>
 {% endblock %}

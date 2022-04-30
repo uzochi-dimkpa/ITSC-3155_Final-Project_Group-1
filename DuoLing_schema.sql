@@ -4,10 +4,6 @@ USE DuoLing;
 
 
 
--- 1ST ITERATION OF DATABASE
-
-
-
 -- ---------------------------------------------------- Tables
 
 -- CRUD tables:
@@ -28,8 +24,9 @@ CREATE TABLE IF NOT EXISTS t_post (
     body TEXT NOT NULL,
     created_at DATETIME NOT NULL,
     updated_at DATETIME NULL,
+    comment_id INT NULL,
     PRIMARY KEY (post_id),
-    FOREIGN KEY (user_id) REFERENCES t_user(user_id) -- ON UPDATE CASCADE ON DELETE SET NULL
+    FOREIGN KEY (user_id) REFERENCES t_user(user_id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS t_comment (
@@ -40,9 +37,13 @@ CREATE TABLE IF NOT EXISTS t_comment (
     created_at DATETIME NOT NULL,
     updated_at DATETIME NULL,
     PRIMARY KEY (comment_id),
-    FOREIGN KEY (post_id) REFERENCES t_post(post_id), -- ON UPDATE CASCADE ON DELETE CASCADE,
-    FOREIGN KEY (user_id) REFERENCES t_user(user_id) -- ON UPDATE CASCADE ON DELETE CASCADE
+    FOREIGN KEY (post_id) REFERENCES t_post(post_id) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES t_user(user_id) ON UPDATE CASCADE ON DELETE CASCADE
 );
+
+-- Altering tables:
+-- ALTER TABLE t_post
+	-- ADD FOREIGN KEY (comment_id) REFERENCES t_comment(comment_id); -- ON UPDATE CASCADE ON DELETE CASCADE;
 
 -- Server-sider tables:
 CREATE TABLE IF NOT EXISTS t_language (
