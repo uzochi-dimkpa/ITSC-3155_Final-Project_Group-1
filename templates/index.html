@@ -66,7 +66,7 @@
                 <tr>
                     <!-- First column -->
                     <td>
-                        Top Questions
+                        All Questions
                     </td>
 
                     <!-- For when we add views & likes attributes to post table entries -->
@@ -97,9 +97,13 @@
                                 <tr>
                                     <td>0</td>
 
+                                    <td>
                                     {% if post.user_id in num_comments.keys() %}
-                                    <td>{{ num_comments.get(post.post_id) }}</td>
+                                    {{ num_comments.get(post.post_id) }}</td>
+                                    {% else %}
+                                    0
                                     {% endif %}
+                                    </td>
 
                                     <td>0</td>
                                 </tr>
@@ -109,11 +113,13 @@
                                 <tr>
                                     <td>Votes</td>
 
+                                    <td>
                                     {% if num_comments.get(post.post_id) > 1 %}
-                                    <td>Comments</td>
+                                    Comments
                                     {% else %}
-                                    <td>Comment</td>
+                                    Comment
                                     {% endif %}
+                                    </td>
 
                                     <td>Views</td>
                                 </tr>
