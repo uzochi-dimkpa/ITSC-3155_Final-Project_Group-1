@@ -2,8 +2,9 @@
 
 {% block title %}FAQ Page{% endblock %}
 {% block stylesheets %}
-<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/faq.css') }}"> {% endblock
-%}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/general.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/faq.css') }}">
+{% endblock %}
 {% block body %}
 <main>
     <h1>Frequently Asked Questions (FAQ)</h1>
