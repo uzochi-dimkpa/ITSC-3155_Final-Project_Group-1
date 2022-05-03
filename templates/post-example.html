@@ -18,16 +18,21 @@
     <h6>Edited {{ post.updated_at }}</h6>
     {% endif %}
     {% if post.user_id == logged_in_user.user_id %}
-        <a href="/post/{{ post.post_id }}/update">Edit</a>
+        <form id="delete_post" action="/post/{{ post.post_id }}/update" method="get">
+            <button form="user_post" type="submit" class="btn btn-primary">Edit</button>
+        </form>
+        <!--<a href="/post/{{ post.post_id }}/update">Edit</a>-->
         <form id="user_post" action="/post/{{ post.post_id }}/delete" method="POST">
             <button form="user_post" type="submit" class="btn btn-danger">Delete</button>
         </form>
     {% endif %} <!-- type="submit" class="main-reply" -->
+    
     <!--Main reply and other replies-->
     <h3>Reply</h3>
     <form id ="comment_text" class="main-reply" action = "/post/{{ post.post_id }}/comment" method = "POST">
-        <textarea class="container reply main-reply" name="comment_text" id = "comment_text" placeholder = "Write your message here"></textarea> <!-- class="main-reply" -->
-        <button form="comment_text" type="submit" class="main-reply">Submit</button>
+        <textarea class="container reply main-reply" name="comment_text" id = "comment_text" placeholder = "Write your message here" rows="3"></textarea> <!-- class="main-reply" -->
+        <br>
+        <button form="comment_text" type="submit" class="main-reply btn btn-primary">Submit</button>
     </form>
     <h3>Other People's Replies:</h3>
     {% for comment in comments %}
@@ -40,8 +45,8 @@
     {% endfor %}
     {% if new_comment is defined and new_comment is not none %}
     <div class="container reply">{{ new_comment.comment_text }}
-    <a href="/post/{{ post.post_id }}/{{ new_comment.comment_id }}/edit">Edit</a>
-    <a href="/post/{{ post.post_id }}/{{ new_comment.comment_id }}/delete">Delete</a>
+        <a href="/post/{{ post.post_id }}/{{ new_comment.comment_id }}/edit">Edit</a>
+        <a href="/post/{{ post.post_id }}/{{ new_comment.comment_id }}/delete">Delete</a>
     </div> <!-- <button type="submit" class="main-reply" action="#"></button> -->
     {% endif %}
 </main>
