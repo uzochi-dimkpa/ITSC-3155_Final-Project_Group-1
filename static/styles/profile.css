@@ -17,13 +17,9 @@
       width: 100%;
       
 }
-.title {
-    margin-left: 96px;
-}
+
 /*card will be on left while language-question is displayed on right on same line*/
 .profile {
-  padding: 20px;
-  margin-left: 50px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
