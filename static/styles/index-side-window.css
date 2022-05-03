@@ -1,43 +1,43 @@
 /* All properties of FAQ/Tips/Tricks display window */
-        /* General properties */
-        .Side_window {
-            width: 404px; min-height: 270px;
-            float: right;
-            margin-right: 58px;
+    /* General properties */
+    .Side_window {
+        width: 404px; min-height: 270px;
+        float: right;
+        margin-right: 58px;
 
-            /* Border for visualization/debugging purposes */
-            /* border: 1px rgba(0, 0, 0, 1) solid; /**/
-        }
+        /* Border for visualization/debugging purposes */
+        /* border: 1px rgba(0, 0, 0, 1) solid; /**/
+    }
 
-        /* h4 tag properties */
-        .Side_window > h4 {
-            font: 'Inter';
-            font-style: normal;
-            font-weight: 400;
-            font-size: 32px;
-            line-height: 39px;
-            text-align: center;
-            padding-bottom: 35px;
-        }
+    /* h4 tag properties */
+    .Side_window > h4 {
+        font: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 32px;
+        line-height: 39px;
+        text-align: center;
+        padding-bottom: 35px;
+    }
 
-        /* h5 tag properties */
-        .Side_window > h5 {
-            font: 'Inter';
-            font-style: normal;
-            font-weight: 200;
-            font-size: 24px;
-            line-height: 30px;
-            text-align: center;
-            padding-bottom: 20px;
-        }
+    /* h5 tag properties */
+    .Side_window > h5 {
+        font: 'Inter';
+        font-style: normal;
+        font-weight: 200;
+        font-size: 24px;
+        line-height: 30px;
+        text-align: center;
+        padding-bottom: 20px;
+    }
 
-        .Side_window > h5 > a {
-            color: rgba(119, 73, 248, 1);
-            text-decoration: none;
-        }
+    .Side_window > h5 > a {
+        color: rgba(119, 73, 248, 1);
+        text-decoration: none;
+    }
 
-        .Side_window > h5 > a:hover {
-            /* color: rgba(119, 73, 248, 1); */
-            text-decoration: underline;
-            text-decoration-color: rgba(0, 0, 0, 1);
-        }
+    .Side_window > h5 > a:hover {
+        /* color: rgba(119, 73, 248, 1); */
+        text-decoration: underline;
+        text-decoration-color: rgba(0, 0, 0, 1);
+    }

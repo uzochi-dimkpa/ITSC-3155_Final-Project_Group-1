@@ -12,8 +12,6 @@
     margin-bottom: 25px;
 }
 
-
-
 /* Setting text properties for the first column of the table head */
 #main_table > thead > tr > td:nth-of-type(1) {
     font: 'Inter';
@@ -31,13 +29,9 @@
 }
 
 /* Setting a permanent width for the first column of the table body */
-/**/
 #main_table > tbody > tr > td:nth-of-type(1) {
     width: 240px;
 }
-/**/
-
-
 
 /*
 #main_table tbody td:nth-of-type(1),
@@ -53,9 +47,7 @@
     line-height: 60px;
     width: 80px;
 }
-/**/
-
-
+*/
 
 /*
 Setting text properties for the second column of the table body;
@@ -81,8 +73,6 @@ is hovering over the text that this id applies to
     text-decoration: underline;
     text-decoration-color: rgba(0, 0, 0, 1);
 }
-
-
 
 /* Setting text properties for the third column of the table body */
 #main_table > tbody > tr > td:nth-of-type(3) > a {
