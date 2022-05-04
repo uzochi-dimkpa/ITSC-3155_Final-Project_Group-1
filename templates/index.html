@@ -3,6 +3,7 @@
 {% block title %} Homepage {% endblock %}
 
 {% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/general.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/index-main-table.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/index-nested-table.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/index-side-window.css') }}">
@@ -10,144 +11,143 @@
 {% endblock %}
 
 {% block body %}
-    <div class="pagewide_whitespace_top_left">
-        <h1 id="DuoLing_header">DuoLing</h1>
+<main>
+    <h1 id="DuoLing_header">DuoLing</h1>
 
-        <!--
-            For some reason, adding whitespace between the
-            above h1 tag and the table below changes the
-            width of every other line in the table.
-            I am unsure of how to fix this, but I am going to
-            add it into the page anyway because that is the
-            way the Figma UI Mockup is styled.
-        -->
+    <!--
+        For some reason, adding whitespace between the
+        above h1 tag and the table below changes the
+        width of every other line in the table.
+        I am unsure of how to fix this, but I am going to
+        add it into the page anyway because that is the
+        way the Figma UI Mockup is styled.
+    -->
+    <!--I believe the whitespace/line width issue is fixed -SG-->
 
-        <? Whitespace >
-        <div style="margin-bottom: 75px"></div>
+    <br>
 
-        <!-- Nested table demonstration -->
-        <!--
-        <table id="nested_table">
-            <thead>
-                <tr>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                </tr>
-            </thead>
+    <!-- Nested table demonstration -->
+    <!--
+    <table id="nested_table">
+        <thead>
+            <tr>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+        </thead>
 
-            <tbody>
-                <tr>
-                    <td>Votes</td>
-                    <td>Answers</td>
-                    <td>Views</td>
-                </tr>
-            </tbody>
-        </table>
-        -->
+        <tbody>
+            <tr>
+                <td>Votes</td>
+                <td>Answers</td>
+                <td>Views</td>
+            </tr>
+        </tbody>
+    </table>
+    -->
 
-        <article class="Side_window">
-            <h4>Frequent Questions</h4>
+    <article class="Side_window">
+        <h4>Frequent Questions</h4>
 
-            <h5>
-                <a href="/faq">What is DuoLing?</a>
-            </h5>
-            <h5>
-                <a href="/faq">How does one become fluent in another language?</a>
-            </h5>
-            <h5>
-                <a href="/faq">Do I have to pay to use DuoLing?</a>
-            </h5>
-        </article>
+        <h5>
+            <a href="/faq">What is DuoLing?</a>
+        </h5>
+        <h5>
+            <a href="/faq">How does one become fluent in another language?</a>
+        </h5>
+        <h5>
+            <a href="/faq">Do I have to pay to use DuoLing?</a>
+        </h5>
+    </article>
 
-        <table id="main_table">
-            <!-- Table head -->
-            <thead>
-                <tr>
-                    <!-- First column -->
-                    <td>
-                        All Questions
-                    </td>
+    <table id="main_table">
+        <!-- Table head -->
+        <thead>
+            <tr>
+                <!-- First column -->
+                <td>
+                    All Questions
+                </td>
 
-                    <!-- For when we add views & likes attributes to post table entries -->
-                    <!-- Second column -->
-                    <!--
-                    <td>
-                        <div>
-                            <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
-                                <button type="button" class="btn btn-secondary">Hot</button>
-                                <button type="button" class="btn btn-secondary">New</button>
-                                <button type="button" class="btn btn-secondary">Best</button>
-                            </div>
+                <!-- For when we add views & likes attributes to post table entries -->
+                <!-- Second column -->
+                <!--
+                <td>
+                    <div>
+                        <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
+                            <button type="button" class="btn btn-secondary">Hot</button>
+                            <button type="button" class="btn btn-secondary">New</button>
+                            <button type="button" class="btn btn-secondary">Best</button>
                         </div>
-                    </td>
-                    -->
-                </tr>
-            </thead>
+                    </div>
+                </td>
+                -->
+            </tr>
+        </thead>
 
-            <!-- Table body -->
-            <tbody>
-                <!-- All rows -->
-                {% for post in all_posts %}
-                <tr>
-                    <!-- First column -->
-                    <td>
-                        <table id="nested_table">
-                            <thead>
-                                <tr>
-                                    <td>0</td>
+        <!-- Table body -->
+        <tbody>
+            <!-- All rows -->
+            {% for post in all_posts %}
+            <tr>
+                <!-- First column -->
+                <td>
+                    <table id="nested_table">
+                        <thead>
+                            <tr>
+                                <td>0</td>
 
-                                    <td>
-                                    {% if post.user_id in num_comments.keys() %}
-                                    {{ num_comments.get(post.post_id) }}</td>
-                                    {% else %}
-                                    0
-                                    {% endif %}
-                                    </td>
+                                <td>
+                                {% if post.user_id in num_comments.keys() %}
+                                {{ num_comments.get(post.post_id) }}</td>
+                                {% else %}
+                                0
+                                {% endif %}
+                                </td>
 
-                                    <td>0</td>
-                                </tr>
-                            </thead>
-                
-                            <tbody>
-                                <tr>
-                                    <td>Votes</td>
+                                <td>0</td>
+                            </tr>
+                        </thead>
+            
+                        <tbody>
+                            <tr>
+                                <td>Votes</td>
 
-                                    <td>
-                                    {% if num_comments.get(post.post_id) > 1 %}
-                                    Comments
-                                    {% else %}
-                                    Comment
-                                    {% endif %}
-                                    </td>
+                                <td>
+                                {% if num_comments.get(post.post_id) > 1 %}
+                                Comments
+                                {% else %}
+                                Comment
+                                {% endif %}
+                                </td>
 
-                                    <td>Views</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </td>
+                                <td>Views</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
 
-                    <!-- Second column -->
-                    <td>
-                        <a href="/post/{{ post.post_id }}" > <!-- style="text-decoration: none; color: rgba(119, 73, 248, 1);" -->
-                            {{ post.title }}
-                        </a>
-                    </td>
+                <!-- Second column -->
+                <td>
+                    <a href="/post/{{ post.post_id }}" > <!-- style="text-decoration: none; color: rgba(119, 73, 248, 1);" -->
+                        {{ post.title }}
+                    </a>
+                </td>
 
-                    <!-- Third column -->
-                    {% if post.user_id in post_users.keys() %}
-                    <td>
-                        <a href="/user/{{ post.user_id }}"> <!-- style="text-decoration: none;" -->
-                            {{ post_users.get(post.user_id) }}
-                        </a>
-                    </td>
-                    {% endif %}
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-
+                <!-- Third column -->
+                {% if post.user_id in post_users.keys() %}
+                <td>
+                    <a href="/user/{{ post.user_id }}"> <!-- style="text-decoration: none;" -->
+                        {{ post_users.get(post.user_id) }}
+                    </a>
+                </td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</main>
     <!-- For when we add pagination and asynchronous scripts -->
     <!-- # pages = (# posts modulo # display) * (# display) + (# display) -->
     <!-- <footer style="text-align: center; padding-top: 82px; padding-bottom: 25px;">

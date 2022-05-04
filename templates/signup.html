@@ -2,11 +2,12 @@
 
 {% block title %} Login Page {% endblock %}
 {% block stylesheets %}
-<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/signup.css') }}"> {% endblock
-%}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/general.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/signup.css') }}">
+{% endblock %}
 {% block body %}
 
-<div class="signin-content">
+<main>
     <h1>SignUp</h1>
     <hr>
     <br>
@@ -33,6 +34,6 @@
     <br>
 
     <button type="button" id="signupbutton" class="btn btn-primary">SignUp</button>
-
+</main>
 
 {% endblock %}

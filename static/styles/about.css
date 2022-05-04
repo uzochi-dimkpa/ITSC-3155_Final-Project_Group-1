@@ -1,12 +1,8 @@
-main {
-  margin: 10px;
-}
-.line-break {
-  border: 1px solid black;
-  border-left: none;
-  border-right: none;
-}
 .about-body {
   padding: 20px;
   width: 70%;
+  /*creates line breaks*/
+  border: 1px solid black;
+  border-left: none;
+  border-right: none;
 }

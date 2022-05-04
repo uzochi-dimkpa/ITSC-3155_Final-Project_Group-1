@@ -1,17 +1,12 @@
-#ask-question {
-  padding-left: 96px;
-}
-.form {
-  /*on the left, add 192x192 padding*/
-  padding-left: 192px;
-  
-}
 .form textarea {
   /*make text input box bigger vertically*/
-  padding: 40px;
   width: 50%;
-
 }
+
+label {
+  font-size: 1.17em;
+}
+
 #tags {
   /*make tags input box bigger vertically*/
   padding: 10px;

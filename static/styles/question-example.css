@@ -1,14 +1,15 @@
 main
 {
-    margin: 10px;
     float: left;
 }
+
 .container
 {
-    width: 747px;
+    width: 500px;
     background-color: #F8F9FA;
     border: 2px solid #7749F8;
     position: relative;
+    margin-left: 0px;
 }
 
 .reply
@@ -18,7 +19,7 @@ main
     margin-left: 0px;
 }
 
-#main-reply
+button
 {
-    min-height: 120px;
+    margin-top: 2px;
 }
