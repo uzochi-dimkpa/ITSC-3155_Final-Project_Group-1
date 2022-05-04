@@ -14,10 +14,30 @@
     {% endblock %}
 </head>
 <body>
+    <style>
+        /*NOTE: Style tag here because layout.css enlarges the logo dramtically. 
+        until that is fixed, style tag is here to display the correct logo design
+        */
+        .logo {
+            width:115px; 
+            border: 2px solid white;
+             border-radius: 50%;
+        }
+        .logo:hover {
+            
+            background-color: black;
+            filter: invert(100%);
+            border: 1px solid #f1cc36;
+            transition: all 0.5s ease-in-out;
+        }
+    </style>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" id="DuoLing_navbar_item" href="/">DuoLing</a>
+            <a class="navbar-brand" id="DuoLing_navbar_item" href="/">
+                <!--use flask to reach images folder-->
+                <img class="logo" src="{{ url_for('static',filename='images/DuoLing-logos_black.png') }}" alt="DuoLing_logo">
+            </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarDark" aria-controls="navbarDark" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
