@@ -28,7 +28,7 @@ sql_echo = os.getenv('SQL_ECHO') # Default: False
 
 app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql://{db_user}:{db_pass}@{db_host}:{db_port}/{db_name}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_ECHO'] = eval(sql_echo)
+app.config['SQLALCHEMY_ECHO'] = eval(str(sql_echo))
 
 db.init_app(app)
 
