@@ -18,12 +18,12 @@
     <h6>Edited {{ post.updated_at }}</h6>
     {% endif %}
     {% if post.user_id == logged_in_user.user_id %}
-        <form id="delete_post" action="/post/{{ post.post_id }}/update" method="get">
-            <button form="user_post" type="submit" class="btn btn-primary">Edit</button>
+        <form id="update_post" action="/post/{{ post.post_id }}/update" method="get">
+            <button form="update_post" type="submit" class="btn btn-primary">Edit</button>
         </form>
         <!--<a href="/post/{{ post.post_id }}/update">Edit</a>-->
-        <form id="user_post" action="/post/{{ post.post_id }}/delete" method="POST">
-            <button form="user_post" type="submit" class="btn btn-danger">Delete</button>
+        <form id="delete_post" action="/post/{{ post.post_id }}/delete" method="POST">
+            <button form="delete_post" type="submit" class="btn btn-danger">Delete</button>
         </form>
     {% endif %} <!-- type="submit" class="main-reply" -->
     
