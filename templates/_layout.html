@@ -19,17 +19,19 @@
         until that is fixed, style tag is here to display the correct logo design
         */
         .logo {
-            width: 85px; 
-            border: 2px solid white;
-             border-radius: 50%;
+            width: 150px;
+            /*move up*/
+            position: relative;
+            top: 30px;
+            margin-top: -90px;            
         }
+        
         .logo:hover {
-            
-            background-color: black;
-            filter: invert(100%);
-            border: 1px solid #f1cc36;
-            transition: all 0.5s ease-in-out;
+           /*make img glow*/
+              filter: brightness(5.5);
+              transition: all .5s ease;
         }
+           
     </style>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
