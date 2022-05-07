@@ -1,9 +1,9 @@
 import os
 import re
-from flask import Flask, abort, redirect, render_template, request, session
+from flask import Flask, abort, redirect, render_template, request, session, g
 from dotenv import load_dotenv
-from sqlalchemy import func, select
 from flask_bcrypt import Bcrypt
+from sqlalchemy.sql import func
 from src.models import User, Post, Comment, db
 from src.blueprints.user_blueprint import router as user_router
 from src.blueprints.post_blueprint import router as post_router
@@ -18,15 +18,11 @@ load_dotenv()
 users = {}
 
 
-# TODO: RENAME '.env_' FILE TO '.env' AND MAKE CHANGES TO FIELDS AS NECESSARY
-db_host = os.getenv('DB_HOST') # Default: localhost
-db_port = os.getenv('DB_PORT') # Default: 3306
-db_user = os.getenv('DB_USER', 'root') # Default: root
-db_pass = os.getenv('DB_PASSWORD')
-db_name = os.getenv('DB_NAME') # Server default: DuoLing
+# TODO: RENAME '.env_' FILE TO '.env' AND MAKE CHANGES TO THE
+# FIELDS IN YOUR '.env' FILE AS NECESSARY
 sql_echo = os.getenv('SQL_ECHO') # Default: False
 
-app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql://{db_user}:{db_pass}@{db_host}:{db_port}/{db_name}'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('CLEARDB_DATABASE_URL', 'sqlite:///test.db') #- 'CLEARDB_DATABASE_URL', #- f'mysql://{db_user}:{db_pass}@{db_host}:{db_port}/{db_name}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = eval(str(sql_echo))
 
@@ -34,18 +30,27 @@ db.init_app(app)
 
 
 
-@app.context_processor
+@app.before_request
 def inject_user_session_profile():
     # TODO: PLACEHODER; the following code will be replaced with code for user login
     # session querying and for returning the user object to the '_layout.html' page
     user_id = 1
-    logged_in_user = User.query.get(user_id)
-    return dict(logged_in_user = logged_in_user) #- key = "value",
+    g.logged_in_user = User.query.get(user_id)
+    # g.user = db.session.get(session["user_id"])
+    # return dict(logged_in_user = g.logged_in_user) #- key = "value",
+    # return render_template('_layout.html', logged_in_user = g.logged_in_user)
+
+# @app.context_processor
+# def inject_user():
+#     user_id = 1
+#     logged_in_user = User.query.get(user_id)
+#     g.logged_in_user = User.query.get(user_id)
+#     return dict(user_id = logged_in_user.user_id) #- key = "value",
 
 @app.get('/')
 # Index page should display 4 user-created posts
 def index():
-    top_four_posts = Post.query.filter(Post.post_id < 5).all()
+    # top_four_posts = Post.query.filter(Post.post_id < 5).all()
     all_posts = Post.query.all()
     post_users = {}; num_comments = {}
 
@@ -53,11 +58,11 @@ def index():
         post_users.update({post.user_id: User.query.filter(post.user_id == User.user_id).first().username})
         num_comments.update({post.post_id: Comment.query.filter(post.post_id == Comment.post_id).count()})
 
-    # Async Javascript work
-    # num_posts = Post.query.count()
-
     # Debug
     # print(f'\n\nCurrent DATETIME: {db.func.now()}\n\n')
+    # print(f'\n\n\nhashed_user_password: {bcrypt.generate_password_hash(User.query.get(1).user_password).decode("utf-8")}\n\n\n')
+    # print(f'\n\n\ncheck_user_password_hash: {bcrypt.check_password_hash(, User.query.get(1).user_pasword)}\n\n\n')
+    # print(f'\n\n\n{type(func.now())}\n\n\n')
 
     return render_template('index.html', all_posts = all_posts, post_users = post_users, num_comments = num_comments) #- , num_posts=num_posts
 

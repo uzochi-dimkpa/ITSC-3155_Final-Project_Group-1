@@ -17,7 +17,7 @@
     {% if post.updated_at is defined and post.updated_at is not none %}
     <h6>Edited {{ post.updated_at }}</h6>
     {% endif %}
-    {% if post.user_id == logged_in_user.user_id %}
+    {% if post.user_id == g.logged_in_user.user_id %}
         <form id="update_post" action="/post/{{ post.post_id }}/update" method="get">
             <button form="update_post" type="submit" class="btn btn-primary">Edit</button>
         </form>
@@ -29,7 +29,7 @@
     
     <!--Main reply and other replies-->
     <h3>Reply</h3>
-    <form id ="comment_text" class="main-reply" action = "/post/{{ post.post_id }}/comment" method = "POST">
+    <form id ="comment_text" class="main-reply" action = "/post/{{ g.logged_in_user.user_id }}/{{ post.post_id }}/comment" method = "POST">
         <textarea class="container reply main-reply" name="comment_text" id = "comment_text" placeholder = "Write your message here" rows="3"></textarea> <!-- class="main-reply" -->
         <br>
         <button form="comment_text" type="submit" class="main-reply btn btn-primary">Submit</button>
@@ -37,7 +37,7 @@
     <h3>Other People's Replies:</h3>
     {% for comment in comments %}
     <div class="container reply">{{ comment.comment_text }}
-        {% if comment.user_id == logged_in_user.user_id %}<a href="/post/{{ post.post_id }}/{{ comment.comment_id }}/edit">Edit</a>
+        {% if comment.user_id == g.logged_in_user.user_id %}<a href="/post/{{ post.post_id }}/{{ comment.comment_id }}/edit">Edit</a>
         <a href="/post/{{ post.post_id }}/{{ comment.comment_id }}/delete">Delete</a>
         {% endif %}
         {% if comment.updated_at is defined and comment.updated_at is not none %} <h6>Edited {{ comment.updated_at }}</h6>{% endif %}

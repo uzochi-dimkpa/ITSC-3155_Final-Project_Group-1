@@ -43,8 +43,8 @@ router = Blueprint('post_router', __name__, url_prefix='/post')
 def create_post_form():
     return render_template('create-post.html')
 
-@router.post('/create')
-def create_post():
+@router.post('/create/<user_id>')
+def create_post(user_id):
     title = request.form.get('title','')
     body = request.form.get('body','')
     #user_id = request.form.get('user_id', '')
@@ -55,7 +55,7 @@ def create_post():
     if title == '' or body == '': #or user_id == '':
         abort(400)
 
-    new_post = Post(title=title, body=body, user_id=1, created_at=created_at, updated_at=None)
+    new_post = Post(title=title, body=body, user_id=user_id, created_at=created_at, updated_at=None)
     
     # Debug
     print(new_post.body)
@@ -121,11 +121,10 @@ def delete_post(post_id):
 
 
 
-@router.route('/<post_id>/comment', methods = ['GET', 'POST']) #- 
-def create_comment(post_id):
+@router.route('/<user_id>/<post_id>/comment', methods = ['GET', 'POST']) #- 
+def create_comment(user_id, post_id):
     # TODO: PLACEHODER; the following code will be replaced with code for user login
     # session querying and for returning the user object to the '_layout.html' page
-    user_id = 1
     logged_in_user = User.query.get(user_id)
 
     user_post = Post.query.get_or_404(post_id)
