@@ -1,6 +1,6 @@
 import os
 import re
-from flask import Flask, abort, redirect, render_template, request, session
+from flask import Flask, abort, redirect, render_template, request, session, g
 from dotenv import load_dotenv
 from flask_bcrypt import Bcrypt
 from sqlalchemy.sql import func
@@ -30,13 +30,21 @@ db.init_app(app)
 
 
 
-@app.context_processor
+@app.before_request
 def inject_user_session_profile():
     # TODO: PLACEHODER; the following code will be replaced with code for user login
     # session querying and for returning the user object to the '_layout.html' page
     user_id = 1
-    logged_in_user = User.query.get(user_id)
-    return dict(logged_in_user = logged_in_user) #- key = "value",
+    g.logged_in_user = User.query.get(user_id)
+    # g.user = db.session.get(session["user_id"])
+    # return dict(logged_in_user = g.logged_in_user) #- key = "value",
+
+# @app.context_processor
+# def inject_user():
+#     user_id = 1
+#     logged_in_user = User.query.get(user_id)
+#     g.logged_in_user = User.query.get(user_id)
+#     return dict(user_id = logged_in_user.user_id) #- key = "value",
 
 @app.get('/')
 # Index page should display 4 user-created posts
