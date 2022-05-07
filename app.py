@@ -22,7 +22,7 @@ users = {}
 # FIELDS IN YOUR '.env' FILE AS NECESSARY
 sql_echo = os.getenv('SQL_ECHO') # Default: False
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('CLEARDB_DATABASE_URL', 'sqlite:///test.db') #- 'CLEARDB_DATABASE_URL', #- f'mysql://{db_user}:{db_pass}@{db_host}:{db_port}/{db_name}'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('my_CLEARDB_DATABASE_URL', 'sqlite:///test.db') #- 'CLEARDB_DATABASE_URL', #- f'mysql://{db_user}:{db_pass}@{db_host}:{db_port}/{db_name}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = eval(str(sql_echo))
 
@@ -101,7 +101,7 @@ def register():
     return redirect('/')
 
 @app.post('/login')
-def login():
+def login_to_webpage():
     username = request.form.get('username', '')
     password = request.form.get('password', '')
 

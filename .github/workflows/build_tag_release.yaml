@@ -28,6 +28,7 @@ jobs:
           echo "New tag: ${{ steps.tag_version.outputs.new_tag }}"
       
       - name: Create a release
+        if: ${{ steps.tag_version.outputs.new_tag != '' }}
         uses: ncipollo/release-action@v1
         with:
           tag: ${{ steps.tag_version.outputs.new_tag }}
