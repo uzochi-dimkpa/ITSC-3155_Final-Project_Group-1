@@ -41,7 +41,7 @@ def inject_user_session_profile():
 @app.get('/')
 # Index page should display 4 user-created posts
 def index():
-    top_four_posts = Post.query.filter(Post.post_id < 5).all()
+    # top_four_posts = Post.query.filter(Post.post_id < 5).all()
     all_posts = Post.query.all()
     post_users = {}; num_comments = {}
 
