@@ -29,7 +29,7 @@
     
     <!--Main reply and other replies-->
     <h3>Reply</h3>
-    <form id ="comment_text" class="main-reply" action = "/post/{{ post.post_id }}/comment" method = "POST">
+    <form id ="comment_text" class="main-reply" action = "/post/{{ logged_in_user.user_id }}/{{ post.post_id }}/comment" method = "POST">
         <textarea class="container reply main-reply" name="comment_text" id = "comment_text" placeholder = "Write your message here" rows="3"></textarea> <!-- class="main-reply" -->
         <br>
         <button form="comment_text" type="submit" class="main-reply btn btn-primary">Submit</button>

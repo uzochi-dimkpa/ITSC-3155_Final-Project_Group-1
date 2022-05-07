@@ -13,21 +13,23 @@ class User(db.Model):
     __tablename__ = 't_user'
 
     user_id = db.Column(db.Integer, nullable = False, primary_key = True)
-    username = db.Column(db.String, nullable = False, unique = True)
-    user_password = db.Column(db.String, nullable = False)
-    first_name = db.Column(db.String, nullable = False)
-    last_name = db.Column(db.String, nullable = False)
+    username = db.Column(db.String(255), nullable = False, unique = True)
+    user_password = db.Column(db.String(255), nullable = False)
+    first_name = db.Column(db.String(255), nullable = False)
+    last_name = db.Column(db.String(255), nullable = False)
+    bio = db.Column(db.Text, nullable = True)
     num_friends = db.Column(db.Integer, nullable = True)
 
-    def __init__(self, username, user_password, first_name, last_name, num_friends):
-        self.username = username; self.password = user_password
+    def __init__(self, username, user_password, first_name, last_name, bio, num_friends):
+        self.username = username; self.user_password = user_password
         self.first_name = first_name; self.last_name = last_name
-        self.num_friends = num_friends
+        self.bio = bio; self.num_friends = num_friends
 
     def __repr__(self):
         return f'User #{self.user_id}:\n\
                 Username: {self.username}, Password: {self.user_password}\n\
                 First Name: {self.first_name}, Last Name: {self.last_name}\n\
+                Biography: {self.bio}\n\
                 # of Friends: {self.num_friends}\n\n\n'
 
 
@@ -38,8 +40,8 @@ class Post(db.Model):
     __tablename__ = 't_post'
 
     post_id = db.Column(db.Integer, nullable = False, primary_key = True)
-    title = db.Column(db.String, nullable = False)
-    body = db.Column(db.String, nullable = False)
+    title = db.Column(db.String(255), nullable = False)
+    body = db.Column(db.String(255), nullable = False)
     created_at = db.Column(db.DateTime, nullable = False, server_default=func.now()) #- server_default=db.func.now()
     updated_at = db.Column(db.DateTime, nullable = True, server_default=None, onupdate=func.now()) #- server_default=db.func.now(),
 
@@ -93,7 +95,7 @@ class Language(db.Model):
     # TODO: Update SQLAlchemy Table here
     __tablename__ = 't_language'
 
-    language_name = db.Column(db.String, nullable=False,unique=True,primary_key=True)
+    language_name = db.Column(db.String(255), nullable=False,unique=True,primary_key=True)
 
     def __repr__(self):
         return f'Language class'
@@ -107,7 +109,7 @@ class Tag(db.Model):
     # TODO: Update SQLAlchemy Table here
     __tablename__ = 't_tag'
 
-    tag_name = db.Column(db.String, nullable=False,unique=True,primary_key=True)
+    tag_name = db.Column(db.String(255), nullable=False,unique=True,primary_key=True)
 
     def __repr__(self):
         return f'Tag class'
@@ -121,7 +123,7 @@ class Relationship(db.Model):
     # TODO: Update SQLAlchemy Table here
     __tablename__ = 't_relate'
 
-    relate_type = db.Column(db.String, nullable = False, unique = True, primary_key = True)
+    relate_type = db.Column(db.String(255), nullable = False, unique = True, primary_key = True)
 
     # def __init__(self, relate_type):
     #     self.relate_type = relate_type
