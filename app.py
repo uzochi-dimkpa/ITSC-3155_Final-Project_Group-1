@@ -49,9 +49,6 @@ def index():
         post_users.update({post.user_id: User.query.filter(post.user_id == User.user_id).first().username})
         num_comments.update({post.post_id: Comment.query.filter(post.post_id == Comment.post_id).count()})
 
-    # Async Javascript work
-    # num_posts = Post.query.count()
-
     # Debug
     # print(f'\n\nCurrent DATETIME: {db.func.now()}\n\n')
     # print(f'\n\n\nhashed_user_password: {bcrypt.generate_password_hash(User.query.get(1).user_password).decode("utf-8")}\n\n\n')
