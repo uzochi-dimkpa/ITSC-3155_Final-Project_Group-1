@@ -2,8 +2,8 @@ import os
 import re
 from flask import Flask, abort, redirect, render_template, request, session
 from dotenv import load_dotenv
-from sqlalchemy import func, select
 from flask_bcrypt import Bcrypt
+from sqlalchemy.sql import func
 from src.models import User, Post, Comment, db
 from src.blueprints.user_blueprint import router as user_router
 from src.blueprints.post_blueprint import router as post_router
@@ -18,15 +18,11 @@ load_dotenv()
 users = {}
 
 
-# TODO: RENAME '.env_' FILE TO '.env' AND MAKE CHANGES TO FIELDS AS NECESSARY
-db_host = os.getenv('DB_HOST') # Default: localhost
-db_port = os.getenv('DB_PORT') # Default: 3306
-db_user = os.getenv('DB_USER', 'root') # Default: root
-db_pass = os.getenv('DB_PASSWORD')
-db_name = os.getenv('DB_NAME') # Server default: DuoLing
+# TODO: RENAME '.env_' FILE TO '.env' AND MAKE CHANGES TO THE
+# FIELDS IN YOUR '.env' FILE AS NECESSARY
 sql_echo = os.getenv('SQL_ECHO') # Default: False
 
-app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql://{db_user}:{db_pass}@{db_host}:{db_port}/{db_name}'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('CLEARDB_DATABASE_URL', 'sqlite:///test.db') #- 'CLEARDB_DATABASE_URL', #- f'mysql://{db_user}:{db_pass}@{db_host}:{db_port}/{db_name}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = eval(str(sql_echo))
 
@@ -58,6 +54,9 @@ def index():
 
     # Debug
     # print(f'\n\nCurrent DATETIME: {db.func.now()}\n\n')
+    # print(f'\n\n\nhashed_user_password: {bcrypt.generate_password_hash(User.query.get(1).user_password).decode("utf-8")}\n\n\n')
+    # print(f'\n\n\ncheck_user_password_hash: {bcrypt.check_password_hash(, User.query.get(1).user_pasword)}\n\n\n')
+    # print(f'\n\n\n{type(func.now())}\n\n\n')
 
     return render_template('index.html', all_posts = all_posts, post_users = post_users, num_comments = num_comments) #- , num_posts=num_posts
 
