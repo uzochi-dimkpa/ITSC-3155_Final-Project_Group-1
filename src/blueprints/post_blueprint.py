@@ -43,7 +43,7 @@ router = Blueprint('post_router', __name__, url_prefix='/post')
 def create_post_form():
     return render_template('create-post.html')
 
-@router.post('/<user_id>/create')
+@router.post('/create/<user_id>')
 def create_post(user_id):
     title = request.form.get('title','')
     body = request.form.get('body','')
