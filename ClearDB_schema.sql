@@ -1,5 +1,6 @@
 -- DROP DATABASE IF EXISTS `heroku_7100647231516f8`;
 -- CREATE DATABASE IF NOT EXISTS `heroku_7100647231516f8`;
+SET FOREIGN_KEY_CHECKS = 0;
 USE `heroku_7100647231516f8`;
 
 -- CRUD tables:
@@ -119,14 +120,14 @@ CREATE TABLE IF NOT EXISTS t_relate (
 -- ;
 
 -- Sample entries:
-INSERT IGNORE INTO t_user (username, user_password, first_name, last_name, bio, num_friends)
+INSERT INTO t_user (username, user_password, first_name, last_name, bio, num_friends)
 VALUES
     ('udimkpa', 'abc123', 'Uzochi', 'Dimkpa', "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", NULL),
     ('sgrace11', 'sgrace', 'Sarah', 'Grace', "Molestie ac feugiat sed lectus vestibulum mattis. Non tellus orci ac auctor augue mauris augue. Diam maecenas ultricies mi eget mauris pharetra et. Scelerisque eleifend donec pretium vulputate. Tortor id aliquet lectus proin nibh nisl. Donec adipiscing tristique risus nec feugiat in fermentum posuere urna. Eget aliquet nibh praesent tristique. Vitae et leo duis ut diam quam nulla. Phasellus egestas tellus rutrum tellus pellentesque eu. Blandit libero volutpat sed cras. Amet risus nullam eget felis eget. Viverra nam libero justo laoreet sit amet. Aliquet enim tortor at auctor urna nunc.", 1),
     ('jacobtie', '123abc', 'Jacob', 'Krevat', "Maecenas pharetra convallis posuere morbi leo urna molestie. Enim sed faucibus turpis in. Leo vel fringilla est ullamcorper eget nulla facilisi etiam dignissim. Auctor elit sed vulputate mi sit. Dui faucibus in ornare quam viverra orci sagittis eu volutpat. Purus gravida quis blandit turpis. Tellus id interdum velit laoreet id donec ultrices tincidunt arcu. Risus sed vulputate odio ut. Nunc faucibus a pellentesque sit amet porttitor eget. Est pellentesque elit ullamcorper dignissim cras tincidunt lobortis feugiat vivamus. Feugiat in fermentum posuere urna. Sed id semper risus in hendrerit gravida rutrum quisque non. Tortor at risus viverra adipiscing at in.", 4)
 ;
 
-INSERT IGNORE INTO t_post (user_id, title, body, created_at, updated_at)
+INSERT INTO t_post (user_id, title, body, created_at, updated_at)
 VALUES
 	(1, "My First Post!", "Hello everyone!", NOW(), NULL),
     (1, "What's for dinner?", "I'm hungry", NOW(), NULL),
@@ -140,7 +141,7 @@ VALUES
         look to for a start? Thanks so much! You guys are awesome.", NOW(), NULL)
 ;
 
-INSERT IGNORE INTO t_comment (post_id, user_id, comment_text, created_at, updated_at)
+INSERT INTO t_comment (post_id, user_id, comment_text, created_at, updated_at)
 VALUES
 	(1, 1, "This sentence is false", NOW(), NULL),
     (2, 1, "Hi hungry! I'm dad", NOW(), NULL),
