@@ -13,17 +13,20 @@
     <br>
     <br>
 
+
+    
     <form action="register" method="post">
         <label for="username"><h4>Username</h4></label><br>
         <input type="text" id="username" name="username"><br>
-        <br>
-        <label for="email"><h4>Email</h4></label><br>
-        <input type="text" id="email" name="email">
-        <br>
-        <br>
         <label for="password"><h4>Password</h4></label><br>
-        <input type="text" id="password" name="password">
+        <input type="text" id="password" name="password"><br>
+        <label for="first_name"><h4>First Name</h4></label><br>
+        <input type="text" id="first_name" name="first_name"><br>
+        <label for="last_name"><h4>Last Name</h4></label><br>
+        <input type="text" id="last_name" name="last_name"><br>
         
+        <button type="submit" id="signupbutton" class="btn btn-primary">SignUp</button>
+    
     </form>
     <br>
     <br>
@@ -33,7 +36,6 @@
     </div>    <br>
     <br>
 
-    <button type="button" id="signupbutton" class="btn btn-primary">SignUp</button>
 </main>
 
 {% endblock %}

@@ -77,46 +77,46 @@ def about():
 def faq():
     return render_template('faq.html')
 
+@app.post('/register')
+def register():
+    username = request.form.get('username', '')
+    password = request.form.get('password', '')
+    first_name = request.form.get('first_name', '')
+    last_name = request.form.get('last_name', '')
 
-# CURRENTLY BROKEN
-# @app.post('/register')
-# def register():
-#     username = request.form.get('username', '')
-#     password = request.form.get('password', '')
+    if username == '' or password == '':
+        abort(400)
 
-#     if username == '' or password == '':
-#         abort(400)
+    hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
 
-#     hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
+    new_user = User(username=username, user_password=hashed_password,first_name=first_name,last_name=last_name,num_friends=0)
+    db.session.add(new_user)
+    db.session.commit()
 
-#     new_user = User(username, hashed_password)
-#     db.session.add(new_user)
-#     db.session.commit()
+    return redirect('/')
 
-#     return redirect('/')
+@app.post('/login')
+def login():
+    username = request.form.get('username', '')
+    password = request.form.get('password', '')
 
-# @app.post('/login')
-# def login():
-#     username = request.form.get('username', '')
-#     password = request.form.get('password', '')
+    if username == '' or password == '':
+        abort(400)
 
-#     if username == '' or password == '':
-#         abort(400)
+    existing_user = User.query.filter_by(username=username).first()
 
-#     existing_user = User.query.filter_by(username=username).first()
+    if not existing_user or existing_user.user_id == 0:
+        return redirect('/fail')
 
-#     if not existing_user or existing_user.user_id == 0:
-#         return redirect('/fail')
+    if not bcrypt.check_password_hash(existing_user.password, password):
+        return redirect('/fail')
 
-#     if not bcrypt.check_password_hash(existing_user.password, password):
-#         return redirect('/fail')
+    session['user'] = {
+        'username': username,
+        'user_id': existing_user.user_id,
+    }
 
-#     session['user'] = {
-#         'username': username,
-#         'user_id': existing_user.user_id,
-#     }
-
-#     return redirect('/') #- '/success'
+    return redirect('/success')
 
 
 

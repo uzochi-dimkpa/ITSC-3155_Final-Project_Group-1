@@ -20,7 +20,7 @@ class User(db.Model):
     num_friends = db.Column(db.Integer, nullable = True)
 
     def __init__(self, username, user_password, first_name, last_name, num_friends):
-        self.username = username; self.password = user_password
+        self.username = username; self.user_password = user_password
         self.first_name = first_name; self.last_name = last_name
         self.num_friends = num_friends
 
