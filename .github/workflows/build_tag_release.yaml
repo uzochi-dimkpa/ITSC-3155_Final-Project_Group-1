@@ -8,7 +8,7 @@ on:
       - closed
 
 jobs:
-  build_tag:
+  build_new_tag:
     if: github.event.pull_request.merged == true
     name: Bump version and push new tag
     runs-on: ubuntu-latest
@@ -28,17 +28,17 @@ jobs:
           echo "New tag: ${{ steps.tag_version.outputs.new_tag }}"
 
   release:
-    needs: [build_tag]
-    # if: ${{ needs.build_tag.outputs.new_tag != '' }}
+    # needs: [build_new_tag]
+    if: ${{ needs.build_new_tag.outputs.new_tag != '' }}
     name: Create release from tag
     runs-on: ubuntu-latest
     steps:
       - name: Create a release
         uses: ncipollo/release-action@v1
         with:
-          tag: ${{ job.build_tag.steps.tag_version.outputs.new_tag }}
-          name: ${{ job.build_tag.steps.tag_version.outputs.new_tag }}
-          body: ${{ job.build_tag.steps.tag_version.outputs.changelog }}
+          tag: ${{ job.build_new_tag.steps.tag_version.outputs.new_tag }}
+          name: ${{ job.build_new_tag.steps.tag_version.outputs.new_tag }}
+          body: ${{ job.build_new_tag.steps.tag_version.outputs.changelog }}
           # Custom token scope must be set to 'repo'; this includes every child option to 'repo'
           token: ${{ secrets.CLOUD_WEBSITE_PROJECT_GITHUB_TOKEN }}
 
