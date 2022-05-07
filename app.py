@@ -38,6 +38,7 @@ def inject_user_session_profile():
     g.logged_in_user = User.query.get(user_id)
     # g.user = db.session.get(session["user_id"])
     # return dict(logged_in_user = g.logged_in_user) #- key = "value",
+    # return render_template('_layout.html', logged_in_user = g.logged_in_user)
 
 # @app.context_processor
 # def inject_user():
