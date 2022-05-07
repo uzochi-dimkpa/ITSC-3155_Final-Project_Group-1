@@ -1,4 +1,5 @@
-CREATE DATABASE IF NOT EXISTS `heroku_7100647231516f8`;
+-- DROP DATABASE IF EXISTS `heroku_7100647231516f8`;
+-- CREATE DATABASE IF NOT EXISTS `heroku_7100647231516f8`;
 USE `heroku_7100647231516f8`;
 
 -- CRUD tables:
@@ -58,31 +59,31 @@ CREATE TABLE IF NOT EXISTS t_relate (
 );
 
 -- Junction tables:
-CREATE TABLE IF NOT EXISTS user__language (
-	user_id INT NOT NULL,
-    language_name VARCHAR(255) NOT NULL,
-    PRIMARY KEY (user_id, language_name),
-    FOREIGN KEY (user_id) REFERENCES t_user(user_id) ON UPDATE CASCADE ON DELETE CASCADE,
-    FOREIGN KEY (language_name) REFERENCES t_language(language_name) ON UPDATE CASCADE ON DELETE CASCADE
-);
+-- CREATE TABLE IF NOT EXISTS user__language (
+-- 	user_id INT NOT NULL,
+--     language_name VARCHAR(255) NOT NULL,
+--     PRIMARY KEY (user_id, language_name),
+--     FOREIGN KEY (user_id) REFERENCES t_user(user_id) ON UPDATE CASCADE ON DELETE CASCADE,
+--     FOREIGN KEY (language_name) REFERENCES t_language(language_name) ON UPDATE CASCADE ON DELETE CASCADE
+-- );
 
-CREATE TABLE IF NOT EXISTS user__user (
-	user_id_one INT NOT NULL,
-    user_id_two INT NOT NULL,
-    relate_type VARCHAR(255) NOT NULL,
-    PRIMARY KEY (user_id_one, user_id_two, relate_type),
-    FOREIGN KEY (user_id_one) REFERENCES t_user(user_id) ON UPDATE CASCADE ON DELETE CASCADE,
-    FOREIGN KEY (user_id_two) REFERENCES t_user(user_id) ON UPDATE CASCADE ON DELETE CASCADE,
-    FOREIGN KEY (relate_type) REFERENCES t_relate(relate_type) ON UPDATE CASCADE ON DELETE CASCADE
-);
+-- CREATE TABLE IF NOT EXISTS user__user (
+-- 	user_id_one INT NOT NULL,
+--     user_id_two INT NOT NULL,
+--     relate_type VARCHAR(255) NOT NULL,
+--     PRIMARY KEY (user_id_one, user_id_two, relate_type),
+--     FOREIGN KEY (user_id_one) REFERENCES t_user(user_id) ON UPDATE CASCADE ON DELETE CASCADE,
+--     FOREIGN KEY (user_id_two) REFERENCES t_user(user_id) ON UPDATE CASCADE ON DELETE CASCADE,
+--     FOREIGN KEY (relate_type) REFERENCES t_relate(relate_type) ON UPDATE CASCADE ON DELETE CASCADE
+-- );
 
-CREATE TABLE IF NOT EXISTS post__tag (
-	post_id INT NOT NULL,
-    tag_name VARCHAR(255) NOT NULL,
-    PRIMARY KEY (post_id, tag_name),
-    FOREIGN KEY (post_id) REFERENCES t_post(post_id) ON UPDATE CASCADE ON DELETE CASCADE,
-    FOREIGN KEY (tag_name) REFERENCES t_tag(tag_name) ON UPDATE CASCADE ON DELETE CASCADE
-);
+-- CREATE TABLE IF NOT EXISTS post__tag (
+-- 	post_id INT NOT NULL,
+--     tag_name VARCHAR(255) NOT NULL,
+--     PRIMARY KEY (post_id, tag_name),
+--     FOREIGN KEY (post_id) REFERENCES t_post(post_id) ON UPDATE CASCADE ON DELETE CASCADE,
+--     FOREIGN KEY (tag_name) REFERENCES t_tag(tag_name) ON UPDATE CASCADE ON DELETE CASCADE
+-- );
 
 
 
@@ -161,3 +162,7 @@ VALUES
 -- SELECT * from t_post WHERE t_post.post_id < 5;
 -- SELECT COUNT(*) FROM t_comment, t_post WHERE t_comment.post_id = t_post.post_id;
 -- SELECT t_user.username FROM t_user WHERE t_user.user_id = 2;
+
+-- SELECT * FROM t_language;
+-- SELECT * FROM t_user;
+-- SELECT * FROM t_post;
