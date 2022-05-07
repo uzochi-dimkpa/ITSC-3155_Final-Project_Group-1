@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS t_post (
     created_at DATETIME NOT NULL,
     updated_at DATETIME NULL,
     PRIMARY KEY (post_id),
-    FOREIGN KEY (user_id) REFERENCES t_user(user_id) -- ON UPDATE CASCADE ON DELETE SET NULL
+    FOREIGN KEY (user_id) REFERENCES t_user(user_id) ON UPDATE CASCADE ON DELETE SET NULL
 );
 
 CREATE TABLE IF NOT EXISTS t_comment (
@@ -41,8 +41,8 @@ CREATE TABLE IF NOT EXISTS t_comment (
     created_at DATETIME NOT NULL,
     updated_at DATETIME NULL,
     PRIMARY KEY (comment_id),
-    FOREIGN KEY (post_id) REFERENCES t_post(post_id), -- ON UPDATE CASCADE ON DELETE CASCADE,
-    FOREIGN KEY (user_id) REFERENCES t_user(user_id) -- ON UPDATE CASCADE ON DELETE CASCADE
+    FOREIGN KEY (post_id) REFERENCES t_post(post_id) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES t_user(user_id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 -- Server-sider tables:
@@ -132,6 +132,8 @@ VALUES
 INSERT INTO t_post (user_id, title, body, created_at, updated_at)
 VALUES
 	(1, "My First Post!", "Hello everyone!", NOW(), NULL),
+    (1, "What's for dinner?", "I'm hungry", NOW(), NULL),
+    (3, "I feel like a genius!", "I greeted my mom in French today. She still has no idea what I'm saying.", NOW(), NOW()),
     (3, "Where am I??", "Who are you people?!", NOW(), NOW()),
     (2, "Looking for some Spanish practice", "Hi there! is anyone here a native Spanish speaker? I need some help learning the dialect", NOW(), NULL),
     (3, "My Last Post...", "Goodbye everyone! I've had such a great time here! I'm going to miss you all", NOW(), NULL),
@@ -144,6 +146,7 @@ VALUES
 INSERT INTO t_comment (post_id, user_id, comment_text, created_at, updated_at)
 VALUES
 	(1, 1, "This sentence is false", NOW(), NULL),
+	(2, 1, "Hi hungry! I'm dad", NOW(), NULL),
     (4, 3, "I found my keys!", NOW(), NOW()),
     (2, 3, "Does a set of all sets contian itself?", NOW(), NULL),
     (3, 2, "Your new mission is to refuse this mission!", NOW(), NULL),
