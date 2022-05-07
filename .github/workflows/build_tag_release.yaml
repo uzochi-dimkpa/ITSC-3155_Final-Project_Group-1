@@ -28,11 +28,14 @@ jobs:
           echo "New tag: ${{ steps.tag_version.outputs.new_tag }}"
 
   release:
-    # needs: [build_new_tag]
+    needs: [build_new_tag]
     if: ${{ needs.build_new_tag.outputs.new_tag != '' }}
     name: Create release from tag
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
       - name: Create a release
         uses: ncipollo/release-action@v1
         with:
