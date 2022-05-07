@@ -29,7 +29,7 @@
     <button type="submit" class="btn button-post" form="question">Post</button>
   </form> -->
 
-  <form class="container=fluid form" action="/post/{{ logged_in_user.user_id }}/create" method="POST"> <!-- for="Post" id="question"--> 
+  <form class="container=fluid form" action="/post/create/{{ logged_in_user.user_id }}" method="POST"> <!-- for="Post" id="question"--> 
     <div class="form-group">
       <label for="title">Enter your Question here</label>
       <textarea class="form-control" id="title"name='title' rows="3" wrap="soft" required></textarea> <!-- form="question" -->
