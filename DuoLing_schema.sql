@@ -4,6 +4,10 @@ USE DuoLing;
 
 
 
+-- 1ST ITERATION OF DATABASE
+
+
+
 -- ---------------------------------------------------- Tables
 
 -- CRUD tables:
@@ -25,7 +29,6 @@ CREATE TABLE IF NOT EXISTS t_post (
     body TEXT NOT NULL,
     created_at DATETIME NOT NULL,
     updated_at DATETIME NULL,
-    comment_id INT NULL,
     PRIMARY KEY (post_id),
     FOREIGN KEY (user_id) REFERENCES t_user(user_id) ON UPDATE CASCADE ON DELETE CASCADE
 );
@@ -41,10 +44,6 @@ CREATE TABLE IF NOT EXISTS t_comment (
     FOREIGN KEY (post_id) REFERENCES t_post(post_id) ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES t_user(user_id) ON UPDATE CASCADE ON DELETE CASCADE
 );
-
--- Altering tables:
--- ALTER TABLE t_post
-	-- ADD FOREIGN KEY (comment_id) REFERENCES t_comment(comment_id); -- ON UPDATE CASCADE ON DELETE CASCADE;
 
 -- Server-sider tables:
 CREATE TABLE IF NOT EXISTS t_language (
@@ -147,7 +146,7 @@ VALUES
 INSERT INTO t_comment (post_id, user_id, comment_text, created_at, updated_at)
 VALUES
 	(1, 1, "This sentence is false", NOW(), NULL),
-    (2, 1, "Hi hungry! I'm dad", NOW(), NULL),
+	(2, 1, "Hi hungry! I'm dad", NOW(), NULL),
     (4, 3, "I found my keys!", NOW(), NOW()),
     (2, 3, "Does a set of all sets contian itself?", NOW(), NULL),
     (3, 2, "Your new mission is to refuse this mission!", NOW(), NULL),
@@ -166,3 +165,4 @@ VALUES
 -- SELECT * from t_post WHERE t_post.post_id < 5;
 -- SELECT COUNT(*) FROM t_comment, t_post WHERE t_comment.post_id = t_post.post_id;
 -- SELECT t_user.username FROM t_user WHERE t_user.user_id = 2;
+
