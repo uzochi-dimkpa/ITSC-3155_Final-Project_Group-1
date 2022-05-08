@@ -27,14 +27,14 @@
         }
         
         .logo:hover {
-           /*make img glow*/
-              filter: brightness(5.5);
-              transition: all .5s ease;
+            /*make img glow*/
+            filter: brightness(5.5);
+            transition: all .5s ease;
         }
-           
+
     </style>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid">
             <a class="navbar-brand" id="DuoLing_navbar_item" href="/">
                 <!--use flask to reach images folder-->
@@ -57,6 +57,10 @@
 
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="/about">About</a>
+                        {% if g.logged_in_user is defined and g.logged_in_user is not none %}
+
+                        <a class="nav-link" aria-current="page" href="/user/{{ g.logged_in_user.user_id }}">Profile</a> <!-- logged_in_user.user_id -->
+                        {% endif %}
                     </li>
 
                     {% if g.logged_in_user is defined and g.logged_in_user is not none %}
@@ -88,6 +92,12 @@
                 <!-- <a href="/user/#"><i class='fas fa-user-circle' style='font-size:40px; color:white; margin-bottom: 10px;'></i></a>
                 <div style="margin-right:40px;"></div> -->
 
+                {% if g.logged_in_user is defined and g.logged_in_user is not none %}
+                <a href="/user/{{ g.logged_in_user.user_id }}"><i class='fas fa-user-circle' style='font-size:40px; color:white; margin-bottom: 10px;'></i></a> <!-- logged_in_user. -->
+                <div style="margin-right:40px;"></div>
+                {% endif %}
+                
+              
                 <!-- Search bar-->
                 <form class="d-flex">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
