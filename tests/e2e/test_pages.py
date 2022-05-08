@@ -59,16 +59,16 @@ def test_faq_page(test_app):
     assert b"<td>It's free! We welcome users of all ages 8+ (with parental guidance for those under 16)</td>" in res.data
 
 
-def test_create_post_page(test_app):
-    res = test_app.get('/post/new', follow_redirects = True)
+# def test_create_post_page(test_app):
+#     res = test_app.get('/post/new', follow_redirects = True)
 
-    assert res.status_code == 200
-    assert b'<h1 id="ask-question">Ask a Question!</h1>' in res.data
-    assert b'<form class="container=fluid form" action="/post/' in res.data
-    assert b'<label for="title">Enter your Question here</label>' in res.data
-    assert b'<label for="body">Enter details about your question!</label>' in res.data
-    assert b'<textarea class="form-control" id="body"name=\'body\' rows="4" wrap="soft" required></textarea>' in res.data
-    assert b'<button type="submit" class="btn button-post">Post</button>' in res.data
+#     assert res.status_code == 200
+#     assert b'<h1 id="ask-question">Ask a Question!</h1>' in res.data
+#     assert b'<form class="container=fluid form" action="/post/' in res.data
+#     assert b'<label for="title">Enter your Question here</label>' in res.data
+#     assert b'<label for="body">Enter details about your question!</label>' in res.data
+#     assert b'<textarea class="form-control" id="body"name=\'body\' rows="4" wrap="soft" required></textarea>' in res.data
+#     assert b'<button type="submit" class="btn button-post">Post</button>' in res.data
 
 
 # Any test that require an existing user possibly does not work because there is no user
