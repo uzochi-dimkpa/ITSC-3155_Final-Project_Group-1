@@ -67,6 +67,7 @@ def test_logging_in_user_3(test_app):
     }, follow_redirects=True)
 
     assert res.status_code == 200
+    assert res.status_code != 500
     # assert b'DuoLing' not in res.data
     # assert b'Frequent Questions' not in res.data
     # assert b'All Questions' not in res.data
