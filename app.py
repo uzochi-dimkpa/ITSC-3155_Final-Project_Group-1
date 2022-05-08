@@ -1,6 +1,7 @@
 import os
 import re
 from flask import Flask, abort, redirect, render_template, request, session, g
+from flask_session import Session
 from dotenv import load_dotenv
 from flask_bcrypt import Bcrypt
 from sqlalchemy.sql import func
@@ -12,6 +13,7 @@ from src.blueprints.post_blueprint import router as post_router
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
 
+
 load_dotenv()
 
 #This will need to be correctly adjusted:
@@ -22,7 +24,7 @@ users = {}
 # FIELDS IN YOUR '.env' FILE AS NECESSARY
 sql_echo = os.getenv('SQL_ECHO') # Default: False
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('my_CLEARDB_DATABASE_URL', 'sqlite:///test.db') #- 'CLEARDB_DATABASE_URL', #- f'mysql://{db_user}:{db_pass}@{db_host}:{db_port}/{db_name}'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('CLEARDB_DATABASE_URL', 'sqlite:///test.db') #- 'CLEARDB_DATABASE_URL', #- f'mysql://{db_user}:{db_pass}@{db_host}:{db_port}/{db_name}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = eval(str(sql_echo))
 
@@ -31,14 +33,13 @@ db.init_app(app)
 
 
 @app.before_request
-def inject_user_session_profile():
-    # TODO: PLACEHODER; the following code will be replaced with code for user login
-    # session querying and for returning the user object to the '_layout.html' page
-    user_id = 1
-    g.logged_in_user = User.query.get(user_id)
-    # g.user = db.session.get(session["user_id"])
-    # return dict(logged_in_user = g.logged_in_user) #- key = "value",
-    # return render_template('_layout.html', logged_in_user = g.logged_in_user)
+def inject_user_before_requests():
+    # user_id = 1
+    # g.logged_in_user = User.query.get(user_id)
+    # g.logged_in_user = None
+
+    if "user" in session:
+        g.logged_in_user = User.query.filter(User.username == session["user"]["username"]).first()
 
 # @app.context_processor
 # def inject_user():
@@ -95,8 +96,16 @@ def register():
     hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
 
     new_user = User(username=username, user_password=hashed_password,first_name=first_name,last_name=last_name,num_friends=0)
+    
+    #SQL Session
     db.session.add(new_user)
     db.session.commit()
+
+    #User Session
+    # session['user'] = {
+    #     'username': username,
+    # }
+
 
     return redirect('/')
 
@@ -105,23 +114,23 @@ def login_to_webpage():
     username = request.form.get('username', '')
     password = request.form.get('password', '')
 
-    if username == '' or password == '':
-        abort(400)
+#     if username == '' or password == '':
+#         abort(400)
 
-    existing_user = User.query.filter_by(username=username).first()
+#     existing_user = User.query.filter_by(username=username).first()
 
-    if not existing_user or existing_user.user_id == 0:
-        return redirect('/fail')
+#     if not existing_user or existing_user.user_id == 0:
+#         return redirect('/fail')
 
-    if not bcrypt.check_password_hash(existing_user.password, password):
-        return redirect('/fail')
+#     if not bcrypt.check_password_hash(existing_user.password, password):
+#         return redirect('/fail')
 
-    session['user'] = {
-        'username': username,
-        'user_id': existing_user.user_id,
-    }
+#     session['user'] = {
+#         'username': username,
+#         'user_id': existing_user.user_id,
+#     }
 
-    return redirect('/success')
+#     return redirect('/success')
 
 
 

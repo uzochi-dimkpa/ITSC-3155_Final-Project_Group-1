@@ -67,10 +67,10 @@ def test_get_all_posts(test_app):
 #     assert res.status_code == 200
 
 
-def test_get_new_post(test_app):
-    res = test_app.get('/post/new', follow_redirects = True)
+# def test_get_new_post(test_app):
+#     res = test_app.get('/post/new', follow_redirects = True)
 
-    assert res.status_code == 200
-    assert b'Ask a Question!' in res.data
-    assert b'Enter your Question here' in res.data
-    assert b'Enter details about your question!' in res.data
+#     assert res.status_code == 200
+#     assert b'Ask a Question!' in res.data
+#     assert b'Enter your Question here' in res.data
+#     assert b'Enter details about your question!' in res.data
