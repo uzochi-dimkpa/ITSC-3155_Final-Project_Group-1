@@ -15,27 +15,53 @@ bcrypt = Bcrypt(app)
 load_dotenv()
 
 #This will need to be correctly adjusted:
-users = {}
+# users = {}
 
 
 # TODO: RENAME '.env_' FILE TO '.env' AND MAKE CHANGES TO THE
 # FIELDS IN YOUR '.env' FILE AS NECESSARY
 sql_echo = os.getenv('SQL_ECHO') # Default: False
+session_secret_key = os.getenv('SECRET_KEY')
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('my_CLEARDB_DATABASE_URL', 'sqlite:///test.db') #- 'CLEARDB_DATABASE_URL', #- f'mysql://{db_user}:{db_pass}@{db_host}:{db_port}/{db_name}'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('CLEARDB_DATABASE_URL', 'sqlite:///test.db') #- 'CLEARDB_DATABASE_URL', #- f'mysql://{db_user}:{db_pass}@{db_host}:{db_port}/{db_name}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = eval(str(sql_echo))
+app.secret_key = session_secret_key
 
 db.init_app(app)
 
 
 
-@app.before_request
-def inject_user_session_profile():
-    # TODO: PLACEHODER; the following code will be replaced with code for user login
+def get_all_users_dict():
+    usernames = {}
+    all_users = User.query.all()
+
+    for user in all_users:
+        usernames.update({user.user_id:user.username})
+    
+    return usernames
+
+# TODO: PLACEHODER; the following code will be replaced with code for user login
     # session querying and for returning the user object to the '_layout.html' page
-    user_id = 1
-    g.logged_in_user = User.query.get(user_id)
+# @app.before_first_request
+# def inject_user_before_first_request():
+#     pass
+    # if session is not None:
+    #     del session
+
+@app.before_request
+def inject_user_before_requests():
+    # user_id = 1
+    # g.logged_in_user = User.query.get(user_id)
+    # g.logged_in_user = None
+
+    g.usernames = get_all_users_dict()
+
+    if "user" in session:
+        g.logged_in_user = User.query.filter(User.username == session["user"]["username"]).first()
+
+    # print(f'\n\n\n{g.logged_in_user.user_id}\n\n\n')
+        # g.logged_in_user = db.session.get(session["user"])
     # g.user = db.session.get(session["user_id"])
     # return dict(logged_in_user = g.logged_in_user) #- key = "value",
     # return render_template('_layout.html', logged_in_user = g.logged_in_user)
@@ -63,6 +89,8 @@ def index():
     # print(f'\n\n\nhashed_user_password: {bcrypt.generate_password_hash(User.query.get(1).user_password).decode("utf-8")}\n\n\n')
     # print(f'\n\n\ncheck_user_password_hash: {bcrypt.check_password_hash(, User.query.get(1).user_pasword)}\n\n\n')
     # print(f'\n\n\n{type(func.now())}\n\n\n')
+    # print(f"\n\n\n{session['user']['username'][0]}\n\n\n")
+    # print(f"\n\n\n{User.query.filter(User.username == session['user']['username']).first()}\n\n\n")
 
     return render_template('index.html', all_posts = all_posts, post_users = post_users, num_comments = num_comments) #- , num_posts=num_posts
 
@@ -90,11 +118,18 @@ def register():
     last_name = request.form.get('last_name', '')
 
     if username == '' or password == '':
-        abort(400)
+        # abort(400)
+        return redirect('/signup')
 
     hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
 
-    new_user = User(username=username, user_password=hashed_password,first_name=first_name,last_name=last_name,num_friends=0)
+    new_user = User(username=username, user_password=hashed_password,first_name=first_name,last_name=last_name,bio=None,num_friends=0)
+
+    session['user'] = {
+        'username': username,
+        'user_id': new_user.user_id,
+    }
+
     db.session.add(new_user)
     db.session.commit()
 
@@ -108,12 +143,13 @@ def login_to_webpage():
     if username == '' or password == '':
         abort(400)
 
-    existing_user = User.query.filter_by(username=username).first()
+    # existing_user = User.query.filter_by(username=username).first()
+    existing_user = User.query.filter(User.username == username).first()
 
     if not existing_user or existing_user.user_id == 0:
         return redirect('/fail')
 
-    if not bcrypt.check_password_hash(existing_user.password, password):
+    if not bcrypt.check_password_hash(existing_user.user_password, password):
         return redirect('/fail')
 
     session['user'] = {
@@ -121,8 +157,31 @@ def login_to_webpage():
         'user_id': existing_user.user_id,
     }
 
-    return redirect('/success')
+    return redirect('/')
 
+# @app.get('/success')
+# def success():
+#     if not 'user' in session:
+#         abort(401)
+#     return render_template('index.html', user=session['user']['username'])
+
+
+@app.get('/fail')
+def fail():
+    if 'user' in session and User.query.filter(User.username == session['user']['username']).first() is not None: #- and User.query.get(session['user']['username'][0] is not None #- 
+        return redirect('/')
+    return render_template('login.html')
+
+
+@app.route('/logout', methods=['GET', 'POST'])
+def logout():
+    if 'user' not in session:
+        abort(401)
+
+    del session['user']
+    # session['user']['username'] = None
+
+    return redirect('/')
 
 
 # @app.get('/example')

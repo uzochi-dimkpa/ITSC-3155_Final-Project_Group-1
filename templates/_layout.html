@@ -56,25 +56,37 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="/user/{{ g.logged_in_user.user_id }}">Profile</a> <!-- logged_in_user.user_id -->
+                        <a class="nav-link" aria-current="page" href="/about">About</a>
                     </li>
 
+                    {% if g.logged_in_user is defined and g.logged_in_user is not none %}
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="/about">About</a>
+                        <a class="nav-link" aria-current="page" href="/user/{{ g.logged_in_user.user_id }}">Profile</a> <!-- logged_in_user.user_id -->
                     </li>
 
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="/post/new">New Post</a>
                     </li>
+                    {% endif %}
+
+                    {% if g.logged_in_user is defined and g.logged_in_user is not none %}
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/logout">Logout</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/login">Login</a>
+                    </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="/login">Logout</a>
+                        <a class="nav-link" aria-current="page" href="/signup">Signup</a>
                     </li>
+                    {% endif %}
                 </ul>
 
                 <!-- Login page icon link -->
-                <a href="/user/{{ g.logged_in_user.user_id }}"><i class='fas fa-user-circle' style='font-size:40px; color:white; margin-bottom: 10px;'></i></a> <!-- logged_in_user. -->
-                <div style="margin-right:40px;"></div>
+                <!-- <a href="/user/#"><i class='fas fa-user-circle' style='font-size:40px; color:white; margin-bottom: 10px;'></i></a>
+                <div style="margin-right:40px;"></div> -->
 
                 <!-- Search bar-->
                 <form class="d-flex">

@@ -1,11 +1,13 @@
 atomicwrites==1.4.0
 attrs==21.4.0
 bcrypt==3.2.0
+cachelib==0.6.0
 cffi==1.15.0
 click==8.0.4
 colorama==0.4.4
 Flask==2.0.3
 Flask-Bcrypt==1.0.0
+Flask-Session==0.4.0
 Flask-SQLAlchemy==2.5.1
 greenlet==1.1.2
 gunicorn==20.1.0
