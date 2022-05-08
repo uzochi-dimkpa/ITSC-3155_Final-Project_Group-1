@@ -10,16 +10,21 @@
 <main>
     <h1>SignUp</h1>
     <hr>
-    
+
+    {% if message %}
+        {{ message }}
+    {% endif %}
     <form action="/register" method="post">
         <label for="username"><h4>Username</h4></label><br>
         <input type="text" id="username" name="username"><br>
         <label for="password"><h4>Password</h4></label><br>
-        <input type="text" id="password" name="password"><br>
+        <input autocomplete= "off" type="text" id="password" name="password"><br>
         <label for="first_name"><h4>First Name</h4></label><br>
         <input type="text" id="first_name" name="first_name"><br>
         <label for="last_name"><h4>Last Name</h4></label><br>
         <input type="text" id="last_name" name="last_name"><br>
+        <label for="bio"><h4>Bio</h4></label><br>
+        <input type="text" id="bio" name="bio"><br>
         
         <button type="submit" id="signupbutton" class="btn btn-primary">SignUp</button>
     
