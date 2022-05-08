@@ -19,7 +19,39 @@ main
     margin-left: 0px;
 }
 
-button
+.btn-primary
 {
-    margin-top: 2px;
+    padding: 10px;
+    margin-top: 10px;
+    color:aliceblue;
+    border-radius: 5px;
+    border: none;
+
+    background: linear-gradient(to right, #317370  50%, #368F8B 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+    transition: all .3s ease-out;
+}
+.btn-primary:hover
+{
+    background-position: left bottom;
+    color: aliceblue;
+}
+.btn-danger
+{
+    padding: 10px;
+    margin-top: 10px;
+    color:aliceblue;
+    border-radius: 5px;
+    border: none;
+
+    background: linear-gradient(to right, #b20e1f  50%, #dc3545 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+    transition: all .3s ease-out;
+}
+.btn-danger:hover
+{
+    background-position: left bottom;
+    color: aliceblue;
 }

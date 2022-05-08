@@ -1,4 +1,13 @@
+/*https://coolors.co/368f8b-515052-f1f2eb-9e8fb2*/
 main
 {
-    margin: 64px;
+    padding: 64px;
+}
+.navbar
+{
+    background-color: #368F8B;
+}
+body
+{
+    background-color: #F1F2EB;
 }
