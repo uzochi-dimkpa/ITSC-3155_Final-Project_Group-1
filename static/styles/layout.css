@@ -12,6 +12,7 @@ i {
 }
 #search-btn {
   border: 1px solid white;
+  color: #9E8FB2;
   background: linear-gradient(to right, black 50%, white 50%);
   background-size: 200% 100%;
   background-position: right bottom;
