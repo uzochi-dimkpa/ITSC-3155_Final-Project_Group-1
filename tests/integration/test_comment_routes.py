@@ -35,7 +35,7 @@ def test_create_new_comment(test_app):
         'bio': 'My name is A B!'
     }, follow_redirects = True)
 
-    test_app.post('/logout', follow_redirects=True)
+    test_app.get('/logout', follow_redirects=True)
 
     test_app.post('/register', data={
         'username': 'CCC',
@@ -45,7 +45,7 @@ def test_create_new_comment(test_app):
         'bio': 'My name is C D!'
     }, follow_redirects = True)
 
-    test_app.post('/logout', follow_redirects=True)
+    test_app.get('/logout', follow_redirects=True)
 
     test_app.post('/login', data={
         'username': 'AAA',
