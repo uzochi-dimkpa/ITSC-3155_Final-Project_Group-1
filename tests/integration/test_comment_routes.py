@@ -62,7 +62,7 @@ def test_create_new_comment(test_app):
         'body': 'Who?',
     }, follow_redirects=True)
 
-    test_app.post('/logout', follow_redirects=True)
+    test_app.get('/logout', follow_redirects=True)
 
     test_app.post('/login', data={
         'username': 'CCC',
