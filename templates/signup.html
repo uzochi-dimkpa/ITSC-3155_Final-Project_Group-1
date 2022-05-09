@@ -10,7 +10,10 @@
 <main>
     <h1>SignUp</h1>
     <hr>
-    
+
+    {% if message %}
+        {{ message }}
+    {% endif %}
     <form action="/register" method="post">
         <label for="username"><h4>Username</h4></label><br>
         <input type="text" id="username" name="username"><br>

@@ -1,4 +1,4 @@
-from flask import Blueprint, abort, redirect, render_template, request
+from flask import Blueprint, abort, redirect, render_template, request,session
 from src.models import User, Post, Comment, Tag, db
 from sqlalchemy import update, delete
 from sqlalchemy.sql import func
@@ -41,6 +41,8 @@ router = Blueprint('post_router', __name__, url_prefix='/post')
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 @router.get('/new')
 def create_post_form():
+    if "user" not in session:
+        return render_template('login.html')
     return render_template('create-post.html')
 
 @router.post('/create/<user_id>')
