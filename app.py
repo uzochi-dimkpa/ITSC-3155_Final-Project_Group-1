@@ -32,7 +32,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = eval(str(sql_echo))
 app.config['SECRET_KEY'] = session_secret_key
 app.config['SECRET_KEY'] = os.environ['LOGIN_SIGNUP_SECRET_KEY']
-app.config['SESSION_TYPE'] = 'filesystem'
+# app.config['SESSION_TYPE'] = 'filesystem'
 
 
 
@@ -50,19 +50,19 @@ def get_all_users_dict():
     
     return usernames
 
-@app.before_first_request
-def inject_user_before_first_request():
-    first_three_test_users = User.query.filter(User.user_id < 4).all()
+# @app.before_first_request
+# def inject_user_before_first_request():
+#     first_three_test_users = User.query.filter(User.user_id < 4).all()
 
-    # for i in range(3):
-    for user in first_three_test_users:
-        # user = User.query.get(i + 1)
+#     # for i in range(3):
+#     for user in first_three_test_users:
+#         # user = User.query.get(i + 1)
 
-        hashed_password = bcrypt.generate_password_hash(user.user_password).decode('utf-8')
-        user.user_password = hashed_password
+#         hashed_password = bcrypt.generate_password_hash(user.user_password).decode('utf-8')
+#         user.user_password = hashed_password
 
-        db.session.add(user)
-        db.session.commit()
+#         db.session.add(user)
+#         db.session.commit()
 
     
 @app.before_request
