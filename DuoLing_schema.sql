@@ -1,5 +1,6 @@
 DROP DATABASE IF EXISTS DuoLing;
 CREATE DATABASE IF NOT EXISTS DuoLing;
+SET FOREIGN_KEY_CHECKS = 0;
 USE DuoLing;
 
 
@@ -165,4 +166,4 @@ VALUES
 -- SELECT * from t_post WHERE t_post.post_id < 5;
 -- SELECT COUNT(*) FROM t_comment, t_post WHERE t_comment.post_id = t_post.post_id;
 -- SELECT t_user.username FROM t_user WHERE t_user.user_id = 2;
-
+SELECT * FROM t_user;

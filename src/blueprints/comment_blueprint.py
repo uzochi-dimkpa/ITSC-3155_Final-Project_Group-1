@@ -4,7 +4,7 @@ from src.blueprints.post_blueprint import router as post_router
 from sqlalchemy import update, delete
 
 # router = Blueprint('comment_router', __name__, url_prefix='/comment')
-router = post_router
+# router = post_router
 
 # <div class="form-group">
 #     <label for="question">Question</label>

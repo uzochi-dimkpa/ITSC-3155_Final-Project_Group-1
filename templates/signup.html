@@ -1,6 +1,6 @@
 {% extends '_layout.html' %}
 
-{% block title %} Login Page {% endblock %}
+{% block title %} Signup Page {% endblock %}
 {% block stylesheets %}
 <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/general.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/signup.css') }}">
@@ -11,22 +11,22 @@
     <h1>SignUp</h1>
     <hr>
 
-    {% if message %}
+    {% if message is defined and message is not none %}
         {{ message }}
     {% endif %}
     <form action="/register" method="post">
         <label for="username"><h4>Username</h4></label><br>
         <input type="text" id="username" name="username"><br>
         <label for="password"><h4>Password</h4></label><br>
-        <input autocomplete= "off" type="text" id="password" name="password"><br>
+        <input type="password" id="password" name="password"><br>
         <label for="first_name"><h4>First Name</h4></label><br>
         <input type="text" id="first_name" name="first_name"><br>
         <label for="last_name"><h4>Last Name</h4></label><br>
         <input type="text" id="last_name" name="last_name"><br>
         <label for="bio"><h4>Bio</h4></label><br>
-        <input type="text" id="bio" name="bio"><br>
+        <textarea type="text" id="bio" name="bio"></textarea><br>
         
-        <button type="submit" id="signupbutton" class="btn btn-primary">SignUp</button>
+        <button type="submit" id="signupbutton" class="btn btn-primary">Sign Up</button>
     
     </form>
     <br>
@@ -36,7 +36,6 @@
         <label style="margin-left: 30px;" class="form-check-label" for="formCheckDefault"><h5>Opt-in to recieve email notifications of new DuoLing posts for your languages</h5></label>
     </div>    <br>
     <br>
-
 </main>
 
 {% endblock %}

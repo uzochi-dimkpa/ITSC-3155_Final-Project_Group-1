@@ -169,7 +169,7 @@ def update_comment(post_id, comment_id): #- , comment_id
     # {% if new_comment.user_id == logged_in_user.user_id %}{% endif %}
 
     updated_comment_text = request.form.get('comment_text', '')
-    user_id = User.query.get(Post.query.get(post_id).user_id)
+    user_id = User.query.get(Post.query.get(post_id).user_id).user_id
     title = Post.query.get(post_id).title; body = Post.query.get(post_id).body
     # post_id = post_id
     # created_at = Comment.query.get(comment_id).created_at

@@ -17,7 +17,8 @@
     {% if post.updated_at is defined and post.updated_at is not none %}
     <h6>Edited {{ post.updated_at }}</h6>
     {% endif %}
-    {% if post.user_id == g.logged_in_user.user_id %}
+    {% if g.logged_in_user is defined and g.logged_in_user is not none and post.user_id == g.logged_in_user.user_id %}
+        <div style="font-size:25px">Posted by <a href="/user/{{ post.user_id }}" style="font-size:25px; color:rgba(0, 0, 0, 1); text-decoration:none" on-hover="text-decoration: underline;"><strong>you</strong></a></div>
         <form id="update_post" action="/post/{{ post.post_id }}/update" method="get">
             <button form="update_post" type="submit" class="btn btn-primary">Edit</button>
         </form>
@@ -25,31 +26,48 @@
         <form id="delete_post" action="/post/{{ post.post_id }}/delete" method="POST">
             <button form="delete_post" type="submit" class="btn btn-danger">Delete</button>
         </form>
-    {% endif %} <!-- type="submit" class="main-reply" -->
+    {% else %}
+        <div style="font-size:25px">Posted by <a href="/user/{{ post.user_id }}" style="font-size:25px; color:rgba(0, 0, 0, 1); text-decoration:none" on-hover="text-decoration: underline;"><strong>{{ g.usernames.get(post.user_id) }}</strong></a></div>
+    {% endif %}
     
     <!--Main reply and other replies-->
+    {% if g.logged_in_user is defined and g.logged_in_user is not none %}
     <h3>Reply</h3>
     <form id ="comment_text" class="main-reply" action = "/post/{{ g.logged_in_user.user_id }}/{{ post.post_id }}/comment" method = "POST">
         <textarea class="container reply main-reply" name="comment_text" id = "comment_text" placeholder = "Write your message here" rows="3"></textarea> <!-- class="main-reply" -->
         <br>
         <button form="comment_text" type="submit" class="main-reply btn btn-primary">Submit</button>
     </form>
+    {% endif %}
     <h3>Other People's Replies:</h3>
     {% for comment in comments %}
-    <div class="container reply">{{ comment.comment_text }}
-        {% if comment.user_id == g.logged_in_user.user_id %}<a href="/post/{{ post.post_id }}/{{ comment.comment_id }}/edit">Edit</a>
+    <div class="container reply">
+        {% if g.logged_in_user is defined and g.logged_in_user is not none and comment.user_id == g.logged_in_user.user_id %}
+        <a href="/user/{{ post.user_id }}" style="font-size:15px; color:rgba(0, 0, 0, 1); text-decoration:none"><strong>You:</strong></a>
+        {{ comment.comment_text }}
+        <a href="/post/{{ post.post_id }}/{{ comment.comment_id }}/edit">Edit</a>
         <a href="/post/{{ post.post_id }}/{{ comment.comment_id }}/delete">Delete</a>
+        {% else %}
+        <a href="/user/{{ post.user_id }}" style="font-size:15px; color:rgba(0, 0, 0, 1); text-decoration:none"><strong>{{ g.usernames.get(comment.user_id) }}:</strong></a>
+        {{ comment.comment_text }}
         {% endif %}
         {% if comment.updated_at is defined and comment.updated_at is not none %} <h6>Edited {{ comment.updated_at }}</h6>{% endif %}
     </div> <!-- <button type="submit" class="main-reply" action="#"></button> -->
     {% endfor %}
     {% if new_comment is defined and new_comment is not none %}
-    <div class="container reply">{{ new_comment.comment_text }}
+    <div class="container reply">
+        {% if g.logged_in_user is defined and g.logged_in_user is not none and new_comment.user_id == g.logged_in_user.user_id %}
+        <a href="/user/{{ post.user_id }}" style="font-size:15px; color:rgba(0, 0, 0, 1); text-decoration:none"><strong>You:</strong></a>
+        {% else %}
+        <a href="/user/{{ post.user_id }}" style="font-size:15px; color:rgba(0, 0, 0, 1); text-decoration:none"><strong>{{ g.usernames.get(new_comment.user_id) }}:</strong></a>
+        {% endif %}
+        {{ new_comment.comment_text }}
         <a href="/post/{{ post.post_id }}/{{ new_comment.comment_id }}/edit">Edit</a>
         <a href="/post/{{ post.post_id }}/{{ new_comment.comment_id }}/delete">Delete</a>
     </div> <!-- <button type="submit" class="main-reply" action="#"></button> -->
     {% endif %}
 </main>
+
 
 
 <!-- For when we add pagination and asynchronous scripts -->
