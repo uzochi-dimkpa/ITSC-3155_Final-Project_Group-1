@@ -1,6 +1,7 @@
+from genericpath import exists
 import os
 import re
-from flask import Flask, abort, redirect, render_template, request, session, g
+from flask import Flask, abort, redirect, render_template, request, session, g, flash
 from flask_session import Session
 from dotenv import load_dotenv
 from flask_bcrypt import Bcrypt
@@ -12,6 +13,7 @@ from src.blueprints.post_blueprint import router as post_router
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
+
 
 
 load_dotenv()
@@ -30,6 +32,10 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = eval(str(sql_echo))
 app.config['SECRET_KEY'] = session_secret_key
 # app.config['SECRET_KEY'] = os.environ['LOGIN_SIGNUP_SECRET_KEY']
+# app.config['SESSION_TYPE'] = 'filesystem'
+
+
+
 
 db.init_app(app)
 
@@ -90,6 +96,8 @@ def inject_user_before_requests():
 @app.get('/')
 # Index page should display 4 user-created posts
 def index():
+    if "user" not in session:
+        return render_template("login.html")
     # top_four_posts = Post.query.filter(Post.post_id < 5).all()
     all_posts = Post.query.all()
     post_users = {}; num_comments = {}
@@ -98,10 +106,13 @@ def index():
         post_users.update({post.user_id: User.query.filter(post.user_id == User.user_id).first().username})
         num_comments.update({post.post_id: Comment.query.filter(post.post_id == Comment.post_id).count()})
 
+    if "user" not in session:
+        print("no user")
     # Debug
     # print(f'\n\nCurrent DATETIME: {db.func.now()}\n\n')
     # print(f'\n\n\nhashed_user_password: {bcrypt.generate_password_hash(User.query.get(1).user_password).decode("utf-8")}\n\n\n')
-    # print(f'\n\n\ncheck_user_password_hash: {bcrypt.check_password_hash(, User.query.get(1).user_pasword)}\n\n\n')
+    # print(f'\n\n\ncheck_user_password_hash: {bcrypt.
+    # check_password_hash(, User.query.get(1).user_pasword)}\n\n\n')
     # print(f'\n\n\n{type(func.now())}\n\n\n')
     # print(f"\n\n\n{session['user']['username'][0]}\n\n\n")
     # print(f"\n\n\n{User.query.filter(User.username == session['user']['username']).first()}\n\n\n")
@@ -112,17 +123,39 @@ def index():
 def login():
     return render_template('login.html')
 
+@app.get('/signup_error')
+def signup_error():
+    return render_template('signup.html',message="Username is already taken!")
+
 @app.get('/signup')
 def signup():
     return render_template('signup.html')
 
+
 @app.get('/about')
 def about():
+    if "user" not in session:
+        return render_template('login.html')
     return render_template('about.html')
 
 @app.get('/faq')
 def faq():
+    if "user" not in session:
+        return render_template('login.html')
     return render_template('faq.html')
+
+# @app.get('/success')
+# def success():
+#     return render_template("index.html")
+
+# @app.get('/fail')
+# def fail():
+#     return render_template("login.html",message="Incorrect password!")
+
+@app.get('/logout')
+def logout():
+    session.pop("user", None)
+    return render_template("login.html")
 
 @app.post('/register')
 def register():
@@ -145,15 +178,9 @@ def register():
         'user_id': new_user.user_id,
     }
     
-    
     #SQL Session
     db.session.add(new_user)
     db.session.commit()
-
-    #User Session
-    # session['user'] = {
-    #     'username': username,
-    # }
 
 
     return redirect('/')
@@ -197,7 +224,6 @@ def login_to_webpage():
 #     if 'user' in session and User.query.filter(User.username == session['user']['username']).first() is not None: #- and User.query.get(session['user']['username'][0] is not None #- 
 #         return redirect('/')
 #     return render_template('login.html')
-
 
 @app.get('/logout')
 def logout():

@@ -10,7 +10,9 @@
 <main>
     <h1>Log In</h1>
     <hr>
-
+    {% if message %}
+        {{ message }}
+    {% endif %}
     <form action="/login" method="post">
         <label for="username"><h4>Username</h4></label><br>
         <input type="text" id="username" name="username"><br>
