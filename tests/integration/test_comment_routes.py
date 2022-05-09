@@ -1,31 +1,3 @@
-# Any test that require an existing user possibly does not work because there is no user
-# under which to make comments, so every time the comment routes are run, they don't
-# actually go anywhere because they require a user to make them.
-# 
-# Although the 't_user' table should exist (which allows for the creation and storing of
-# new users), we have no CRUD routes that actually makes new users, so whenever a comment
-# is made and it looks for the user's id with which to identify itself, it finds none
-# and thus fails to create a new entry in the 't_comment' table
-# 
-# When we are able to create users using CRUD routes,
-# we can create new and functional tests
-# 
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# 
-# 
-# test_app.post(f'/post/{3}/create', data={
-    #     'comment_text': 'I DON'T KNOW WHAT SIDE I'M ON!!!'
-    # }, follow_redirects = True)
-
-    # res = test_app.get(f'/post/{2}', follow_redirects = True)
-
-    # res = test_app.get('/', follow_redirects = True)
-
-    # assert b'What is DuoLing?' in res.data
-    # assert b'How do I become fluent in another language?' in res.data
-    # assert b'Do I have to pay to use DuoLing?' in res.dataYou have...a moment to run
-
-
 def test_create_new_comment(test_app):
     test_app.post('/register', data={
         'username': 'AAA',
@@ -35,7 +7,7 @@ def test_create_new_comment(test_app):
         'bio': 'My name is A B!'
     }, follow_redirects = True)
 
-    test_app.post('/logout', follow_redirects=True)
+    test_app.get('/logout', follow_redirects=True)
 
     test_app.post('/register', data={
         'username': 'CCC',
@@ -45,7 +17,7 @@ def test_create_new_comment(test_app):
         'bio': 'My name is C D!'
     }, follow_redirects = True)
 
-    test_app.post('/logout', follow_redirects=True)
+    test_app.get('/logout', follow_redirects=True)
 
     test_app.post('/login', data={
         'username': 'AAA',
@@ -62,7 +34,7 @@ def test_create_new_comment(test_app):
         'body': 'Who?',
     }, follow_redirects=True)
 
-    test_app.post('/logout', follow_redirects=True)
+    test_app.get('/logout', follow_redirects=True)
 
     test_app.post('/login', data={
         'username': 'CCC',

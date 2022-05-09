@@ -32,6 +32,7 @@ def test_signup_page(test_app):
     assert b'<label for="first_name"><h4>First Name</h4></label>' in res.data
     assert b'<label for="last_name"><h4>Last Name</h4></label>' in res.data
     assert b'<label for="bio"><h4>Bio</h4></label>' in res.data
+    assert b'<textarea type="text" id="bio" name="bio"></textarea>' in res.data
     assert b'<button type="submit" id="signupbutton" class="btn btn-primary">Sign Up</button>' in res.data
     assert b'<input style="width: 26px; height: 23px;" class="form-check-input" type="checkbox" value="" id="formCheckDefault">' in res.data
     assert b'<h5>Opt-in to recieve email notifications of new DuoLing posts for your languages</h5>' in res.data

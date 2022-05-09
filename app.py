@@ -28,7 +28,8 @@ session_secret_key = os.getenv('LOGIN_SIGNUP_SECRET_KEY')
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('CLEARDB_DATABASE_URL', 'sqlite:///test.db') #- 'CLEARDB_DATABASE_URL', #- f'mysql://{db_user}:{db_pass}@{db_host}:{db_port}/{db_name}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = eval(str(sql_echo))
-app.secret_key = session_secret_key
+app.config['SECRET_KEY'] = session_secret_key
+# app.config['SECRET_KEY'] = os.environ['LOGIN_SIGNUP_SECRET_KEY']
 
 db.init_app(app)
 
@@ -191,14 +192,14 @@ def login_to_webpage():
 #     return render_template('index.html', user=session['user']['username'])
 
 
-@app.get('/fail')
-def fail():
-    if 'user' in session and User.query.filter(User.username == session['user']['username']).first() is not None: #- and User.query.get(session['user']['username'][0] is not None #- 
-        return redirect('/')
-    return render_template('login.html')
+# @app.get('/fail')
+# def fail():
+#     if 'user' in session and User.query.filter(User.username == session['user']['username']).first() is not None: #- and User.query.get(session['user']['username'][0] is not None #- 
+#         return redirect('/')
+#     return render_template('login.html')
 
 
-@app.route('/logout', methods=['GET', 'POST'])
+@app.get('/logout')
 def logout():
     if 'user' not in session:
         abort(401)
