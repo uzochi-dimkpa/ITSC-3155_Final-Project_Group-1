@@ -23,7 +23,7 @@ load_dotenv()
 # TODO: RENAME '.env_' FILE TO '.env' AND MAKE CHANGES TO THE
 # FIELDS IN YOUR '.env' FILE AS NECESSARY
 sql_echo = os.getenv('SQL_ECHO') # Default: False
-session_secret_key = os.getenv('SECRET_KEY')
+session_secret_key = os.getenv('LOGIN_SIGNUP_SECRET_KEY')
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('CLEARDB_DATABASE_URL', 'sqlite:///test.db') #- 'CLEARDB_DATABASE_URL', #- f'mysql://{db_user}:{db_pass}@{db_host}:{db_port}/{db_name}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -43,13 +43,19 @@ def get_all_users_dict():
     
     return usernames
 
-# TODO: PLACEHODER; the following code will be replaced with code for user login
-    # session querying and for returning the user object to the '_layout.html' page
-# @app.before_first_request
-# def inject_user_before_first_request():
-#     pass
-    # if session is not None:
-    #     del session
+@app.before_first_request
+def inject_user_before_first_request():
+    first_three_test_users = User.query.filter(User.user_id < 4).all()
+
+    # for i in range(3):
+    for user in first_three_test_users:
+        # user = User.query.get(i + 1)
+
+        hashed_password = bcrypt.generate_password_hash(user.user_password).decode('utf-8')
+        user.user_password = hashed_password
+
+        db.session.add(user)
+        db.session.commit()
 
     
 @app.before_request
@@ -101,7 +107,7 @@ def index():
 
     return render_template('index.html', all_posts = all_posts, post_users = post_users, num_comments = num_comments) #- , num_posts=num_posts
 
-@app.get('/login')
+@app.get('/loginpage')
 def login():
     return render_template('login.html')
 
@@ -123,22 +129,21 @@ def register():
     password = request.form.get('password', '')
     first_name = request.form.get('first_name', '')
     last_name = request.form.get('last_name', '')
+    bio = request.form.get('bio', '')
 
-    if username == '' or password == '':
+    if username == '' or password == '' or username is None or password is None:
         # abort(400)
         return redirect('/signup')
 
     hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
 
-    
-    new_user = User(username=username, user_password=hashed_password,first_name=first_name,last_name=last_name,bio=None,num_friends=0)
+    new_user = User(username=username, user_password=hashed_password,first_name=first_name,last_name=last_name,bio=bio,num_friends=0)
 
     session['user'] = {
         'username': username,
         'user_id': new_user.user_id,
     }
     
-    new_user = User(username=username, user_password=hashed_password,first_name=first_name,last_name=last_name,num_friends=0)
     
     #SQL Session
     db.session.add(new_user)
@@ -157,26 +162,24 @@ def login_to_webpage():
     username = request.form.get('username', '')
     password = request.form.get('password', '')
 
-#     if username == '' or password == '':
-#         abort(400)
-
+    if username == '' or password == '':
+        return redirect('/loginpage')
 
     # existing_user = User.query.filter_by(username=username).first()
     existing_user = User.query.filter(User.username == username).first()
 
-
-#     if not existing_user or existing_user.user_id == 0:
-#         return redirect('/fail')
-
+    if not existing_user or existing_user.user_id == 0:
+        # return redirect('/fail')
+        return redirect('/loginpage')
 
     if not bcrypt.check_password_hash(existing_user.user_password, password):
-        return redirect('/fail')
-    
+        # return redirect('/fail')
+        return redirect('/loginpage')
 
-#     session['user'] = {
-#         'username': username,
-#         'user_id': existing_user.user_id,
-#     }
+    session['user'] = {
+        'username': username,
+        'user_id': existing_user.user_id,
+    }
 
 
     return redirect('/')

@@ -2,7 +2,6 @@ from flask import Blueprint, abort, redirect, render_template, request
 from src.models import User, Post, Comment, Tag, db
 from sqlalchemy import update, delete
 from sqlalchemy.sql import func
-# from app import usernames
 
 router = Blueprint('post_router', __name__, url_prefix='/post')
 
@@ -41,7 +40,7 @@ router = Blueprint('post_router', __name__, url_prefix='/post')
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 @router.get('/new')
-def get_create_post_form():
+def create_post_form():
     return render_template('create-post.html')
 
 @router.post('/create/<user_id>')
@@ -65,7 +64,6 @@ def create_post(user_id):
     db.session.commit()
 
     post_comments = Comment.query.filter(Comment.post_id == new_post.post_id).all()
-    # post_username = User.query.get(user_id).username
     return render_template('post-example.html', post=new_post, comments=post_comments)
 
     #return redirect(f'/{new_post.post_id}')
@@ -79,7 +77,6 @@ def get_user_post(post_id):
     # print(post_comments)
 
     # all_english_posts = Tag.query.filter_by(post_id_one = post_id, tag_name = 'english').all()
-    # post_username = User.query.get(Post.query.get(post_id).user_id).username
     return render_template('post-example.html', post = user_post, comments = post_comments) #- , english_posts = all_english_posts
 
 @router.get('/<post_id>/update')
@@ -87,7 +84,6 @@ def get_update_post_form(post_id):
     post_title = Post.query.get(post_id).title
     post_body = Post.query.get(post_id).body
     post_comments = Comment.query.filter(Comment.post_id == post_id).all()
-    
     return render_template('update-post.html', post_id = post_id, title = post_title, body = post_body, comments = post_comments)
 
 @router.post('/<post_id>')
@@ -105,7 +101,6 @@ def update_user_post(post_id):
     post_to_update.title = title; post_to_update.body = body
     db.session.commit()
     post_comments = Comment.query.filter(Comment.post_id == post_to_update.post_id).all()
-    # post_username = User.query.get(Post.query.get(post_id).user_id).username
     return render_template('post-example.html', post = post_to_update, comments = post_comments) #- f'/post/{post_id}'
 
 @router.post('/<post_id>/delete')
@@ -146,8 +141,6 @@ def create_comment(user_id, post_id):
         print(f'\n\n\nuser_id: {user_id}\ncomment_text: "{comment_text}"\n\n\n')
         return redirect(f'/post/{post_id}')
 
-    # post_username = User.query.get(user_id).username
-
     created_comment = Comment(post_id=post_id, user_id=logged_in_user.user_id, comment_text=comment_text, created_at=created_at, updated_at=updated_at) #- 1
     db.session.add(created_comment)
     db.session.commit()
@@ -174,7 +167,7 @@ def update_comment(post_id, comment_id): #- , comment_id
     # {% if new_comment.user_id == logged_in_user.user_id %}{% endif %}
 
     updated_comment_text = request.form.get('comment_text', '')
-    user_id = User.query.get(Post.query.get(post_id).user_id)
+    user_id = User.query.get(Post.query.get(post_id).user_id).user_id
     title = Post.query.get(post_id).title; body = Post.query.get(post_id).body
     # post_id = post_id
     # created_at = Comment.query.get(comment_id).created_at
@@ -190,7 +183,6 @@ def update_comment(post_id, comment_id): #- , comment_id
 
     user_post = Post.query.get_or_404(post_id)
     all_post_comments = Comment.query.filter(Comment.post_id == post_id).all()
-    # post_username = User.query.get(Post.query.get(post_id).user_id).username
 
     return render_template('post-example.html', post = user_post, comments = all_post_comments, title = title, body = body) #- f'/post/{updated_comment.post_id}'
 

@@ -59,7 +59,7 @@
         {% if g.logged_in_user is defined and g.logged_in_user is not none and new_comment.user_id == g.logged_in_user.user_id %}
         <a href="/user/{{ post.user_id }}" style="font-size:15px; color:rgba(0, 0, 0, 1); text-decoration:none"><strong>You:</strong></a>
         {% else %}
-        <a href="/user/{{ post.user_id }}" style="font-size:15px; color:rgba(0, 0, 0, 1); text-decoration:none"><strong>{{ g.usernames.get(comment.user_id) }}:</strong></a>
+        <a href="/user/{{ post.user_id }}" style="font-size:15px; color:rgba(0, 0, 0, 1); text-decoration:none"><strong>{{ g.usernames.get(new_comment.user_id) }}:</strong></a>
         {% endif %}
         {{ new_comment.comment_text }}
         <a href="/post/{{ post.post_id }}/{{ new_comment.comment_id }}/edit">Edit</a>
