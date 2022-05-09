@@ -37,21 +37,6 @@ jobs:
           # Custom token scope must be set to 'repo'; this includes every child option to 'repo'
           token: ${{ secrets.CLOUD_WEBSITE_PROJECT_GITHUB_TOKEN }}
 
-  # release:
-  #   needs: [build_tag]
-  #   if: ${{ needs.build_tag.outputs.new_tag != '' }}
-  #   name: Create release from tag
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Create a release
-  #       uses: ncipollo/release-action@v1
-  #       with:
-  #         tag: ${{ job.build_tag.steps.tag_version.outputs.new_tag }}
-  #         name: ${{ job.build_tag.steps.tag_version.outputs.new_tag }}
-  #         body: ${{ job.build_tag.steps.tag_version.outputs.changelog }}
-  #         # Custom token scope must be set to 'repo'; this includes every child option to 'repo'
-  #         token: ${{ secrets.CLOUD_WEBSITE_PROJECT_GITHUB_TOKEN }}
-
 # Tag naming via commits:
 #   fix:[commit_message] #- patch
 #   feat:[commit_messge] #- minor
