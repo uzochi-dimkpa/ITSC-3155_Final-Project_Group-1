@@ -225,7 +225,7 @@ def login_to_webpage():
 #         return redirect('/')
 #     return render_template('login.html')
 
-@app.route('/logout', methods=['GET', 'POST'])
+@app.get('/logout')
 def logout():
     if 'user' not in session:
         abort(401)
