@@ -10,7 +10,7 @@
 <main>
     <h1>Log In</h1>
     <hr>
-    {% if message %}
+    {% if message is defined and message is not none %}
         {{ message }}
     {% endif %}
     <form action="/login" method="post">

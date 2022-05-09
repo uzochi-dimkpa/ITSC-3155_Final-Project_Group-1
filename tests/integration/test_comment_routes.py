@@ -1,5 +1,5 @@
 def test_create_new_comment(test_app):
-    test_app.post('/register', data={
+    res = test_app.post('/register', data={
         'username': 'AAA',
         'password': 'BBB',
         'first_name': 'A',

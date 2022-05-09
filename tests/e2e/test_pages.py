@@ -2,6 +2,7 @@ def test_index_page(test_app):
     res = test_app.get('/', follow_redirects = True)
 
     assert res.status_code == 200
+    assert b'DuoLing' in res.data
     assert b'<h1 id="DuoLing_header">DuoLing</h1>' in res.data
     assert b'<article class="Side_window">' in res.data
     assert b'<table id="main_table">' in res.data
