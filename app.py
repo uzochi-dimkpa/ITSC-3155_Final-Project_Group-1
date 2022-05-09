@@ -32,8 +32,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = eval(str(sql_echo))
 app.config['SECRET_KEY'] = session_secret_key
 app.config['SECRET_KEY'] = os.environ['LOGIN_SIGNUP_SECRET_KEY']
-# app.config['SECRET_KEY'] = 'hello world'
-# app.config['SESSION_TYPE'] = 'filesystem'
+app.config['SESSION_TYPE'] = 'filesystem'
 
 
 
