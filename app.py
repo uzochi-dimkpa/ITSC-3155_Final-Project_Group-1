@@ -31,7 +31,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('CLEARDB_DATABASE_URL', 'sqlit
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = eval(str(sql_echo))
 app.config['SECRET_KEY'] = session_secret_key
-app.config['SECRET_KEY'] = os.environ['LOGIN_SIGNUP_SECRET_KEY']
+# app.config['SECRET_KEY'] = os.environ['LOGIN_SIGNUP_SECRET_KEY']
 # app.config['SESSION_TYPE'] = 'filesystem'
 
 
@@ -144,13 +144,13 @@ def faq():
         return render_template('login.html')
     return render_template('faq.html')
 
-@app.get('/success')
-def success():
-    return render_template("index.html")
+# @app.get('/success')
+# def success():
+#     return render_template("index.html")
 
-@app.get('/fail')
-def fail():
-    return render_template("login.html",message="Incorrect password!")
+# @app.get('/fail')
+# def fail():
+#     return render_template("login.html",message="Incorrect password!")
 
 @app.get('/logout')
 def logout():
@@ -219,11 +219,11 @@ def login_to_webpage():
 #     return render_template('index.html', user=session['user']['username'])
 
 
-@app.get('/fail')
-def fail():
-    if 'user' in session and User.query.filter(User.username == session['user']['username']).first() is not None: #- and User.query.get(session['user']['username'][0] is not None #- 
-        return redirect('/')
-    return render_template('login.html')
+# @app.get('/fail')
+# def fail():
+#     if 'user' in session and User.query.filter(User.username == session['user']['username']).first() is not None: #- and User.query.get(session['user']['username'][0] is not None #- 
+#         return redirect('/')
+#     return render_template('login.html')
 
 @app.route('/logout', methods=['GET', 'POST'])
 def logout():
