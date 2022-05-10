@@ -22,6 +22,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('CLEARDB_DATABASE_URL', 'sqlit
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = eval(str(os.getenv('SQL_ECHO')))
 app.config['SECRET_KEY'] = os.getenv('LOGIN_SIGNUP_SECRET_KEY')
+# app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {'pool_recycle': 60}
 # app.config['SESSION_TYPE'] = 'filesystem'
 
 
