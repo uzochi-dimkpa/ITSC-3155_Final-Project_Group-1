@@ -9,26 +9,6 @@
 {% block body %}
 <main>
   <h1 id="ask-question">Say something!</h1>
-  <!--Page will include a block to fill out a question, a dropdown to add tags, then a purple post button-->
-  <!-- this is a language learning site -->
-  <!-- <form class="container=fluid form" action="#" method="POST" id="question">
-    <h2>Enter your Question here</h2>
-    <div class="form-group">
-      <label for="question">Question</label>
-      <textarea class="form-control" id="question" form="question" rows="3" name="question" wrap="soft" required></textarea>
-    </div>
-    <h2>Add tags to your post!</h2>
-    <div class="form-group">
-      <label for="tags">Tags</label>
-      <select class="form-control" id="tags" name="tags" form="question" required>
-        <option>a tag</option>
-        <option>another tag</option>
-        <option>a third tag</option>
-      </select>
-    </div>
-    <button type="submit" class="btn button-post" form="question">Post</button>
-  </form> -->
-
   <form class="container=fluid form" action="/post/{{ post_id }}" method="POST"> <!-- for="Post" id="question"--> 
     <h2>Edit your post here</h2>
     <div class="form-group">

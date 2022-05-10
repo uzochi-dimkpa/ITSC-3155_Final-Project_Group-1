@@ -9,8 +9,8 @@
 {% block body %}
 <main>
     <h1>{{ post.title }}</h1>
-    <!-- Question -->
-    <!-- <h2>(Question)</h2> -->
+    
+    
     <div class="container">
         {{ post.body }}
     </div>
@@ -22,7 +22,7 @@
         <form id="update_post" action="/post/{{ post.post_id }}/update" method="get">
             <button form="update_post" type="submit" class="btn btn-primary">Edit</button>
         </form>
-        <!--<a href="/post/{{ post.post_id }}/update">Edit</a>-->
+        
         <form id="delete_post" action="/post/{{ post.post_id }}/delete" method="POST">
             <button form="delete_post" type="submit" class="btn btn-danger">Delete</button>
         </form>
@@ -52,7 +52,7 @@
         {{ comment.comment_text }}
         {% endif %}
         {% if comment.updated_at is defined and comment.updated_at is not none %} <h6>Edited {{ comment.updated_at }}</h6>{% endif %}
-    </div> <!-- <button type="submit" class="main-reply" action="#"></button> -->
+    </div>
     {% endfor %}
     {% if new_comment is defined and new_comment is not none %}
     <div class="container reply">
@@ -64,7 +64,7 @@
         {{ new_comment.comment_text }}
         <a href="/post/{{ post.post_id }}/{{ new_comment.comment_id }}/edit">Edit</a>
         <a href="/post/{{ post.post_id }}/{{ new_comment.comment_id }}/delete">Delete</a>
-    </div> <!-- <button type="submit" class="main-reply" action="#"></button> -->
+    </div>
     {% endif %}
 </main>
 

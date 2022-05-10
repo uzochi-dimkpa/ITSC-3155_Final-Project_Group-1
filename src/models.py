@@ -5,11 +5,8 @@ db = SQLAlchemy()
 
 
 
-#: TEMPORARY; WILL EDIT/UPDATE LATER
-
 # CRUD Resource #1
 class User(db.Model):
-    # TODO: Update SQLAlchemy Table here
     __tablename__ = 't_user'
 
     user_id = db.Column(db.Integer, nullable = False, primary_key = True)
@@ -36,7 +33,6 @@ class User(db.Model):
 
 # CRUD Resource #2
 class Post(db.Model):
-    # TODO: Update SQLAlchemy Table here
     __tablename__ = 't_post'
 
     post_id = db.Column(db.Integer, nullable = False, primary_key = True)
@@ -67,7 +63,6 @@ class Post(db.Model):
 
 # CRUD Resource #3
 class Comment(db.Model):
-    # TODO: Update SQLAlchemy Table here
     __tablename__ = 't_comment'
 
     comment_id = db.Column(db.Integer, primary_key=True)

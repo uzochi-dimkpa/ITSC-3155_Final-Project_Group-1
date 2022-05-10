@@ -14,19 +14,14 @@ bcrypt = Bcrypt(app)
 
 load_dotenv()
 
-#This will need to be correctly adjusted:
-users = {}
 
 
 # TODO: RENAME '.env_' FILE TO '.env' AND MAKE CHANGES TO THE
 # FIELDS IN YOUR '.env' FILE AS NECESSARY
-sql_echo = os.getenv('SQL_ECHO') # Default: False
-
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('CLEARDB_DATABASE_URL', 'sqlite:///test.db') #- 'CLEARDB_DATABASE_URL', #- f'mysql://{db_user}:{db_pass}@{db_host}:{db_port}/{db_name}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_ECHO'] = eval(str(sql_echo))
+app.config['SQLALCHEMY_ECHO'] = eval(str(os.getenv('SQL_ECHO')))
 app.config['SECRET_KEY'] = os.getenv('LOGIN_SIGNUP_SECRET_KEY')
-# app.config['SECRET_KEY'] = os.environ('LOGIN_SIGNUP_SECRET_KEY')
 # app.config['SESSION_TYPE'] = 'filesystem'
 
 
@@ -65,10 +60,8 @@ def inject_user_before_requests():
     if "user" in session:
         g.logged_in_user = User.query.filter(User.username == session["user"]["username"]).first()
 
-    first_three_test_users = User.query.filter(User.user_id < 4).all()
-
 @app.get('/')
-# Index page should display 4 user-created posts
+# Index page should display all user-created posts
 def index():
     all_posts = Post.query.all()
     post_users = {}; num_comments = {}
@@ -86,7 +79,7 @@ def index():
     # check_password_hash(, User.query.get(1).user_pasword)}\n\n\n')
     # print(f'\n\n\n{type(func.now())}\n\n\n')
     
-    #user= User.query.get(int(session["user"]["user_id"]))
+    # user = User.query.get(int(session["user"]["user_id"]))
 
     return render_template('index.html', all_posts = all_posts, post_users = post_users, num_comments = num_comments) #- , num_posts=num_posts
 
@@ -118,11 +111,6 @@ def faq():
 # def fail():
 #     return render_template("login.html",message="Incorrect password!")
 
-# @app.get('/logout')
-# def logout():
-#     session.pop("user", None)
-#     return render_template("login.html")
-
 @app.get('/logout')
 def logout():
     del session['user']
@@ -148,9 +136,11 @@ def register():
     hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
     new_user = User(username=username, user_password=hashed_password,first_name=first_name,last_name=last_name,bio=bio,num_friends=0)
     
-    #SQL Session
+    # SQL Session
     db.session.add(new_user)
     db.session.commit()
+
+    # User login session
     session['user'] = {
         'username': username,
         'user_id': new_user.user_id,
