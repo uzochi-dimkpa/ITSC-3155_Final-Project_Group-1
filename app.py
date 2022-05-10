@@ -18,8 +18,6 @@ load_dotenv()
 
 # TODO: RENAME '.env_' FILE TO '.env' AND MAKE CHANGES TO THE
 # FIELDS IN YOUR '.env' FILE AS NECESSARY
-# sql_echo = os.getenv('SQL_ECHO') # Default: False
-
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('CLEARDB_DATABASE_URL', 'sqlite:///test.db') #- 'CLEARDB_DATABASE_URL', #- f'mysql://{db_user}:{db_pass}@{db_host}:{db_port}/{db_name}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = eval(str(os.getenv('SQL_ECHO')))
@@ -61,8 +59,6 @@ def inject_user_before_requests():
 
     if "user" in session:
         g.logged_in_user = User.query.filter(User.username == session["user"]["username"]).first()
-
-    first_three_test_users = User.query.filter(User.user_id < 4).all()
 
 @app.get('/')
 # Index page should display all user-created posts
